@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-register',
@@ -7,9 +9,21 @@ import { Component, OnInit } from '@angular/core';
 })
 export class RegisterComponent implements OnInit {
 
-  constructor() { }
+User = {};
+
+  constructor(private http: HttpClient, private router: Router) { }
 
   ngOnInit() {
+  }
+
+register() {
+    this.http.post('/register', this.User)
+      .subscribe(res => {
+          this.router.navigate(['/login']);
+        }, (err) => {
+          console.log(err);
+        }
+      );
   }
 
 }
