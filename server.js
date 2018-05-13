@@ -2,34 +2,10 @@
 const express = require('express');
 const bodyParser = require ('body-parser');
 const path = require ('path');
-const http = require ('http');
 const app = express();
-<<<<<<< HEAD
-
-const api =require ('./server/routes/api');
-
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({extended : false}));
-
-app.use(express.static(path.join(__dirname,'dist/DonateDapp')));
-
-app.use('/api',api);
-
-app.get('*',(req,res) => {
-  res.sendFile(path.join(__dirname,'dist/DonateDapp/index.html'))
-});
-
-const port = process.env.PORT || '3000';
-app.set('port',port);
-
-const server = http.createServer(app);
-
-=======
 const api =require ('./server/routes/api');
 ///////////////////
-var favicon = require('serve-favicon');
 var logger = require('morgan');
-var morgan = require('morgan');
 var mongoose = require('mongoose');
 var passport = require('passport');
 var config = require('./config/database');
@@ -47,8 +23,7 @@ app.use('/api',api);
 app.get('*',(req,res) => {
   res.sendFile(path.join(__dirname,'dist/DonateDapp/index.html'))
 });
-const port = process.env.PORT || '3000';
-app.set('port',port);
-const server = http.createServer(app);
->>>>>>> add passport
-server.listen(port,() => console.log(`running on localhost:${port}`));
+var port = 2000
+app.listen(process.env.PORT || port , function () {
+	console.log("server is listening "+ port +" Port")
+});
