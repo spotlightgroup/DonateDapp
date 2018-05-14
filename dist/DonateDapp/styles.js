@@ -539,7 +539,7 @@ if(false) {}
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! /Users/rbk-09/Desktop/DonateDapp/src/styles.css */"./src/styles.css");
+module.exports = __webpack_require__(/*! /home/abdullatif/Desktop/DonateDapp/src/styles.css */"./src/styles.css");
 
 
 /***/ })
