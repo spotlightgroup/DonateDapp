@@ -309,7 +309,7 @@ module.exports = ""
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container\">\n  <h1>Register</h1>\n  <div class=\"row\">\n    <div class=\"col-md-6\">\n      <form (ngSubmit)=\"register()\" #registerForm=\"ngForm\">\n        <div class=\"form-group\">\n          <label for=\"name\">Full Name:</label>\n          <input type=\"text\" class=\"form-control\" [(ngModel)]=\"User.fullname\" name=\"fullname\" required>\n        </div>\n        <div class=\"form-group\">\n          <label for=\"name\">Email address:</label>\n          <input type=\"email\" class=\"form-control\" [(ngModel)]=\"User.email\" name=\"email\" required>\n        </div>\n        <div class=\"form-group\">\n          <label for=\"name\">Password:</label>\n          <input type=\"password\" class=\"form-control\" [(ngModel)]=\"User.password\" name=\"password\" required>\n        </div>\n        <div class=\"form-group\">\n          <label for=\"name\">Confirm Password:</label>\n          <input type=\"password\" class=\"form-control\" [(ngModel)]=\"User.confirmP\" name=\"confirmP\" required>\n        </div>\n        <div class=\"form-group\">\n          <button type=\"submit\" class=\"btn btn-success\" [disabled]=\"!registerForm.form.valid\">Sign up</button>\n          <a  [routerLink]=\"['/login']\" class=\"nav-link\" href=\"#\">if you have already account login</a>\n        </div>\n      </form>\n    </div>\n  </div>\n</div>\n"
+module.exports = "<div class=\"container\">\n  <h1>Register</h1>\n  <div class=\"row\">\n    <div class=\"col-md-6\">\n      <form (ngSubmit)=\"register()\" #registerForm=\"ngForm\">\n        <div class=\"form-group\">\n          <label for=\"name\">Email address:</label>\n          <input type=\"email\" class=\"form-control\" [(ngModel)]=\"User.email\" name=\"email\" required>\n        </div>\n        <div class=\"form-group\">\n          <label for=\"name\">Password:</label>\n          <input type=\"password\" class=\"form-control\" [(ngModel)]=\"User.password\" name=\"password\" required>\n        </div>\n        <div class=\"form-group\">\n          <button type=\"submit\" class=\"btn btn-success\" [disabled]=\"!registerForm.form.valid\">Sign up</button>\n          <a  [routerLink]=\"['/login']\" class=\"nav-link\" href=\"#\">if you have already account login</a>\n        </div>\n      </form>\n    </div>\n  </div>\n</div>\n"
 
 /***/ }),
 
@@ -430,7 +430,7 @@ Object(_angular_platform_browser_dynamic__WEBPACK_IMPORTED_MODULE_1__["platformB
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! /Users/rbk-09/Desktop/DonateDapp/src/main.ts */"./src/main.ts");
+module.exports = __webpack_require__(/*! /home/abdullatif/Desktop/DonateDapp/src/main.ts */"./src/main.ts");
 
 
 /***/ })

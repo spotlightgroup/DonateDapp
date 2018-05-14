@@ -4,20 +4,12 @@
     <div class="col-md-6">
       <form (ngSubmit)="register()" #registerForm="ngForm">
         <div class="form-group">
-          <label for="name">Full Name:</label>
-          <input type="text" class="form-control" [(ngModel)]="User.fullname" name="fullname" required>
-        </div>
-        <div class="form-group">
           <label for="name">Email address:</label>
           <input type="email" class="form-control" [(ngModel)]="User.email" name="email" required>
         </div>
         <div class="form-group">
           <label for="name">Password:</label>
           <input type="password" class="form-control" [(ngModel)]="User.password" name="password" required>
-        </div>
-        <div class="form-group">
-          <label for="name">Confirm Password:</label>
-          <input type="password" class="form-control" [(ngModel)]="User.confirmP" name="confirmP" required>
         </div>
         <div class="form-group">
           <button type="submit" class="btn btn-success" [disabled]="!registerForm.form.valid">Sign up</button>
