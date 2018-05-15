@@ -309,7 +309,7 @@ module.exports = ""
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container\">\n  <h1>Register</h1>\n  <div class=\"row\">\n    <div class=\"col-md-6\">\n      <form (ngSubmit)=\"register()\" #registerForm=\"ngForm\">\n        <div class=\"form-group\">\n          <label for=\"name\">Email address:</label>\n          <input type=\"email\" class=\"form-control\" [(ngModel)]=\"User.email\" name=\"email\" required>\n        </div>\n        <div class=\"form-group\">\n          <label for=\"name\">Password:</label>\n          <input type=\"password\" class=\"form-control\" [(ngModel)]=\"User.password\" name=\"password\" required>\n        </div>\n        <div class=\"form-group\">\n          <button type=\"submit\" class=\"btn btn-success\" [disabled]=\"!registerForm.form.valid\">Sign up</button>\n          <a  [routerLink]=\"['/login']\" class=\"nav-link\" href=\"#\">if you have already account login</a>\n        </div>\n      </form>\n    </div>\n  </div>\n</div>\n"
+module.exports = "<div class=\"container\">\n  <h1>Register</h1>\n  <div class=\"row\">\n    <div class=\"col-md-6\">\n      <form (ngSubmit)=\"register()\" #registerForm=\"ngForm\">\n        <div class=\"form-group\">\n          <label for=\"name\">User Name:</label>\n          <input type=\"text\" class=\"form-control\" [(ngModel)]=\"User.username\" name=\"username\" required>\n        </div>\n        <div class=\"form-group\">\n          <label for=\"name\">Email:</label>\n          <input type=\"email\" class=\"form-control\" [(ngModel)]=\"User.email\" name=\"email\" required>\n        </div>\n        <div class=\"form-group\">\n          <label for=\"name\">Password:</label>\n          <input type=\"password\" class=\"form-control\" [(ngModel)]=\"User.password\" name=\"password\" required>\n        </div>\n        <div class=\"form-group\">\n          <button type=\"submit\" class=\"btn btn-success\" [disabled]=\"!registerForm.form.valid\">Sign up</button>\n          <a  [routerLink]=\"['/login']\" class=\"nav-link\" href=\"#\">if you have already account login</a>\n        </div>\n      </form>\n    </div>\n  </div>\n</div>\n"
 
 /***/ }),
 
@@ -342,13 +342,16 @@ var RegisterComponent = /** @class */ (function () {
     function RegisterComponent(http, router) {
         this.http = http;
         this.router = router;
+        //User = {};
         this.User = {};
+        this.message = '';
     }
     RegisterComponent.prototype.ngOnInit = function () {
     };
     RegisterComponent.prototype.register = function () {
         var _this = this;
-        this.http.post('/register', this.User)
+        console.log("Abdullllllatiiiiif", this.User);
+        this.http.post('/api/register', this.User)
             .subscribe(function (res) {
             _this.router.navigate(['/login']);
         }, function (err) {

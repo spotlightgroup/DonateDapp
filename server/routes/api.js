@@ -9,12 +9,14 @@ var User = require("../../models/User");
 
 // router for register new user
 
-router.post('/signup', function(req, res) {
+router.post('/register', function(req, res) {
+  console.log("ABSAMRAAA",req.body)
   if (!req.body.username || !req.body.password) {
     res.json({success: false, msg: 'Please pass username and password.'});
   } else {
     var newUser = new User({
       username: req.body.username,
+      email:req.body.email,
       password: req.body.password
     });
     // save the user
