@@ -4,7 +4,11 @@
     <div class="col-md-6">
       <form (ngSubmit)="register()" #registerForm="ngForm">
         <div class="form-group">
-          <label for="name">Email address:</label>
+          <label for="name">User Name:</label>
+          <input type="text" class="form-control" [(ngModel)]="User.username" name="username" required>
+        </div>
+        <div class="form-group">
+          <label for="name">Email:</label>
           <input type="email" class="form-control" [(ngModel)]="User.email" name="email" required>
         </div>
         <div class="form-group">

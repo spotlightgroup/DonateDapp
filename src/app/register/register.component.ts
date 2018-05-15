@@ -9,7 +9,9 @@ import { HttpClient } from '@angular/common/http';
 })
 export class RegisterComponent implements OnInit {
 
+//User = {};
 User = {};
+message = '';
 
   constructor(private http: HttpClient, private router: Router) { }
 
@@ -17,7 +19,8 @@ User = {};
   }
 
 register() {
-    this.http.post('/register', this.User)
+  console.log("Abdullllllatiiiiif",this.User)
+    this.http.post('/api/register', this.User)
       .subscribe(res => {
           this.router.navigate(['/login']);
         }, (err) => {
