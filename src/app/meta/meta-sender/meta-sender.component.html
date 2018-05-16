@@ -1,0 +1,18 @@
+
+<div class="container">
+
+
+<div >
+      <ul>
+        <li *ngFor="let account of accounts" (click)="refreshBalance()" [value]="account">Your Address is : {{account}}</li>
+      </ul>
+    <p>You have <span id="balance">{{model.balance}}</span> RbCoin</p>
+</div>
+
+<div>
+  <h1>Send RbCoin</h1>
+      <input type="text" matInput id="amount" placeholder="Amount" (change)="setAmount($event)">
+      <input type="text" matInput id="receiver" placeholder="Receiver Address" (change)="setReceiver($event)">
+    <button mat-button id="send" (click)="sendCoin()">Send RBCOIN</button>
+</div>
+</div>
