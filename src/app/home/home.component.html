@@ -1,0 +1,19 @@
+<div class="inputPost container-fluid">
+    <h3>What Is Your Project ?</h3>
+    <input type="text" class="form-control" [(ngModel)]="model.header" >
+    <h3>Descrip Your Project</h3>
+    <input type="text" class="form-control" [(ngModel)]="model.description" >
+    <h3>What Is Your Project ?</h3>
+    <input type="number" class="form-control" [(ngModel)]="model.needed" min="0" >
+    <input type="button" name="send" value="send" (click)="sendPost()" class="btn btn-outline-success my-2 my-sm-0">
+    <div class="alert alert-warning alert-dismissible" role="alert" *ngIf="message !== ''">
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      {{message}}
+    </div>
+</div>
+
+<div class="card container" *ngFor="let post of Posts" >
+  <h2>{{post.header}}</h2>
+  <p>{{post.description}}</p>
+  <p>{{post.needed}}</p>
+</div>

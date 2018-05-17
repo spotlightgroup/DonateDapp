@@ -52,7 +52,7 @@ module.exports = ""
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = " <nav class=\"navbar navbar-expand-lg navbar-light bg-light\">\n\n    <a class=\"nav-link disabled\" [routerLink]=\"['/home']\">DonateDapp</a>\n\n  <a class=\"navbar-brand\" href=\"#\">About</a>\n  <button class=\"navbar-toggler\" type=\"button\" data-toggle=\"collapse\" data-target=\"#navbarSupportedContent\" aria-controls=\"navbarSupportedContent\" aria-expanded=\"false\" aria-label=\"Toggle navigation\">\n    <span class=\"navbar-toggler-icon\"></span>\n  </button>\n\n  <div class=\"collapse navbar-collapse\" id=\"navbarSupportedContent\">\n    <ul class=\"navbar-nav mr-auto\">\n      <li class=\"nav-item\">\n        <a  [routerLink]=\"['/profile']\" class=\"nav-link\" href=\"#\">Profile</a>\n      </li>\n      <li class=\"nav-item\">\n        <a  [routerLink]=\"['/signup']\" class=\"nav-link\" href=\"#\">SignUp</a>\n      </li>\n      <li class=\"nav-item\">\n        <a [routerLink]=\"['/login'] \" class=\"nav-link\" href=\"#\">Login</a>\n      </li>\n      <li class=\"nav-item\" *ngIf=\"User !== '' \">\n        <a (click)=\"logout()\" class=\"nav-link\" >log out</a>\n      </li>\n    </ul>\n    <form class=\"form-inline my-2 my-lg-0\">\n      <input class=\"form-control mr-sm-2\" type=\"search\" placeholder=\"Search\" aria-label=\"Search\">\n      <button class=\"btn btn-outline-success my-2 my-sm-0\" type=\"submit\">Search</button>\n    </form>\n  </div>\n</nav>\n<div class=\"alert alert-warning alert-dismissible\" role=\"alert\" *ngIf=\"message !== ''\">\n    <button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\"><span aria-hidden=\"true\">&times;</span></button>\n    {{message}}\n  </div>\n<router-outlet></router-outlet>\n"
+module.exports = "\n\n <nav class=\"navbar navbar-expand-lg navbar-light bg-light\">\n\n    <a class=\"nav-link disabled\" [routerLink]=\"['/home']\">DonateDapp</a>\n\n  <a class=\"navbar-brand\" href=\"#\">About</a>\n  <button class=\"navbar-toggler\" type=\"button\" data-toggle=\"collapse\" data-target=\"#navbarSupportedContent\" aria-controls=\"navbarSupportedContent\" aria-expanded=\"false\" aria-label=\"Toggle navigation\">\n    <span class=\"navbar-toggler-icon\"></span>\n  </button>\n\n  <div class=\"collapse navbar-collapse\" id=\"navbarSupportedContent\">\n    <ul class=\"navbar-nav mr-auto\">\n      <li class=\"nav-item\">\n        <a  [routerLink]=\"['/profile']\" class=\"nav-link\" href=\"#\">Profile</a>\n      </li>\n      <li class=\"nav-item\">\n        <a  [routerLink]=\"['/signup']\" class=\"nav-link\" href=\"#\">SignUp</a>\n      </li>\n      <li class=\"nav-item\">\n        <a [routerLink]=\"['/login'] \" class=\"nav-link\" href=\"#\">Login</a>\n      </li>\n      <li class=\"nav-item\" *ngIf=\"User !== '' \">\n        <a (click)=\"logout()\" class=\"nav-link\" >log out</a>\n      </li>\n    </ul>\n    <form class=\"form-inline my-2 my-lg-0\">\n      <input class=\"form-control mr-sm-2\" type=\"search\" placeholder=\"Search\" aria-label=\"Search\">\n      <button class=\"btn btn-outline-success my-2 my-sm-0\" type=\"submit\">Search</button>\n    </form>\n  </div>\n</nav>\n<div class=\"alert alert-warning alert-dismissible\" role=\"alert\" *ngIf=\"message !== ''\">\n    <button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\"><span aria-hidden=\"true\">&times;</span></button>\n    {{message}}\n  </div>\n\n\n\n<router-outlet></router-outlet>\n"
 
 /***/ }),
 
@@ -233,7 +233,7 @@ module.exports = ""
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = ""
+module.exports = "<div class=\"inputPost container-fluid\">\n    <h3>What Is Your Project ?</h3>\n    <input type=\"text\" class=\"form-control\" [(ngModel)]=\"model.header\" >\n    <h3>Descrip Your Project</h3>\n    <input type=\"text\" class=\"form-control\" [(ngModel)]=\"model.description\" >\n    <h3>What Is Your Project ?</h3>\n    <input type=\"number\" class=\"form-control\" [(ngModel)]=\"model.needed\" min=\"0\" >\n    <input type=\"button\" name=\"send\" value=\"send\" (click)=\"sendPost()\" class=\"btn btn-outline-success my-2 my-sm-0\">\n    <div class=\"alert alert-warning alert-dismissible\" role=\"alert\" *ngIf=\"message !== ''\">\n      <button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\"><span aria-hidden=\"true\">&times;</span></button>\n      {{message}}\n    </div>\n</div>\n\n<div class=\"card container\" *ngFor=\"let post of Posts\" >\n  <h2>{{post.header}}</h2>\n  <p>{{post.description}}</p>\n  <p>{{post.needed}}</p>\n</div>\n"
 
 /***/ }),
 
@@ -248,6 +248,7 @@ module.exports = ""
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "HomeComponent", function() { return HomeComponent; });
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm5/http.js");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -258,10 +259,47 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 
+
 var HomeComponent = /** @class */ (function () {
-    function HomeComponent() {
+    function HomeComponent(http) {
+        this.http = http;
+        this.model = {
+            header: "",
+            needed: 0,
+            description: "",
+            publicKey: 'fasdfasss'
+        };
+        this.message = '';
     }
     HomeComponent.prototype.ngOnInit = function () {
+        this.getPosts();
+    };
+    HomeComponent.prototype.sendPost = function () {
+        var _this = this;
+        var that = this;
+        this.http.post('/addPost', this.model).subscribe(function (res) {
+        }, function (err) {
+            _this.message = "error";
+            return;
+        });
+        that.message = "done";
+        console.log('this', that.message);
+        that.model = {
+            header: "",
+            needed: 0,
+            description: "",
+            publicKey: 'fasdfasss'
+        };
+        this.getPosts();
+    };
+    HomeComponent.prototype.getPosts = function () {
+        var _this = this;
+        this.http.get("/getPosts").subscribe(function (res) {
+            _this.Posts = res;
+        }, function (err) {
+            _this.message = "error";
+            return;
+        });
     };
     HomeComponent = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
@@ -269,7 +307,7 @@ var HomeComponent = /** @class */ (function () {
             template: __webpack_require__(/*! ./home.component.html */ "./src/app/home/home.component.html"),
             styles: [__webpack_require__(/*! ./home.component.css */ "./src/app/home/home.component.css")]
         }),
-        __metadata("design:paramtypes", [])
+        __metadata("design:paramtypes", [_angular_common_http__WEBPACK_IMPORTED_MODULE_1__["HttpClient"]])
     ], HomeComponent);
     return HomeComponent;
 }());
@@ -1032,7 +1070,7 @@ Object(_angular_platform_browser_dynamic__WEBPACK_IMPORTED_MODULE_1__["platformB
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! /Users/rbk/Desktop/DonateDapp/src/main.ts */"./src/main.ts");
+module.exports = __webpack_require__(/*! /home/ahmad/Desktop/DonateDapp/src/main.ts */"./src/main.ts");
 
 
 /***/ })

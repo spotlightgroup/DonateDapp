@@ -4,6 +4,7 @@ const bodyParser = require ('body-parser');
 const path = require ('path');
 const app = express();
 const api =require ('./server/routes/api');
+var Post = require("./models/Posts");
 ///////////////////
 var logger = require('morgan');
 var mongoose = require('mongoose');
@@ -23,9 +24,36 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended : false}));
 app.use(express.static(path.join(__dirname,'dist/DonateDapp')));
 app.use('/api',api);
+
+app.post("/addPost", (req, res)=> {
+  Post.create(req.body, (err, data)=> {
+    if (err) {
+      console.log(err);
+    }
+    else {
+      console.log(data);
+    }
+  });
+});
+
+
+
+app.get("/getPosts", (req, res)=> {
+  Post.find({}, (err, data)=> {
+    if (err) {
+      console.log(err);
+    }
+    else {
+      res.send(data)
+    }
+  });
+});
+
 app.get('*',(req,res) => {
   res.sendFile(path.join(__dirname,'dist/DonateDapp/index.html'))
 });
+
+
 var port = 3000
 app.listen(process.env.PORT || port , function () {
 	console.log("server is listening "+ port +" Port")
