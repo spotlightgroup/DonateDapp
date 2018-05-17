@@ -55,59 +55,6 @@ router.post('/login', function(req, res) {
     }
   });
 });
-// for add a post and save it in the database
-router.post('/Post',(req, res)=> {
-  let info = req.body;
-  Post.create(info, (err, post)=>{
-    if (err) {
-      console.log(err);
-    }
-    else {
-      console.log("created new post", post);
-    }
-  });
-});
-// for get 12 posts
-router.get('/getPosts', (req, res)=> {
-  let posts = [];
-  Post.find({}, (err, data)=> {
-    if (err) {
-      console.error(err);
-    }else {
-      for (let i = 0; i < 12; i ++) {
-        if (data[i]) {
-          posts.push(data[i])
-        }
-      }
-      res.send(posts)
-    }
-
-  });
-});
-
-router.delete('/Post:id', (req, res)=> {
-  Post.remove(req.params, (err, deleted) => {
-    if (err) {
-      console.error(err);
-    }
-    else {
-      console.log('deleted: ', deleted);
-    }
-  })
-});
-
-// route for edit a post
-router.put('/Post:id', (req, res)=> {
-  Post.findOneAndUpdate(req.params, {$set: req.body}, (err, updated) => {
-    if (err) {
-      console.error(err);
-    }
-    else {
-      console.log('updated: ', updated);
-    }
-  })
-});
-
 
 //
 getToken = function (headers) {
@@ -122,5 +69,7 @@ getToken = function (headers) {
     return null;
   }
 };
+
+
 
 module.exports = router;

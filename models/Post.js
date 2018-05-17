@@ -11,7 +11,7 @@ const PostSchema = new Schema({
           required: true
       },
     needed: {
-        type: String,
+        type: Number,
         required: true
     }
 });
