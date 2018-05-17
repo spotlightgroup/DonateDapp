@@ -6,4 +6,8 @@
     <h3>What Is Your Project ?</h3>
     <input type="number" class="form-control" [(ngModel)]="model.needed" min="0" >
     <input type="button" name="send" value="send" (click)="sendPost()" class="btn btn-outline-success my-2 my-sm-0">
+    <div class="alert alert-warning alert-dismissible" role="alert" *ngIf="message !== ''">
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      {{message}}
+    </div>
 </div>

@@ -233,7 +233,7 @@ module.exports = ""
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"inputPost container-fluid\">\n    <h3>What Is Your Project ?</h3>\n    <input type=\"text\" class=\"form-control\" [(ngModel)]=\"model.header\" >\n    <h3>Descrip Your Project</h3>\n    <input type=\"text\" class=\"form-control\" [(ngModel)]=\"model.description\" >\n    <h3>What Is Your Project ?</h3>\n    <input type=\"number\" class=\"form-control\" [(ngModel)]=\"model.needed\" min=\"0\" >\n    <input type=\"button\" name=\"send\" value=\"send\" (click)=\"sendPost()\" class=\"btn btn-outline-success my-2 my-sm-0\">\n</div>\n"
+module.exports = "<div class=\"inputPost container-fluid\">\n    <h3>What Is Your Project ?</h3>\n    <input type=\"text\" class=\"form-control\" [(ngModel)]=\"model.header\" >\n    <h3>Descrip Your Project</h3>\n    <input type=\"text\" class=\"form-control\" [(ngModel)]=\"model.description\" >\n    <h3>What Is Your Project ?</h3>\n    <input type=\"number\" class=\"form-control\" [(ngModel)]=\"model.needed\" min=\"0\" >\n    <input type=\"button\" name=\"send\" value=\"send\" (click)=\"sendPost()\" class=\"btn btn-outline-success my-2 my-sm-0\">\n    <div class=\"alert alert-warning alert-dismissible\" role=\"alert\" *ngIf=\"message !== ''\">\n      <button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\"><span aria-hidden=\"true\">&times;</span></button>\n      {{message}}\n    </div>\n</div>\n"
 
 /***/ }),
 
@@ -275,12 +275,20 @@ var HomeComponent = /** @class */ (function () {
     };
     HomeComponent.prototype.sendPost = function () {
         var _this = this;
-        console.log(this.model);
+        var that = this;
         this.http.post('/addPost', this.model).subscribe(function (res) {
-            _this.message = "done";
         }, function (err) {
             _this.message = "error";
+            return;
         });
+        that.message = "done";
+        console.log('this', that.message);
+        that.model = {
+            header: "",
+            needed: 0,
+            description: "",
+            publicKey: 'fasdfasss'
+        };
     };
     HomeComponent = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({

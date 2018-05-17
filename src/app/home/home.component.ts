@@ -24,11 +24,21 @@ message = '';
 
   }
   sendPost() {
-    console.log(this.model)
+    let that = this
     this.http.post('/addPost',this.model).subscribe(res => {
-      this.message = "done"
+
+
     }, err => {
       this.message = "error"
+      return;
     });
+    that.message = "done"
+    console.log('this',that.message)
+    that.model = {
+      header: "",
+      needed: 0,
+      description: "",
+      publicKey: 'fasdfasss'
+    };
   }
 }
