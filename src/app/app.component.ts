@@ -18,5 +18,4 @@ export class AppComponent {
       this.message = err.error.msg;
     });
   }
-
 }

@@ -76,8 +76,6 @@ router.get('/currentUser',function(req,res){
 });
 
 
-
-
 //
 getToken = function (headers) {
   if (headers && headers.authorization) {
