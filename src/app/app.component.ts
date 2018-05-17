@@ -9,7 +9,10 @@ import { HttpClient } from '@angular/common/http';
 export class AppComponent {
   User = "";
   message = "";
-  constructor(private http:HttpClient) { };
+  constructor(private http:HttpClient) {
+
+  };
+
   logout(){
     this.http.post('/api/logout',{}).subscribe(res => {}, err => {
       this.message = err.error.msg;
