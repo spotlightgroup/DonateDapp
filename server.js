@@ -73,7 +73,7 @@ app.post('/editPost', (req, res)=> {
     }
     else {
       console.log('updated: ', updated);
-      
+
     }
   })
 });

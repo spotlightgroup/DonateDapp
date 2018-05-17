@@ -20,6 +20,7 @@ import {
 } from '@angular/material';
 
 import { RouterModule, Routes } from '@angular/router';
+import { PostComponent } from './post/post.component';
 
 const appRoutes: Routes = [
   { path: 'home',
@@ -46,7 +47,8 @@ const appRoutes: Routes = [
     AppComponent,
     HomeComponent,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    PostComponent
   ],
   imports: [
     BrowserAnimationsModule,

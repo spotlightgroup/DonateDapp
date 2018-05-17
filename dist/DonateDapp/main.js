@@ -116,12 +116,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_platform_browser_animations__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @angular/platform-browser/animations */ "./node_modules/@angular/platform-browser/fesm5/animations.js");
 /* harmony import */ var _angular_material__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! @angular/material */ "./node_modules/@angular/material/esm5/material.es5.js");
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
+/* harmony import */ var _post_post_component__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./post/post.component */ "./src/app/post/post.component.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+
 
 
 
@@ -164,7 +166,8 @@ var AppModule = /** @class */ (function () {
                 _app_component__WEBPACK_IMPORTED_MODULE_2__["AppComponent"],
                 _home_home_component__WEBPACK_IMPORTED_MODULE_3__["HomeComponent"],
                 _login_login_component__WEBPACK_IMPORTED_MODULE_4__["LoginComponent"],
-                _register_register_component__WEBPACK_IMPORTED_MODULE_5__["RegisterComponent"]
+                _register_register_component__WEBPACK_IMPORTED_MODULE_5__["RegisterComponent"],
+                _post_post_component__WEBPACK_IMPORTED_MODULE_14__["PostComponent"]
             ],
             imports: [
                 _angular_platform_browser_animations__WEBPACK_IMPORTED_MODULE_11__["BrowserAnimationsModule"],
@@ -210,7 +213,7 @@ module.exports = ""
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = ""
+module.exports = "\n<app-post></app-post>\n"
 
 /***/ }),
 
@@ -601,6 +604,82 @@ var MetaModule = /** @class */ (function () {
         })
     ], MetaModule);
     return MetaModule;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/app/post/post.component.css":
+/*!*****************************************!*\
+  !*** ./src/app/post/post.component.css ***!
+  \*****************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = ""
+
+/***/ }),
+
+/***/ "./src/app/post/post.component.html":
+/*!******************************************!*\
+  !*** ./src/app/post/post.component.html ***!
+  \******************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "<div *ngFor=\"let post of posts\">\n\n  <h1>{{post.header}}</h1>\n  <p>{{post.description}}</p>\n  <p>neede: {{post.needed}}</p>\n  <button type=\"button\" name=\"button\">donate</button>\n </div>\n"
+
+/***/ }),
+
+/***/ "./src/app/post/post.component.ts":
+/*!****************************************!*\
+  !*** ./src/app/post/post.component.ts ***!
+  \****************************************/
+/*! exports provided: PostComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "PostComponent", function() { return PostComponent; });
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm5/http.js");
+var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (undefined && undefined.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+var PostComponent = /** @class */ (function () {
+    function PostComponent(http) {
+        this.http = http;
+    }
+    PostComponent.prototype.ngOnInit = function () {
+        this.getPosts();
+    };
+    PostComponent.prototype.getPosts = function () {
+        var _this = this;
+        this.http.get('/getPosts').subscribe(function (res) {
+            console.log('this', _this);
+            _this.posts = res;
+        }, function (err) {
+            console.error(err);
+        });
+    };
+    PostComponent = __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
+            selector: 'app-post',
+            template: __webpack_require__(/*! ./post.component.html */ "./src/app/post/post.component.html"),
+            styles: [__webpack_require__(/*! ./post.component.css */ "./src/app/post/post.component.css")]
+        }),
+        __metadata("design:paramtypes", [_angular_common_http__WEBPACK_IMPORTED_MODULE_1__["HttpClient"]])
+    ], PostComponent);
+    return PostComponent;
 }());
 
 
