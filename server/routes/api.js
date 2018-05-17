@@ -85,6 +85,17 @@ router.get('/getPosts', (req, res)=> {
   });
 });
 
+router.dalete('/deletePost:id', (req, res)=> {
+  Post.remove(req.params, (err, deleted) => {
+    if (err) {
+      console.error(err);
+    }
+    else {
+      console.log('deleted: ', deleted);
+    }
+  })
+});
+
 
 //
 getToken = function (headers) {
