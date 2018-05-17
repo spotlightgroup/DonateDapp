@@ -10,7 +10,6 @@ var User = require("../../models/User");
 // router for register new user
 
 router.post('/register', function(req, res) {
-  console.log("ABSAMRAAA",req.body)
   if (!req.body.username || !req.body.password) {
     res.json({success: false, msg: 'Please pass username and password.'});
   } else {
@@ -43,6 +42,7 @@ router.post('/login', function(req, res) {
       // check if password matches
       user.comparePassword(req.body.password, function (err, isMatch) {
         if (isMatch && !err) {
+          req.session['username']=user.username;
           // if user is found and password is right create a token
           var token = jwt.sign(user.toJSON(), config.secret);
           // return the information including token as JSON
@@ -54,6 +54,28 @@ router.post('/login', function(req, res) {
     }
   });
 });
+
+router.post('/logout',function(req,res){
+	if(req.session.username){
+		req.session.destroy(function(err){
+			if(err){
+				res.status(401).send({success: false, msg: 'failed to log out'});
+			}
+		});
+	}else {
+    res.status(401).send({success: false, msg: 'log in first doom ass'});
+  }
+});
+
+router.get('/currentUser',function(req,res){
+	if(req.session.username){
+    res.status(401).send({success: false, msg: req.session.username});
+  }else{
+    res.status(401).send({success: false, msg: ""});
+  }
+});
+
+
 
 
 //
@@ -69,5 +91,7 @@ getToken = function (headers) {
     return null;
   }
 };
+
+
 
 module.exports = router;
