@@ -96,6 +96,17 @@ router.dalete('/deletePost:id', (req, res)=> {
   })
 });
 
+router.put('/editPost:id', (req, res)=> {
+  Post.findOneAndUpdate(req.params, {$set: req.body, (err, updated) => {
+    if (err) {
+      console.error(err);
+    }
+    else {
+      console.log('updated: ', updated);
+    }
+  })
+});
+
 
 //
 getToken = function (headers) {
