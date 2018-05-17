@@ -20,6 +20,7 @@ import {
 } from '@angular/material';
 
 import { RouterModule, Routes } from '@angular/router';
+import { ProfileComponent } from './profile/profile.component';
 
 const appRoutes: Routes = [
   { path: 'home',
@@ -38,6 +39,11 @@ const appRoutes: Routes = [
   path: 'signup',
   component: RegisterComponent,
   data: { title: 'signup' }
+},
+{
+ path: 'profile',
+ component: ProfileComponent,
+ data: { title: 'profile' }
 }
 ];
 
@@ -46,7 +52,8 @@ const appRoutes: Routes = [
     AppComponent,
     HomeComponent,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    ProfileComponent
   ],
   imports: [
     BrowserAnimationsModule,

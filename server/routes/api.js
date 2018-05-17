@@ -69,7 +69,7 @@ router.post('/logout',function(req,res){
 
 router.get('/currentUser',function(req,res){
 	if(req.session.username){
-    res.status(401).send({success: false, msg: req.session.username});
+    res.status(201).send({success: true, msg: req.session.username});
   }else{
     res.status(401).send({success: false, msg: ""});
   }
