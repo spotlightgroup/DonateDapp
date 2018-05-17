@@ -9,6 +9,9 @@ var logger = require('morgan');
 var mongoose = require('mongoose');
 var passport = require('passport');
 var config = require('./config/database');
+var session = require('express-session');
+
+app.use(session({secret:'this is secret'}));
 app.use(logger('dev'));
 mongoose.Promise = require('bluebird');
 mongoose.connect(config.database, { promiseLibrary: require('bluebird') })
@@ -23,7 +26,7 @@ app.use('/api',api);
 app.get('*',(req,res) => {
   res.sendFile(path.join(__dirname,'dist/DonateDapp/index.html'))
 });
-var port = 2000
+var port = 3000
 app.listen(process.env.PORT || port , function () {
 	console.log("server is listening "+ port +" Port")
 });
