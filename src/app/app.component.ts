@@ -18,9 +18,5 @@ export class AppComponent {
       this.message = err.error.msg;
     });
   }
-  currentUser(){
-    this.http.get('/api/currentUser',{}).subscribe(res => {}, err => {
-      this.User = err.error.msg;
-    });
-  }
+
 }

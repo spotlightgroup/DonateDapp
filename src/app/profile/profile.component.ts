@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-profile',
@@ -6,9 +7,20 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./profile.component.css']
 })
 export class ProfileComponent implements OnInit {
-  constructor() { }
+  username="";
+  constructor(private http:HttpClient) { }
 
   ngOnInit() {
+      this.http.get('/api/currentUser',{}).subscribe(res => {
+        console.log("resss",res);
+      //  console.log("resss msssg",res.msg);
+        if(res['msg']){
+          this.username = res['msg'];
+
+        }
+      }, err => {
+console.log(err.error);
+      });
   }
 
 }

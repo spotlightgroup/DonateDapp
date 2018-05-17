@@ -52,7 +52,7 @@ module.exports = ""
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = " <body (click)=\"currentUser()\">\n   <nav class=\"navbar navbar-expand-lg navbar-light bg-light\">\n\n    <a class=\"nav-link disabled\" [routerLink]=\"['/home']\">DonateDapp</a>\n\n  <a class=\"navbar-brand\" href=\"#\">About</a>\n  <button class=\"navbar-toggler\" type=\"button\" data-toggle=\"collapse\" data-target=\"#navbarSupportedContent\" aria-controls=\"navbarSupportedContent\" aria-expanded=\"false\" aria-label=\"Toggle navigation\">\n    <span class=\"navbar-toggler-icon\"></span>\n  </button>\n\n  <div class=\"collapse navbar-collapse\" id=\"navbarSupportedContent\">\n    <ul class=\"navbar-nav mr-auto\">\n      <li class=\"nav-item\">\n        <a  [routerLink]=\"['/signup']\" class=\"nav-link\" href=\"#\">SignUp</a>\n      </li>\n      <li class=\"nav-item\">\n        <a [routerLink]=\"['/login']\" class=\"nav-link\" href=\"#\">Login</a>\n      </li>\n      <li class=\"nav-item\" *ngIf=\"User !== '' \">\n        <a (click)=\"logout()\" class=\"nav-link\" >log out</a>\n      </li>\n    </ul>\n    <form class=\"form-inline my-2 my-lg-0\">\n      <input class=\"form-control mr-sm-2\" type=\"search\" placeholder=\"Search\" aria-label=\"Search\">\n      <button class=\"btn btn-outline-success my-2 my-sm-0\" type=\"submit\">Search</button>\n    </form>\n  </div>\n</nav>\n<div class=\"alert alert-warning alert-dismissible\" role=\"alert\" *ngIf=\"message !== ''\">\n    <button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\"><span aria-hidden=\"true\">&times;</span></button>\n    {{message}}\n  </div>\n</body>\n<router-outlet></router-outlet>\n"
+module.exports = " <nav class=\"navbar navbar-expand-lg navbar-light bg-light\">\n\n    <a class=\"nav-link disabled\" [routerLink]=\"['/home']\">DonateDapp</a>\n\n  <a class=\"navbar-brand\" href=\"#\">About</a>\n  <button class=\"navbar-toggler\" type=\"button\" data-toggle=\"collapse\" data-target=\"#navbarSupportedContent\" aria-controls=\"navbarSupportedContent\" aria-expanded=\"false\" aria-label=\"Toggle navigation\">\n    <span class=\"navbar-toggler-icon\"></span>\n  </button>\n\n  <div class=\"collapse navbar-collapse\" id=\"navbarSupportedContent\">\n    <ul class=\"navbar-nav mr-auto\">\n      <li class=\"nav-item\">\n        <a  [routerLink]=\"['/profile']\" class=\"nav-link\" href=\"#\">Profile</a>\n      </li>\n      <li class=\"nav-item\">\n        <a  [routerLink]=\"['/signup']\" class=\"nav-link\" href=\"#\">SignUp</a>\n      </li>\n      <li class=\"nav-item\">\n        <a [routerLink]=\"['/login'] \" class=\"nav-link\" href=\"#\">Login</a>\n      </li>\n      <li class=\"nav-item\" *ngIf=\"User !== '' \">\n        <a (click)=\"logout()\" class=\"nav-link\" >log out</a>\n      </li>\n    </ul>\n    <form class=\"form-inline my-2 my-lg-0\">\n      <input class=\"form-control mr-sm-2\" type=\"search\" placeholder=\"Search\" aria-label=\"Search\">\n      <button class=\"btn btn-outline-success my-2 my-sm-0\" type=\"submit\">Search</button>\n    </form>\n  </div>\n</nav>\n<div class=\"alert alert-warning alert-dismissible\" role=\"alert\" *ngIf=\"message !== ''\">\n    <button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\"><span aria-hidden=\"true\">&times;</span></button>\n    {{message}}\n  </div>\n<router-outlet></router-outlet>\n"
 
 /***/ }),
 
@@ -90,12 +90,6 @@ var AppComponent = /** @class */ (function () {
         var _this = this;
         this.http.post('/api/logout', {}).subscribe(function (res) { }, function (err) {
             _this.message = err.error.msg;
-        });
-    };
-    AppComponent.prototype.currentUser = function () {
-        var _this = this;
-        this.http.get('/api/currentUser', {}).subscribe(function (res) { }, function (err) {
-            _this.User = err.error.msg;
         });
     };
     AppComponent = __decorate([
@@ -137,12 +131,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_platform_browser_animations__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @angular/platform-browser/animations */ "./node_modules/@angular/platform-browser/fesm5/animations.js");
 /* harmony import */ var _angular_material__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! @angular/material */ "./node_modules/@angular/material/esm5/material.es5.js");
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
+/* harmony import */ var _profile_profile_component__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./profile/profile.component */ "./src/app/profile/profile.component.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+
 
 
 
@@ -174,6 +170,11 @@ var appRoutes = [
         path: 'signup',
         component: _register_register_component__WEBPACK_IMPORTED_MODULE_5__["RegisterComponent"],
         data: { title: 'signup' }
+    },
+    {
+        path: 'profile',
+        component: _profile_profile_component__WEBPACK_IMPORTED_MODULE_14__["ProfileComponent"],
+        data: { title: 'profile' }
     }
 ];
 var AppModule = /** @class */ (function () {
@@ -185,7 +186,8 @@ var AppModule = /** @class */ (function () {
                 _app_component__WEBPACK_IMPORTED_MODULE_2__["AppComponent"],
                 _home_home_component__WEBPACK_IMPORTED_MODULE_3__["HomeComponent"],
                 _login_login_component__WEBPACK_IMPORTED_MODULE_4__["LoginComponent"],
-                _register_register_component__WEBPACK_IMPORTED_MODULE_5__["RegisterComponent"]
+                _register_register_component__WEBPACK_IMPORTED_MODULE_5__["RegisterComponent"],
+                _profile_profile_component__WEBPACK_IMPORTED_MODULE_14__["ProfileComponent"]
             ],
             imports: [
                 _angular_platform_browser_animations__WEBPACK_IMPORTED_MODULE_11__["BrowserAnimationsModule"],
@@ -628,6 +630,83 @@ var MetaModule = /** @class */ (function () {
 
 /***/ }),
 
+/***/ "./src/app/profile/profile.component.css":
+/*!***********************************************!*\
+  !*** ./src/app/profile/profile.component.css ***!
+  \***********************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = ""
+
+/***/ }),
+
+/***/ "./src/app/profile/profile.component.html":
+/*!************************************************!*\
+  !*** ./src/app/profile/profile.component.html ***!
+  \************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "<link href=\"//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css\" rel=\"stylesheet\" id=\"bootstrap-css\">\n<script src=\"//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js\"></script>\n<script src=\"//code.jquery.com/jquery-1.11.1.min.js\"></script>\n<!------ Include the above in your HEAD tag ---------->\n\n\n<!DOCTYPE html>\n<html lang=\"en\">\n\n<head>\n\n    <meta charset=\"utf-8\">\n    <meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n    <meta name=\"description\" content=\"\">\n    <meta name=\"author\" content=\"\">\n\n    <title>User profile form requirement</title>\n<link href=\"https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css\" rel=\"stylesheet\" integrity=\"sha256-3dkvEK0WLHRJ7/Csr0BZjAWxERc5WH7bdeUya2aXxdU= sha512-+L4yy6FRcDGbXJ9mPG8MT/3UCDzwR9gPeyFNMCtInsol++5m3bk2bXWKdZjvybmohrAsn3Ua5x8gfLnbE1YkOg==\" crossorigin=\"anonymous\">\n    <!-- Bootstrap Core CSS -->\n<!--     <link href=\"css/bootstrap.min.css\" rel=\"stylesheet\"> -->\n<link href=\"https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css\" rel=\"stylesheet\" integrity=\"sha256-7s5uDGW3AHqw6xtJmNNtr+OBRJUlgkNJEo78P4b0yRw= sha512-nNo+yCHEyn0smMxSswnf/OnX6/KwJuZTlNZBjauKhTK0c+zT+q5JOCx0UFhXQ6rJR9jg6Es8gPuD2uZcYDLqSw==\" crossorigin=\"anonymous\">\n\n    <!-- Custom CSS -->\n    <style>\n    body {\n        padding-top: 70px;\n        /* Required padding for .navbar-fixed-top. Remove if using .navbar-static-top. Change if height of navigation changes. */\n    }\n\n    .othertop{margin-top:10px;}\n    </style>\n\n    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->\n    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->\n    <!--[if lt IE 9]>\n        <script src=\"https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js\"></script>\n        <script src=\"https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js\"></script>\n    <![endif]-->\n\n</head>\n\n<body>\n\n   <div class=\"container\">\n<div class=\"row\">\n<div class=\"col-md-10 \">\n<form class=\"form-horizontal\">\n<fieldset>\n\n<!-- Form Name -->\n<legend>User profile form requirement</legend>\n\n<!-- Text input-->\n\n\n\n\n<div class=\"form-group\">\n  <label class=\"col-md-4 control-label\" for=\"Name (Full name)\">Name (Full name)</label>\n  <div class=\"col-md-4\">\n <div class=\"input-group\">\n       <div class=\"input-group-addon\">\n        <i class=\"fa fa-user\">\n        </i>\n       </div>\n       <input id=\"Name (Full name)\" name=\"Name (Full name)\" type=\"text\" placeholder={{username}} class=\"form-control input-md\">\n      </div>\n\n\n  </div>\n\n\n</div>\n\n<!-- File Button -->\n<div class=\"form-group\">\n  <label class=\"col-md-4 control-label\" for=\"Upload photo\">Upload photo</label>\n  <div class=\"col-md-4\">\n    <input id=\"Upload photo\" name=\"Upload photo\" class=\"input-file\" type=\"file\">\n  </div>\n</div>\n\n<!-- Text input-->\n<div class=\"form-group\">\n  <label class=\"col-md-4 control-label\" for=\"Date Of Birth\">Date Of Birth</label>\n  <div class=\"col-md-4\">\n\n  <div class=\"input-group\">\n       <div class=\"input-group-addon\">\n     <i class=\"fa fa-birthday-cake\"></i>\n\n       </div>\n       <input id=\"Date Of Birth\" name=\"Date Of Birth\" type=\"text\" placeholder=\"Date Of Birth\" class=\"form-control input-md\">\n      </div>\n\n\n  </div>\n</div>\n\n\n<!-- Text input-->\n<div class=\"form-group\">\n  <label class=\"col-md-4 control-label\" for=\"Father\">Father's name</label>\n  <div class=\"col-md-4\">\n  <div class=\"input-group\">\n       <div class=\"input-group-addon\">\n      <i class=\"fa fa-male\" style=\"font-size: 20px;\"></i>\n\n       </div>\n      <input id=\"Father\" name=\"Father\" type=\"text\" placeholder=\"Father's name\" class=\"form-control input-md\">\n\n      </div>\n\n  </div>\n</div>\n\n<!-- Text input-->\n<div class=\"form-group\">\n  <label class=\"col-md-4 control-label\" for=\"Mother\">Mother's Name</label>\n  <div class=\"col-md-4\">\n  <div class=\"input-group\">\n       <div class=\"input-group-addon\">\n      <i class=\"fa fa-female\" style=\"font-size: 20px;\"></i>\n\n       </div>\n  <input id=\"Mother\" name=\"Mother\" type=\"text\" placeholder=\"Mother's Name\" class=\"form-control input-md\">\n\n      </div>\n\n  </div>\n</div>\n\n<!-- Multiple Radios (inline) -->\n<div class=\"form-group\">\n  <label class=\"col-md-4 control-label\" for=\"Gender\">Gender</label>\n  <div class=\"col-md-4\">\n    <label class=\"radio-inline\" for=\"Gender-0\">\n      <input type=\"radio\" name=\"Gender\" id=\"Gender-0\" value=\"1\" checked=\"checked\">\n      Male\n    </label>\n    <label class=\"radio-inline\" for=\"Gender-1\">\n      <input type=\"radio\" name=\"Gender\" id=\"Gender-1\" value=\"2\">\n      Female\n    </label>\n    <label class=\"radio-inline\" for=\"Gender-2\">\n      <input type=\"radio\" name=\"Gender\" id=\"Gender-2\" value=\"3\">\n      Other\n    </label>\n  </div>\n</div>\n\n<!-- Multiple Radios (inline) -->\n<div class=\"form-group\">\n  <label class=\"col-md-4 control-label\" for=\"radios\">Marital Status:</label>\n  <div class=\"col-md-4\">\n    <label class=\"radio-inline\" for=\"radios-0\">\n      <input type=\"radio\" name=\"radios\" id=\"radios-0\" value=\"1\" checked=\"checked\">\n      Married\n    </label>\n    <label class=\"radio-inline\" for=\"radios-1\">\n      <input type=\"radio\" name=\"radios\" id=\"radios-1\" value=\"2\">\n      Unmarried\n    </label>\n  </div>\n</div>\n\n<!-- Text input-->\n<!-- <div class=\"form-group\">\n  <label class=\"col-md-4 control-label\" for=\"Temporary Address\">Temporary Address</label>\n  <div class=\"col-md-4\">\n\n  <div class=\"input-group\">\n       <div class=\"input-group-addon\">\n     <i class=\"fa fa-home\" style=\"font-size:20px;\"></i>\n\n       </div>\n <input id=\"Temporary Address\" name=\"Temporary Address\" type=\"text\" placeholder=\"Temporary Address\" class=\"form-control input-md\">\n      </div>\n\n\n  </div>\n</div>\n -->\n\n\n<div class=\"form-group\">\n  <label class=\"col-md-4 control-label col-xs-12\" for=\"Permanent Address\">Permanent Address</label>\n  <div class=\"col-md-2  col-xs-4\">\n  <input id=\"Permanent Address\" name=\"Permanent Address\" type=\"text\" placeholder=\"District\" class=\"form-control input-md \">\n  </div>\n\n  <div class=\"col-md-2 col-xs-4\">\n\n  <input id=\"Permanent Address\" name=\"Permanent Address\" type=\"text\" placeholder=\"Area\" class=\"form-control input-md \">\n  </div>\n\n\n</div>\n\n<div class=\"form-group\">\n  <label class=\"col-md-4 control-label\" for=\"Permanent Address\"></label>\n  <div class=\"col-md-2  col-xs-4\">\n  <input id=\"Permanent Address\" name=\"Permanent Address\" type=\"text\" placeholder=\"Street\" class=\"form-control input-md \">\n\n  </div>\n\n\n\n\n</div>\n\n\n\n\n<div class=\"form-group\">\n  <label class=\"col-md-4 control-label col-xs-12\" for=\"Temporary Address\">Temporary Address</label>\n  <div class=\"col-md-2  col-xs-4\">\n  <input id=\"Temporary Address\" name=\"Temporary Address\" type=\"text\" placeholder=\"District\" class=\"form-control input-md \">\n  </div>\n\n  <div class=\"col-md-2 col-xs-4\">\n\n  <input id=\"Temporary Address\" name=\"Temporary Address\" type=\"text\" placeholder=\"Area\" class=\"form-control input-md \">\n  </div>\n\n\n</div>\n\n<div class=\"form-group\">\n  <label class=\"col-md-4 control-label\" for=\"Temporary Address\"></label>\n  <div class=\"col-md-2  col-xs-4\">\n  <input id=\"Temporary Address\" name=\"Temporary Address\" type=\"text\" placeholder=\"Street\" class=\"form-control input-md \">\n\n  </div>\n\n\n\n\n</div>\n\n\n\n\n<!-- Text input-->\n<div class=\"form-group\">\n  <label class=\"col-md-4 control-label\" for=\"Primary Occupation\">Primary Occupation</label>\n  <div class=\"col-md-4\">\n  <div class=\"input-group\">\n       <div class=\"input-group-addon\">\n     <i class=\"fa fa-briefcase\"></i>\n\n       </div>\n      <input id=\"Primary Occupation\" name=\"Primary Occupation\" type=\"text\" placeholder=\"Primary Occupation\" class=\"form-control input-md\">\n      </div>\n\n\n  </div>\n</div>\n\n<!-- Text input-->\n<div class=\"form-group\">\n  <label class=\"col-md-4 control-label\" for=\"Secondary Occupation (if any)\">Secondary Occupation (if any)</label>\n  <div class=\"col-md-4\">\n  <div class=\"input-group\">\n       <div class=\"input-group-addon\">\n      <i class=\"fa fa-briefcase\"></i>\n\n       </div>\n     <input id=\"Secondary Occupation (if any)\" name=\"Secondary Occupation (if any)\" type=\"text\" placeholder=\"Secondary Occupation (if any)\" class=\"form-control input-md\">\n      </div>\n\n\n  </div>\n</div>\n\n<!-- Text input-->\n<div class=\"form-group\">\n  <label class=\"col-md-4 control-label\" for=\"Skills\">Skills</label>\n  <div class=\"col-md-4\">\n  <div class=\"input-group\">\n       <div class=\"input-group-addon\">\n     <i class=\"fa fa-graduation-cap\"></i>\n\n       </div>\n     <input id=\"Skills\" name=\"Skills\" type=\"text\" placeholder=\"Skills\" class=\"form-control input-md\">\n      </div>\n\n\n  </div>\n</div>\n\n<!-- Text input-->\n<div class=\"form-group\">\n  <label class=\"col-md-4 control-label\" for=\"Phone number \">Phone number </label>\n  <div class=\"col-md-4\">\n  <div class=\"input-group\">\n       <div class=\"input-group-addon\">\n     <i class=\"fa fa-phone\"></i>\n\n       </div>\n    <input id=\"Phone number \" name=\"Phone number \" type=\"text\" placeholder=\"Primary Phone number \" class=\"form-control input-md\">\n\n      </div>\n      <div class=\"input-group othertop\">\n       <div class=\"input-group-addon\">\n     <i class=\"fa fa-mobile fa-1x\" style=\"font-size: 20px;\"></i>\n\n       </div>\n    <input id=\"Phone number \" name=\"Secondary Phone number \" type=\"text\" placeholder=\" Secondary Phone number \" class=\"form-control input-md\">\n\n      </div>\n\n  </div>\n</div>\n\n<!-- Text input-->\n<div class=\"form-group\">\n  <label class=\"col-md-4 control-label\" for=\"Email Address\">Email Address</label>\n  <div class=\"col-md-4\">\n  <div class=\"input-group\">\n       <div class=\"input-group-addon\">\n     <i class=\"fa fa-envelope-o\"></i>\n\n       </div>\n    <input id=\"Email Address\" name=\"Email Address\" type=\"text\" placeholder=\"Email Address\" class=\"form-control input-md\">\n\n      </div>\n\n  </div>\n</div>\n\n<!-- Text input-->\n<div class=\"form-group\">\n  <label class=\"col-md-4 control-label\" for=\"Availability time\">Availability time</label>\n  <div class=\"col-md-4\">\n  <div class=\"input-group\">\n       <div class=\"input-group-addon\">\n     <i class=\"fa fa-clock-o\"></i>\n\n       </div>\n    <input id=\"Availability time\" name=\"Availability time\" type=\"text\" placeholder=\"Availability time\" class=\"form-control input-md\">\n\n      </div>\n\n\n  </div>\n</div>\n\n<!-- Text input-->\n<div class=\"form-group\">\n  <label class=\"col-md-4 control-label\" for=\"Available Service Area\">Available Service Area</label>\n  <div class=\"col-md-4\">\n  <div class=\"input-group\">\n       <div class=\"input-group-addon\">\n     <i class=\"fa fa-street-view\"></i>\n\n       </div>\n   <input id=\"Available Service Area\" name=\"Available Service Area\" type=\"text\" placeholder=\"Available Service Area\" class=\"form-control input-md\">\n\n      </div>\n\n\n  </div>\n</div>\n\n<!-- Text input-->\n<div class=\"form-group\">\n  <label class=\"col-md-4 control-label\" for=\"Citizenship No.\">Citizenship No.</label>\n  <div class=\"col-md-4\">\n  <div class=\"input-group\">\n       <div class=\"input-group-addon\">\n     <i class=\"fa fa-sticky-note-o\"></i>\n\n       </div>\n   <input id=\"Citizenship No.\" name=\"Citizenship No.\" type=\"text\" placeholder=\"Citizenship No.\" class=\"form-control input-md\">\n\n      </div>\n\n\n  </div>\n</div>\n\n<!-- Multiple Checkboxes -->\n<div class=\"form-group\">\n  <label class=\"col-md-4 control-label\" for=\"Languages Known\">Languages Known</label>\n  <div class=\"col-md-4\">\n  <div class=\"checkbox\">\n    <label for=\"Languages Known-0\">\n      <input type=\"checkbox\" name=\"Languages Known\" id=\"Languages Known-0\" value=\"1\">\n      Nepali\n    </label>\n    </div>\n  <div class=\"checkbox\">\n    <label for=\"Languages Known-1\">\n      <input type=\"checkbox\" name=\"Languages Known\" id=\"Languages Known-1\" value=\"2\">\n      Newari\n    </label>\n    </div>\n  <div class=\"checkbox\">\n    <label for=\"Languages Known-2\">\n      <input type=\"checkbox\" name=\"Languages Known\" id=\"Languages Known-2\" value=\"3\">\n      English\n    </label>\n    </div>\n  <div class=\"checkbox\">\n    <label for=\"Languages Known-3\">\n      <input type=\"checkbox\" name=\"Languages Known\" id=\"Languages Known-3\" value=\"4\">\n      Hindi\n    </label>\n    </div>\n\n<div class=\"othertop\">\n    <label for=\"Languages Known-4\">\n\n\n\n    </label>\n\n     <input type=\"input\" name=\"LanguagesKnown\" id=\"Languages Known-4\"  placeholder=\"Other Language\">\n    </div>\n\n  </div>\n</div>\n\n<!-- Text input-->\n<div class=\"form-group\">\n  <label class=\"col-md-4 control-label\" for=\"License No.\">License No.</label>\n  <div class=\"col-md-4\">\n  <div class=\"input-group\">\n       <div class=\"input-group-addon\">\n     <i class=\"fa fa-sticky-note-o\"></i>\n\n       </div>\n   <input id=\"License No.\" name=\"License No.\" type=\"text\" placeholder=\"License No.\" class=\"form-control input-md\">\n\n      </div>\n\n\n  </div>\n</div>\n\n<!-- Multiple Radios -->\n<div class=\"form-group\">\n  <label class=\"col-md-4 control-label\" for=\"Owns Vehicle\">Owns Vehicle?</label>\n  <div class=\"col-md-4\">\n  <div class=\"checkbox\">\n    <label for=\"Owns Vehicle-0\">\n      <input type=\"checkbox\" name=\"Owns Vehicle\" id=\"Owns Vehicle-0\" value=\"1\">\n      4 wheeler\n    </label>\n    </div>\n  <div class=\"checkbox\">\n    <label for=\"Owns Vehicle-1\">\n      <input type=\"checkbox\" name=\"Owns Vehicle\" id=\"Owns Vehicle-1\" value=\"2\">\n     Bike\n    </label>\n    </div>\n  <div class=\"checkbox\">\n    <label for=\"Owns Vehicle-2\">\n      <input type=\"checkbox\" name=\"Owns Vehicle\" id=\"Owns Vehicle-2\" value=\"3\">\n      Bicycle\n    </label>\n    </div>\n  </div>\n</div>\n\n\n<!-- Text input-->\n<div class=\"form-group\">\n  <label class=\"col-md-4 control-label\" for=\"Working Experience (time period)\">Working Experience (time period)</label>\n  <div class=\"col-md-4\">\n  <div class=\"input-group\">\n       <div class=\"input-group-addon\">\n     <i class=\"fa fa-clock-o\"></i>\n\n       </div>\n    <input id=\"Working Experience (time period)\" name=\"Working Experience\" type=\"text\" placeholder=\"Enter time period \" class=\"form-control input-md\">\n\n\n      </div>\n\n  </div>\n</div>\n\n<!-- Textarea -->\n<div class=\"form-group\">\n  <label class=\"col-md-4 control-label\" for=\"Overview (max 200 words)\">Overview (max 200 words)</label>\n  <div class=\"col-md-4\">\n    <textarea class=\"form-control\" rows=\"10\"  id=\"Overview (max 200 words)\" name=\"Overview (max 200 words)\">Overview</textarea>\n  </div>\n</div>\n\n\n<div class=\"form-group\">\n  <label class=\"col-md-4 control-label\" ></label>\n  <div class=\"col-md-4\">\n  <a href=\"#\" class=\"btn btn-success\"><span class=\"glyphicon glyphicon-thumbs-up\"></span> Submit</a>\n  <a href=\"#\" class=\"btn btn-danger\" value=\"\"><span class=\"glyphicon glyphicon-remove-sign\"></span> Clear</a>\n\n  </div>\n</div>\n\n</fieldset>\n</form>\n</div>\n<div class=\"col-md-2 hidden-xs\">\n<img src=\"http://websamplenow.com/30/userprofile/images/avatar.jpg\" class=\"img-responsive img-thumbnail \">\n  <div>\n  <label>{{username}}</label>\n  </div>\n</div>\n\n\n</div>\n   </div>\n    <!-- jQuery Version 1.11.1 -->\n    <script src=\"js/jquery.js\"></script>\n\n    <!-- Bootstrap Core JavaScript -->\n    <script src=\"js/bootstrap.min.js\"></script>\n\n</body>\n\n</html>\n"
+
+/***/ }),
+
+/***/ "./src/app/profile/profile.component.ts":
+/*!**********************************************!*\
+  !*** ./src/app/profile/profile.component.ts ***!
+  \**********************************************/
+/*! exports provided: ProfileComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ProfileComponent", function() { return ProfileComponent; });
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm5/http.js");
+var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (undefined && undefined.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+var ProfileComponent = /** @class */ (function () {
+    function ProfileComponent(http) {
+        this.http = http;
+        this.username = "";
+    }
+    ProfileComponent.prototype.ngOnInit = function () {
+        var _this = this;
+        this.http.get('/api/currentUser', {}).subscribe(function (res) {
+            console.log("resss", res);
+            //  console.log("resss msssg",res.msg);
+            if (res['msg']) {
+                _this.username = res['msg'];
+            }
+        }, function (err) {
+            console.log(err.error);
+        });
+    };
+    ProfileComponent = __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
+            selector: 'app-profile',
+            template: __webpack_require__(/*! ./profile.component.html */ "./src/app/profile/profile.component.html"),
+            styles: [__webpack_require__(/*! ./profile.component.css */ "./src/app/profile/profile.component.css")]
+        }),
+        __metadata("design:paramtypes", [_angular_common_http__WEBPACK_IMPORTED_MODULE_1__["HttpClient"]])
+    ], ProfileComponent);
+    return ProfileComponent;
+}());
+
+
+
+/***/ }),
+
 /***/ "./src/app/register/register.component.css":
 /*!*************************************************!*\
   !*** ./src/app/register/register.component.css ***!
@@ -953,7 +1032,7 @@ Object(_angular_platform_browser_dynamic__WEBPACK_IMPORTED_MODULE_1__["platformB
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! /Users/rbk-09/Desktop/DonateDapp/src/main.ts */"./src/main.ts");
+module.exports = __webpack_require__(/*! /Users/rbk/Desktop/DonateDapp/src/main.ts */"./src/main.ts");
 
 
 /***/ })
