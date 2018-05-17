@@ -55,7 +55,7 @@ router.post('/login', function(req, res) {
     }
   });
 });
-
+// for add a post and save it in the database
 router.post('/Post',(req, res)=> {
   let info = req.body;
   Post.create(info, (err, post)=>{
@@ -67,7 +67,7 @@ router.post('/Post',(req, res)=> {
     }
   });
 });
-
+// for get 12 posts
 router.get('/getPosts', (req, res)=> {
   let posts = [];
   Post.find({}, (err, data)=> {
@@ -85,7 +85,7 @@ router.get('/getPosts', (req, res)=> {
   });
 });
 
-router.dalete('/Post:id', (req, res)=> {
+router.delete('/Post:id', (req, res)=> {
   Post.remove(req.params, (err, deleted) => {
     if (err) {
       console.error(err);
@@ -96,8 +96,9 @@ router.dalete('/Post:id', (req, res)=> {
   })
 });
 
+// route for edit a post
 router.put('/Post:id', (req, res)=> {
-  Post.findOneAndUpdate(req.params, {$set: req.body, (err, updated) => {
+  Post.findOneAndUpdate(req.params, {$set: req.body}, (err, updated) => {
     if (err) {
       console.error(err);
     }
