@@ -65,9 +65,26 @@ router.post('/addPost',(req, res)=> {
     else {
       console.log("created new post", post);
     }
-  })
-
+  });
 });
+
+router.get('/getPosts', (req, res)=> {
+  let posts = [];
+  Post.find({}, (err, data)=> {
+    if (err) {
+      console.error(err);
+    }else {
+      for (let i = 0; i < 12; i ++) {
+        if (data[i]) {
+          posts.push(data[i])
+        }
+      }
+      res.send(posts)
+    }
+
+  });
+});
+
 
 //
 getToken = function (headers) {
