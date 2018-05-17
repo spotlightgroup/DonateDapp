@@ -6,6 +6,7 @@ var express = require('express');
 var jwt = require('jsonwebtoken');
 var router = express.Router();
 var User = require("../../models/User");
+var Post = require("../../models/Post");
 
 // router for register new user
 
@@ -55,7 +56,6 @@ router.post('/login', function(req, res) {
   });
 });
 
-
 //
 getToken = function (headers) {
   if (headers && headers.authorization) {
@@ -69,5 +69,7 @@ getToken = function (headers) {
     return null;
   }
 };
+
+
 
 module.exports = router;

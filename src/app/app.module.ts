@@ -7,7 +7,20 @@ import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { HttpModule } from '@angular/http';
+import {MetaModule} from './meta/meta.module';
+import { CommonModule } from '@angular/common';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {
+  MatButtonModule,
+  MatCardModule,
+  MatFormFieldModule,
+  MatInputModule,
+  MatToolbarModule
+} from '@angular/material';
+
 import { RouterModule, Routes } from '@angular/router';
+import { PostComponent } from './post/post.component';
 
 const appRoutes: Routes = [
   { path: 'home',
@@ -34,12 +47,23 @@ const appRoutes: Routes = [
     AppComponent,
     HomeComponent,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    PostComponent
   ],
   imports: [
+    BrowserAnimationsModule,
+    CommonModule,
+    MatButtonModule,
+    MatCardModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatToolbarModule,
     BrowserModule,
     FormsModule,
     HttpClientModule,
+    HttpModule,
+    MetaModule,
+
     RouterModule.forRoot(
     appRoutes,
     { enableTracing: true }
