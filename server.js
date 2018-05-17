@@ -35,6 +35,20 @@ app.post("/addPost", (req, res)=> {
     }
   });
 });
+
+
+
+app.get("/getPosts", (req, res)=> {
+  Post.find({}, (err, data)=> {
+    if (err) {
+      console.log(err);
+    }
+    else {
+      res.send(data)
+    }
+  });
+});
+
 app.get('*',(req,res) => {
   res.sendFile(path.join(__dirname,'dist/DonateDapp/index.html'))
 });

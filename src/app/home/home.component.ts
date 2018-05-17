@@ -12,7 +12,7 @@ model = {
   description: "",
   publicKey: 'fasdfasss'
 };
-
+Posts: any;
 message = '';
 
 
@@ -21,7 +21,7 @@ message = '';
   constructor(private http:HttpClient) { }
 
   ngOnInit() {
-
+    this.getPosts()
   }
   sendPost() {
     let that = this
@@ -40,5 +40,16 @@ message = '';
       description: "",
       publicKey: 'fasdfasss'
     };
+    this.getPosts()
+  }
+
+
+  getPosts() {
+    this.http.get("/getPosts").subscribe(res => {
+      this.Posts = res;
+    }, err => {
+      this.message = "error"
+      return;
+    })
   }
 }

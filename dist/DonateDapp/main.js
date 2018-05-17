@@ -233,7 +233,7 @@ module.exports = ""
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"inputPost container-fluid\">\n    <h3>What Is Your Project ?</h3>\n    <input type=\"text\" class=\"form-control\" [(ngModel)]=\"model.header\" >\n    <h3>Descrip Your Project</h3>\n    <input type=\"text\" class=\"form-control\" [(ngModel)]=\"model.description\" >\n    <h3>What Is Your Project ?</h3>\n    <input type=\"number\" class=\"form-control\" [(ngModel)]=\"model.needed\" min=\"0\" >\n    <input type=\"button\" name=\"send\" value=\"send\" (click)=\"sendPost()\" class=\"btn btn-outline-success my-2 my-sm-0\">\n    <div class=\"alert alert-warning alert-dismissible\" role=\"alert\" *ngIf=\"message !== ''\">\n      <button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\"><span aria-hidden=\"true\">&times;</span></button>\n      {{message}}\n    </div>\n</div>\n"
+module.exports = "<div class=\"inputPost container-fluid\">\n    <h3>What Is Your Project ?</h3>\n    <input type=\"text\" class=\"form-control\" [(ngModel)]=\"model.header\" >\n    <h3>Descrip Your Project</h3>\n    <input type=\"text\" class=\"form-control\" [(ngModel)]=\"model.description\" >\n    <h3>What Is Your Project ?</h3>\n    <input type=\"number\" class=\"form-control\" [(ngModel)]=\"model.needed\" min=\"0\" >\n    <input type=\"button\" name=\"send\" value=\"send\" (click)=\"sendPost()\" class=\"btn btn-outline-success my-2 my-sm-0\">\n    <div class=\"alert alert-warning alert-dismissible\" role=\"alert\" *ngIf=\"message !== ''\">\n      <button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\"><span aria-hidden=\"true\">&times;</span></button>\n      {{message}}\n    </div>\n</div>\n\n<div class=\"card container\" *ngFor=\"let post of Posts\" >\n  <h2>{{post.header}}</h2>\n  <p>{{post.description}}</p>\n  <p>{{post.needed}}</p>\n</div>\n"
 
 /***/ }),
 
@@ -272,6 +272,7 @@ var HomeComponent = /** @class */ (function () {
         this.message = '';
     }
     HomeComponent.prototype.ngOnInit = function () {
+        this.getPosts();
     };
     HomeComponent.prototype.sendPost = function () {
         var _this = this;
@@ -289,6 +290,16 @@ var HomeComponent = /** @class */ (function () {
             description: "",
             publicKey: 'fasdfasss'
         };
+        this.getPosts();
+    };
+    HomeComponent.prototype.getPosts = function () {
+        var _this = this;
+        this.http.get("/getPosts").subscribe(function (res) {
+            _this.Posts = res;
+        }, function (err) {
+            _this.message = "error";
+            return;
+        });
     };
     HomeComponent = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({

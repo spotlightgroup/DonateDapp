@@ -11,3 +11,9 @@
       {{message}}
     </div>
 </div>
+
+<div class="card container" *ngFor="let post of Posts" >
+  <h2>{{post.header}}</h2>
+  <p>{{post.description}}</p>
+  <p>{{post.needed}}</p>
+</div>
