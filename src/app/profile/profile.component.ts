@@ -7,7 +7,14 @@ import { HttpClient } from '@angular/common/http';
   styleUrls: ['./profile.component.css']
 })
 export class ProfileComponent implements OnInit {
-  username="";
+model = {
+  fullName: "",
+  phoneNumber1: 0,
+  phoneNumber2: 0,
+  address: "",
+  email: "",
+  Overview: ""
+}
   constructor(private http:HttpClient) { }
 
   ngOnInit() {
