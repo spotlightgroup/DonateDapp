@@ -19,7 +19,7 @@ model = {
 Posts: any;
 message = ''
 post :any;
-clicked= false;
+donateClicked= false;
 
 
 
@@ -68,8 +68,9 @@ clicked= false;
   }
   getPublicKey(key) {
       this.data.publicKey = key;
-      this.clicked = !this.clicked;
-
+      setTimeout(()=> {
+        window.location.reload()
+      },2000)
   }
 
 

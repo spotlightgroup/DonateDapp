@@ -4,7 +4,7 @@
     <input type="text" class="form-control" [(ngModel)]="model.header" >
     <h3>Descrip Your Project</h3>
     <input type="text" class="form-control" [(ngModel)]="model.description" >
-    <h3>What Is Your Project ?</h3>
+    <h3>How Much Do You Need ?</h3>
     <input type="number" class="form-control" [(ngModel)]="model.needed" min="0" >
     <input type="button" name="send" value="send" (click)="sendPost()" class="btn btn-outline-success my-2 my-sm-0">
     <div class="alert alert-warning alert-dismissible" role="alert" *ngIf="message !== ''">
@@ -12,12 +12,11 @@
       {{message}}
     </div>
 </div>
-<app-meta></app-meta>
 <div class="card container" *ngFor="let post of Posts" >
   <h2>{{post.header}}</h2>
   <p>{{post.description}}</p>
   <p>{{post.needed}}</p>
-  <button type="submit" class="btn btn-success" (click)="getPublicKey(post.publicKey)">Donate</button>
+  <a  [routerLink]="['/donate']" type="submit" class="btn btn-success" (click)="getPublicKey(post.publicKey)">Donate</a>
   <div class="form-group">
 
 

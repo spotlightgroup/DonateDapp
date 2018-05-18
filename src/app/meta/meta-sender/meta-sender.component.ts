@@ -29,6 +29,7 @@ export class MetaSenderComponent implements OnInit {
     }
 
   ngOnInit(): void {
+
     this.watchAccount();
     this.web3Service.artifactsToContract(metacoin_artifacts)
       .then((MetaCoinAbstraction) => {
@@ -41,7 +42,6 @@ export class MetaSenderComponent implements OnInit {
       this.accounts = accounts;
       this.model.account = accounts[0];
       this.refreshBalance();
-      console.log(this.model.account)
     });
   }
 
@@ -74,6 +74,9 @@ export class MetaSenderComponent implements OnInit {
       console.log(e);
       this.setStatus('Error sending coin; see log.');
     }
+    setTimeout(()=> {
+      window.location.reload()
+    },3000)
   }
 
   async refreshBalance() {

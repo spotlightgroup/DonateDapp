@@ -5,5 +5,6 @@ import { Injectable } from '@angular/core';
 })
 export class DataService {
   public publicKey = "";
+
   constructor() { }
 }

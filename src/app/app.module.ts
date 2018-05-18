@@ -37,6 +37,11 @@ const appRoutes: Routes = [
    data: { title: 'Login' }
  },
  {
+  path: 'donate',
+  component: MetaSenderComponent ,
+  data: { title: 'Sender' }
+},
+ {
   path: 'signup',
   component: RegisterComponent,
   data: { title: 'signup' }
