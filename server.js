@@ -39,13 +39,22 @@ app.post("/addPost", (req, res)=> {
 
 
 app.get("/getPosts", (req, res)=> {
-  Post.find({}, (err, data)=> {
+  Post.aggregate([
+    {
+      $lookup: {
+        from: "User",
+         localField: "user",
+         foreignField: "username",
+         as: "userInfo"
+       }
+    }
+  ], (err, data)=> {
     if (err) {
       console.log(err);
     }
     else {
       res.send(data)
-    }
+    };
   });
 });
 

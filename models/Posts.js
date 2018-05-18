@@ -2,6 +2,9 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const PostSchema = new Schema({
+    user: {
+      type: String
+    },
     header: {
         type: String,
         required: true
