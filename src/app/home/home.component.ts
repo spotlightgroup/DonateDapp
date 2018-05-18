@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import {Web3Service} from '../util/web3.service';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -10,7 +11,7 @@ model = {
   header: "",
   needed: 0,
   description: "",
-  publicKey: 'fasdfasss'
+  publicKey: ''
 };
 Posts: any;
 message = '';
@@ -19,10 +20,18 @@ sender = false;
 
 
 
-  constructor(private http:HttpClient) { }
+  constructor(private http:HttpClient, private web3:Web3Service) { }
 
   ngOnInit() {
+    this.web3.bootstrapWeb3()
     this.getPosts()
+
+    setTimeout(()=>{
+      this.model.publicKey = this.web3.accounts[0]
+      console.log(this.model.publicKey)
+    }, 2000)
+
+
   }
   sendPost() {
     let that = this

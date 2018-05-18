@@ -10,7 +10,7 @@ declare let window: any;
 @Injectable()
 export class Web3Service {
   private web3: any;
-  private accounts: string[];
+  public accounts: string[];
   public ready = false;
   public MetaCoin: any;
   public accountsObservable = new Subject<string[]>();
@@ -51,7 +51,7 @@ export class Web3Service {
 
   }
 
-  private refreshAccounts() {
+  public refreshAccounts() {
     this.web3.eth.getAccounts((err, accs) => {
       console.log('Refreshing accounts');
       if (err != null) {
