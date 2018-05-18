@@ -13,10 +13,6 @@ const PostSchema = new Schema({
     needed: {
         type: Number,
         required: true
-    },
-    publicKey: {
-      type: String,
-      required: true
     }
 });
 
