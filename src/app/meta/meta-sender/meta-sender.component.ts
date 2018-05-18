@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {Web3Service} from '../../util/web3.service';
 import { MatSnackBar } from '@angular/material';
+import {DataService} from '../../util/data.service';
 
 declare let require: any;
 const metacoin_artifacts = require('../../../../build/contracts/MetaCoin.json');
@@ -23,7 +24,7 @@ export class MetaSenderComponent implements OnInit {
 
   status = '';
 
-  constructor(private web3Service: Web3Service, private matSnackBar: MatSnackBar) {
+  constructor(private web3Service: Web3Service, private matSnackBar: MatSnackBar, private data:DataService) {
 
     }
 
@@ -94,11 +95,6 @@ export class MetaSenderComponent implements OnInit {
   setAmount(e) {
     console.log('Setting amount: ' + e.target.value);
     this.model.amount = e.target.value;
+    this.model.receiver = this.data.publicKey;
   }
-
-  setReceiver(e) {
-    console.log('Setting receiver: ' + e.target.value);
-    this.model.receiver = e.target.value;
-  }
-
 }

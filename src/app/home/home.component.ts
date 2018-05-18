@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import {Web3Service} from '../util/web3.service';
+import {DataService} from '../util/data.service';
+
+
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -14,13 +17,14 @@ model = {
   publicKey: ''
 };
 Posts: any;
-message = '';
-sender = false;
+message = ''
+post :any;
+clicked= false;
 
 
 
 
-  constructor(private http:HttpClient, private web3:Web3Service) { }
+  constructor(private http:HttpClient, private web3:Web3Service, private data:DataService) { }
 
   ngOnInit() {
     this.web3.bootstrapWeb3()
@@ -62,7 +66,11 @@ sender = false;
       return;
     })
   }
-  toggleSender() {
-    this.sender = !this.sender
+  getPublicKey(key) {
+      this.data.publicKey = key;
+      this.clicked = !this.clicked;
+
   }
+
+
 }

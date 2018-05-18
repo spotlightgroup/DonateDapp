@@ -12,13 +12,15 @@
       {{message}}
     </div>
 </div>
-
+<app-meta></app-meta>
 <div class="card container" *ngFor="let post of Posts" >
   <h2>{{post.header}}</h2>
   <p>{{post.description}}</p>
   <p>{{post.needed}}</p>
+  <button type="submit" class="btn btn-success" (click)="getPublicKey(post.publicKey)">Donate</button>
   <div class="form-group">
-    <button [routerLink]="['/donate']" type="submit" class="btn btn-success">Donate</button>
+
 
   </div>
+
 </div>
