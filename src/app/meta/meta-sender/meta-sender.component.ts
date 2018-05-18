@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {Web3Service} from '../../util/web3.service';
 import { MatSnackBar } from '@angular/material';
+import {DataService} from '../../util/data.service';
 
 declare let require: any;
 const metacoin_artifacts = require('../../../../build/contracts/MetaCoin.json');
@@ -23,11 +24,12 @@ export class MetaSenderComponent implements OnInit {
 
   status = '';
 
-  constructor(private web3Service: Web3Service, private matSnackBar: MatSnackBar) {
+  constructor(private web3Service: Web3Service, private matSnackBar: MatSnackBar, private data:DataService) {
 
     }
 
   ngOnInit(): void {
+
     this.watchAccount();
     this.web3Service.artifactsToContract(metacoin_artifacts)
       .then((MetaCoinAbstraction) => {
@@ -40,7 +42,6 @@ export class MetaSenderComponent implements OnInit {
       this.accounts = accounts;
       this.model.account = accounts[0];
       this.refreshBalance();
-      console.log(this.model.account)
     });
   }
 
@@ -73,6 +74,9 @@ export class MetaSenderComponent implements OnInit {
       console.log(e);
       this.setStatus('Error sending coin; see log.');
     }
+    setTimeout(()=> {
+      window.location.reload()
+    },3000)
   }
 
   async refreshBalance() {
@@ -94,11 +98,6 @@ export class MetaSenderComponent implements OnInit {
   setAmount(e) {
     console.log('Setting amount: ' + e.target.value);
     this.model.amount = e.target.value;
+    this.model.receiver = this.data.publicKey;
   }
-
-  setReceiver(e) {
-    console.log('Setting receiver: ' + e.target.value);
-    this.model.receiver = e.target.value;
-  }
-
 }

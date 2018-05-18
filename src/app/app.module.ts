@@ -38,8 +38,8 @@ const appRoutes: Routes = [
  },
  {
   path: 'donate',
-  component: MetaSenderComponent,
-  data: { title: 'DONATE' }
+  component: MetaSenderComponent ,
+  data: { title: 'Sender' }
 },
  {
   path: 'signup',
