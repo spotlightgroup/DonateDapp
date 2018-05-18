@@ -3,7 +3,8 @@ const Schema = mongoose.Schema;
 
 const PostSchema = new Schema({
     user: {
-      type: String
+      type: String,
+      required: true
     },
     header: {
         type: String,
