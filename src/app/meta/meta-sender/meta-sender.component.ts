@@ -6,7 +6,7 @@ declare let require: any;
 const metacoin_artifacts = require('../../../../build/contracts/MetaCoin.json');
 
 @Component({
-  selector: 'app-meta-sender',
+  selector: 'app-meta',
   templateUrl: './meta-sender.component.html',
   styleUrls: ['./meta-sender.component.css']
 })
@@ -24,12 +24,10 @@ export class MetaSenderComponent implements OnInit {
   status = '';
 
   constructor(private web3Service: Web3Service, private matSnackBar: MatSnackBar) {
-    console.log('Constructor: ' + web3Service);
-  }
+
+    }
 
   ngOnInit(): void {
-    console.log('OnInit: ' + this.web3Service);
-    console.log(this);
     this.watchAccount();
     this.web3Service.artifactsToContract(metacoin_artifacts)
       .then((MetaCoinAbstraction) => {
@@ -42,6 +40,7 @@ export class MetaSenderComponent implements OnInit {
       this.accounts = accounts;
       this.model.account = accounts[0];
       this.refreshBalance();
+      console.log(this.model.account)
     });
   }
 
