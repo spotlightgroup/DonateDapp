@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import {MetaSenderComponent} from './meta/meta-sender/meta-sender.component';
 
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
@@ -36,6 +37,11 @@ const appRoutes: Routes = [
    data: { title: 'Login' }
  },
  {
+  path: 'donate',
+  component: MetaSenderComponent,
+  data: { title: 'DONATE' }
+},
+ {
   path: 'signup',
   component: RegisterComponent,
   data: { title: 'signup' }
@@ -53,7 +59,7 @@ const appRoutes: Routes = [
     HomeComponent,
     LoginComponent,
     RegisterComponent,
-    ProfileComponent
+    ProfileComponent,
   ],
   imports: [
     BrowserAnimationsModule,

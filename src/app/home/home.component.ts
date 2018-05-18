@@ -14,6 +14,7 @@ model = {
 };
 Posts: any;
 message = '';
+sender = false;
 
 
 
@@ -51,5 +52,8 @@ message = '';
       this.message = "error"
       return;
     })
+  }
+  toggleSender() {
+    this.sender = !this.sender
   }
 }

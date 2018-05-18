@@ -1,3 +1,4 @@
+
 <div class="inputPost container-fluid">
     <h3>What Is Your Project ?</h3>
     <input type="text" class="form-control" [(ngModel)]="model.header" >
@@ -16,4 +17,8 @@
   <h2>{{post.header}}</h2>
   <p>{{post.description}}</p>
   <p>{{post.needed}}</p>
+  <div class="form-group">
+    <button [routerLink]="['/donate']" type="submit" class="btn btn-success">Donate</button>
+
+  </div>
 </div>
