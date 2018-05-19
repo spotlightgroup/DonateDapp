@@ -95,7 +95,18 @@ router.post('/logout',function(req,res){
     res.status(401).send({success: false, msg: 'log in first doom ass'});
   }
 });
+let reciever="";
+router.post("/Reciever",(req,res)=>{
+  console.log("request body reciever",req.body)
+  req.session['reciever']=req.body.key;
+  reciever=req.body.key;
+  console.log("request session",req.session);
 
+})
+router.get("/Reciever",function(req,res){
+  console.log("request session in reciever",req.session)
+  res.status(200).send( {"reciever":reciever});
+})
 router.get('/currentUser',function(req,res){
 	if(req.session.username){
     User.findOne({username: req.session.username},function(err, user) {

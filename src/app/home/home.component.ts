@@ -27,7 +27,8 @@ post :any;
 
   constructor(private http:HttpClient, private web3:Web3Service, private data:DataService) { }
 
-  ngOnInit() {this.model.publicKey = this.data.publicKey
+  ngOnInit() {
+    this.model.publicKey = this.data.publicKey
     this.http.get('/api/currentUser',{}).subscribe(res => {
       console.log("resss",res);
       if(res['msg']){
@@ -77,9 +78,15 @@ post :any;
       return;
     })
   }
-  getPublicKey(key) {
-      this.data.publicKey = key;
-
+  setReciever(key) {
+    this.http.post("/api/Reciever",{"key":key}).subscribe(res => {
+      console.log("reciever sent")
+    }, err => {
+      console.log("Reciever sent failed !!");
+    })
+    setTimeout(()=> {
+      window.location.reload()
+    }, 3000)
   }
 
 
