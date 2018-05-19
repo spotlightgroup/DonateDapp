@@ -11,6 +11,7 @@ import {DataService} from '../util/data.service';
 })
 export class HomeComponent implements OnInit {
 model = {
+  user: '',
   header: "",
   needed: 0,
   description: "",
@@ -19,18 +20,27 @@ model = {
 Posts: any;
 message = ''
 post :any;
-donateClicked= false;
+
 
 
 
 
   constructor(private http:HttpClient, private web3:Web3Service, private data:DataService) { }
 
-  ngOnInit() {
+  ngOnInit() {this.model.publicKey = this.data.publicKey
+    this.http.get('/api/currentUser',{}).subscribe(res => {
+      console.log("resss",res);
+      if(res['msg']){
+        this.model.user = res['msg'].username;
+      }
+    }, err => {
+      console.log(err.error);
+    })
     this.web3.bootstrapWeb3()
     this.getPosts()
 
     setTimeout(()=>{
+
       this.model.publicKey = this.web3.accounts[0]
       console.log(this.model.publicKey)
     }, 2000)
@@ -49,10 +59,11 @@ donateClicked= false;
     that.message = "done"
     console.log('this',that.message)
     that.model = {
+      user: "",
       header: "",
       needed: 0,
       description: "",
-      publicKey: 'fasdfasss'
+      publicKey: ''
     };
     this.getPosts()
   }
@@ -68,9 +79,7 @@ donateClicked= false;
   }
   getPublicKey(key) {
       this.data.publicKey = key;
-      setTimeout(()=> {
-        window.location.reload()
-      },2000)
+
   }
 
 

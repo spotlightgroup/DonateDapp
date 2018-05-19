@@ -80,7 +80,10 @@ router.post('/login', function(req, res) {
     }
   });
 });
-
+// route add Posts
+router.post('/addPost',function(req,res){
+  console.log("req body add post",req.body);
+})
 router.post('/logout',function(req,res){
 	if(req.session.username){
 		req.session.destroy(function(err){

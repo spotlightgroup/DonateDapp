@@ -29,7 +29,7 @@ export class MetaSenderComponent implements OnInit {
     }
 
   ngOnInit(): void {
-
+    console.log('public key', this.model.receiver)
     this.watchAccount();
     this.web3Service.artifactsToContract(metacoin_artifacts)
       .then((MetaCoinAbstraction) => {
@@ -41,6 +41,7 @@ export class MetaSenderComponent implements OnInit {
     this.web3Service.accountsObservable.subscribe((accounts) => {
       this.accounts = accounts;
       this.model.account = accounts[0];
+      this.data.publicKey = this.model.account;
       this.refreshBalance();
     });
   }
@@ -74,9 +75,7 @@ export class MetaSenderComponent implements OnInit {
       console.log(e);
       this.setStatus('Error sending coin; see log.');
     }
-    setTimeout(()=> {
-      window.location.reload()
-    },3000)
+
   }
 
   async refreshBalance() {
@@ -89,6 +88,8 @@ export class MetaSenderComponent implements OnInit {
       const metaCoinBalance = await deployedMetaCoin.getBalance.call(this.model.account);
       console.log('Found balance: ' + metaCoinBalance);
       this.model.balance = metaCoinBalance;
+    //  window.location.reload()
+
     } catch (e) {
       console.log(e);
       this.setStatus('Error getting balance; see log.');
