@@ -16,7 +16,7 @@
   <h2>{{post.header}}</h2>
   <p>{{post.description}}</p>
   <p>{{post.needed}}</p>
-  <a  [routerLink]="['/donate']" type="submit" class="btn btn-success" (click)="getPublicKey(post.publicKey)">Donate</a>
+  <a  [routerLink]="['/donate']" type="submit" class="btn btn-success" (click)="setReciever(post.publicKey)">Donate</a>
   <div class="form-group">
 
 

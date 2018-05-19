@@ -2,6 +2,8 @@ import {Component, OnInit} from '@angular/core';
 import {Web3Service} from '../../util/web3.service';
 import { MatSnackBar } from '@angular/material';
 import {DataService} from '../../util/data.service';
+import { HttpClient } from '@angular/common/http';
+
 
 declare let require: any;
 const metacoin_artifacts = require('../../../../build/contracts/MetaCoin.json');
@@ -24,23 +26,25 @@ export class MetaSenderComponent implements OnInit {
 
   status = '';
 
-  constructor(private web3Service: Web3Service, private matSnackBar: MatSnackBar, private data:DataService) {
+  constructor(private http:HttpClient,private web3Service: Web3Service, private matSnackBar: MatSnackBar, private data:DataService) {
 
     }
 
   ngOnInit(): void {
-
     this.watchAccount();
     this.web3Service.artifactsToContract(metacoin_artifacts)
       .then((MetaCoinAbstraction) => {
         this.MetaCoin = MetaCoinAbstraction;
       });
+
+
   }
 
   watchAccount() {
     this.web3Service.accountsObservable.subscribe((accounts) => {
       this.accounts = accounts;
       this.model.account = accounts[0];
+      this.data.publicKey = this.model.account;
       this.refreshBalance();
     });
   }
@@ -54,9 +58,17 @@ export class MetaSenderComponent implements OnInit {
       this.setStatus('Metacoin is not loaded, unable to send transaction');
       return;
     }
+    let receiver = '';
+          this.http.get("/api/Reciever").subscribe(res=>{
+            receiver = res["reciever"];
+            console.log('receiver1', receiver)
 
+          },err=>{
+            console.log("error in get reciever ");
+          });
+           console.log('receiver2', receiver)
     const amount = this.model.amount;
-    const receiver = this.model.receiver;
+
 
     console.log('Sending coins' + amount + ' to ' + receiver);
 
@@ -74,9 +86,7 @@ export class MetaSenderComponent implements OnInit {
       console.log(e);
       this.setStatus('Error sending coin; see log.');
     }
-    setTimeout(()=> {
-      window.location.reload()
-    },3000)
+
   }
 
   async refreshBalance() {
@@ -89,6 +99,8 @@ export class MetaSenderComponent implements OnInit {
       const metaCoinBalance = await deployedMetaCoin.getBalance.call(this.model.account);
       console.log('Found balance: ' + metaCoinBalance);
       this.model.balance = metaCoinBalance;
+    //  window.location.reload()
+
     } catch (e) {
       console.log(e);
       this.setStatus('Error getting balance; see log.');
@@ -97,7 +109,6 @@ export class MetaSenderComponent implements OnInit {
 
   setAmount(e) {
     console.log('Setting amount: ' + e.target.value);
-    this.model.amount = e.target.value;
-    this.model.receiver = this.data.publicKey;
+      this.model.amount = e.target.value;
   }
 }
