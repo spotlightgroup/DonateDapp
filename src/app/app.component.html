@@ -4,20 +4,20 @@
 
     <a class="nav-link disabled" [routerLink]="['/home']">DonateDapp</a>
 
-  <a class="navbar-brand" href="#">About</a>
+  <a class="navbar-brand" [routerLink]="['/about']">About</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
 
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
-      <li class="nav-item">
+      <li class="nav-item" *ngIf="User !== '' ">
         <a  [routerLink]="['/profile']" class="nav-link" href="#">Profile</a>
       </li>
-      <li class="nav-item">
+      <li class="nav-item" *ngIf="User === '' ">
         <a  [routerLink]="['/signup']" class="nav-link" href="#">SignUp</a>
       </li>
-      <li class="nav-item">
+      <li class="nav-item" *ngIf="User === '' ">
         <a [routerLink]="['/login'] " class="nav-link" href="#">Login</a>
       </li>
       <li class="nav-item" *ngIf="User !== '' ">

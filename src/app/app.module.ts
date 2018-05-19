@@ -9,7 +9,7 @@ import { RegisterComponent } from './register/register.component';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { HttpModule } from '@angular/http';
-import {MetaModule} from './meta/meta.module';
+import { MetaModule } from './meta/meta.module';
 import { CommonModule } from '@angular/common';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {
@@ -22,6 +22,7 @@ import {
 
 import { RouterModule, Routes } from '@angular/router';
 import { ProfileComponent } from './profile/profile.component';
+import { AboutComponent } from './about/about.component';
 
 const appRoutes: Routes = [
   { path: 'home',
@@ -50,6 +51,11 @@ const appRoutes: Routes = [
  path: 'profile',
  component: ProfileComponent,
  data: { title: 'profile' }
+},
+{
+ path: 'about',
+ component: AboutComponent,
+ data: { title: 'about' }
 }
 ];
 
@@ -60,6 +66,7 @@ const appRoutes: Routes = [
     LoginComponent,
     RegisterComponent,
     ProfileComponent,
+    AboutComponent,
   ],
   imports: [
     BrowserAnimationsModule,
