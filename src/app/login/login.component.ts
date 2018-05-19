@@ -22,7 +22,9 @@ export class LoginComponent implements OnInit {
     this.data = res;
     //to store data in the browser's session
     localStorage.setItem('jwtToken', this.data.token);
+    window.location.reload()
     this.router.navigate(['home']);
+
   }, err => {
     this.message = err.error.msg;
   });
