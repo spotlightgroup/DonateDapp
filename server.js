@@ -5,6 +5,7 @@ const path = require ('path');
 const app = express();
 const api =require ('./server/routes/api');
 var Post = require("./models/Posts");
+var User= require("./models/User");
 ///////////////////
 var logger = require('morgan');
 var mongoose = require('mongoose');
@@ -42,7 +43,7 @@ app.get("/getPosts", (req, res)=> {
   Post.aggregate([
     {
       $lookup: {
-        from: "User",
+        from: 'User',
          localField: "user",
          foreignField: "username",
          as: "userInfo"
@@ -53,7 +54,7 @@ app.get("/getPosts", (req, res)=> {
       console.log(err);
     }
     else {
-      res.send(data)
+      res.send(data.reverse())
     };
   });
 });
