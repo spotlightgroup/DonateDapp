@@ -18,7 +18,11 @@ contarct Donation {
   address[] public donors;
 
 
-
+//create the modifier
+modifier restricted() {
+  require(msg.sender === manager);
+  _;
+}
 // the constructor;
   function Donation(uint minimum) public{
     //the manager is the person who deploy the contarct;
