@@ -4,21 +4,23 @@ pragam solidity ^0.4.17;
 contarct Donation {
   //variables declare
   address manager;
-  uint public minimumContribution;
+  uint public minimumDonation;
+  address[] public donors;
+
+
 
 // the constructor;
   function Donation(uint minimum) public{
     //the manager is the person who deploy the contarct;
     manager = msg.sender;
-    minimumContribution = minimum;
+    minimumDonation = minimum;
   }
 
-/* to be a contributer your value should be more than the
-minimumContribution value  */
+  // donat for someone have have a project;
+  function donate() public payable {
+    require (msg.value > minimumDonation)
+    donors.push(msg.sender)
 
-  function contribute() public payable {
-    require(msg.value > minimumContribution);
   }
-
 
 }
