@@ -3,6 +3,16 @@ pragam solidity ^0.4.17;
 // the contract body;
 contarct Donation {
   //variables declare
+
+// the structure deffetion of the spend money request;
+  struct Request {
+    string description;
+    uint value;
+    address resipient;
+    bool complete;
+  }
+
+  Request[] public requests;
   address manager;
   uint public minimumDonation;
   address[] public donors;
@@ -20,7 +30,7 @@ contarct Donation {
   function donate() public payable {
     require (msg.value > minimumDonation)
     donors.push(msg.sender)
-
   }
+
 
 }
