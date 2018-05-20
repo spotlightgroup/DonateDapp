@@ -34,6 +34,7 @@ contract Donation {
   uint public minimumDonation;
   mapping(address => bool) public donors;
   uint approversCount;
+  uint donorsCount;
 
 //create the modifier
 modifier restricted() {
@@ -52,6 +53,7 @@ modifier restricted() {
     require (msg.value > minimumDonation);
     donors[msg.sender] = true;
     approversCount++;
+    donorsCount++;
   }
 
 
@@ -84,6 +86,7 @@ modifier restricted() {
   function resolveRequest(uint index) public restricted {
     Request storage request = requests[index];
     require(request.approvalCount > (approversCount / 2));
+    require(request.approvalCount > (donorsCount / 2));
     require(!request.complete);
     request.recipient.transfer(request.value);
     request.complete = true;
