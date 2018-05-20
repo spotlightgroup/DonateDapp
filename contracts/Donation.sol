@@ -10,6 +10,8 @@ contarct Donation {
     uint value;
     address recipient;
     bool complete;
+    uint approvalCount;
+    mapping(address => bool) approvals;
   }
 
   Request[] public requests;
@@ -40,13 +42,27 @@ modifier restricted() {
   function spend(string description, uint value; address recipient)
     public restricted {
       require(donors[msg.sender])
-      Request newRequst = Request({
+      Request memory newRequst = Request({
         description: description,
         value: value,
         recipient: recipient,
-        complete: false
+        complete: false,
+        approvalCount: 0,
         })
         requests.push(newRequst)
+  }
+
+
+
+  // as a donor should be able to approve a spend request ;
+  function approveSpend (uint index) public {
+    Request storage request = requests[index];
+
+    require(donors[msg.sender]);
+    require(!request.approvals[msg.sender]);
+    request.approvals[msg.sender] = true;
+    request.approvalCount++;
+
   }
 
 
