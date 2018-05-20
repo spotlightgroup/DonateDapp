@@ -1,5 +1,20 @@
 pragma solidity ^0.4.17;
 
+// contract factory;
+contract DonationMaker {
+  address[] public deployedContracts;
+
+  function createContract(uint minimum) public {
+    address newContract = new Donation(minimum, msg.sender);
+    deployedContracts.push(newContract);
+  }
+
+  function getDeployedContracts() public view returns (address[]) {
+    return deployedContracts;
+  }
+}
+
+
 // the contract body;
 contract Donation {
   //variables declare
@@ -26,9 +41,9 @@ modifier restricted() {
   _;
 }
 // the constructor;
-  function Donation(uint minimum) public{
+  function Donation(uint minimum, address maker) public{
     //the manager is the person who deploy the contarct;
-    manager = msg.sender;
+    manager = maker;
     minimumDonation = minimum;
   }
 
