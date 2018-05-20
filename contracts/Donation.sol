@@ -37,4 +37,19 @@ modifier restricted() {
   }
 
 
+  //create request to spend the money;
+  function spend(string description, uint value; address recipient)
+    public restricted {
+      Request newRequst = Request({
+        description: description,
+        value: value,
+        resipient: resipient,
+        complete: false
+        })
+        requests.push(newRequst)
+  }
+
+
+
+
 }
