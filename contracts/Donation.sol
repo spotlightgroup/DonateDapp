@@ -1,7 +1,7 @@
-pragam solidity ^0.4.17;
+pragma solidity ^0.4.17;
 
 // the contract body;
-contarct Donation {
+contract Donation {
   //variables declare
 
 // the structure deffetion of the spend money request;
@@ -18,10 +18,11 @@ contarct Donation {
   address manager;
   uint public minimumDonation;
   mapping(address => bool) public donors;
+  uint approversCount;
 
 //create the modifier
 modifier restricted() {
-  require(msg.sender === manager);
+  require(msg.sender == manager);
   _;
 }
 // the constructor;
@@ -33,23 +34,23 @@ modifier restricted() {
 
   // donat for someone have have a project;
   function donate() public payable {
-    require (msg.value > minimumDonation)
+    require (msg.value > minimumDonation);
     donors[msg.sender] = true;
+    approversCount++;
   }
 
 
   //create request to spend the money;
-  function spend(string description, uint value; address recipient)
+  function spend(string description, uint value, address recipient)
     public restricted {
-      require(donors[msg.sender])
       Request memory newRequst = Request({
         description: description,
         value: value,
         recipient: recipient,
         complete: false,
-        approvalCount: 0,
-        })
-        requests.push(newRequst)
+        approvalCount: 0
+        });
+        requests.push(newRequst);
   }
 
 
@@ -64,6 +65,16 @@ modifier restricted() {
     request.approvalCount++;
 
   }
+  //finish the request of spending money;
+  function resolveRequest(uint index) public restricted {
+    Request storage request = requests[index];
+    require(request.approvalCount > (approversCount / 2));
+    require(!request.complete);
+    request.recipient.transfer(request.value);
+    request.complete = true;
+  }
+
+
 
 
 
