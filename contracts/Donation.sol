@@ -8,15 +8,14 @@ contarct Donation {
   struct Request {
     string description;
     uint value;
-    address resipient;
+    address recipient;
     bool complete;
   }
 
   Request[] public requests;
   address manager;
   uint public minimumDonation;
-  address[] public donors;
-
+  mapping(address => bool) public donors;
 
 //create the modifier
 modifier restricted() {
@@ -33,17 +32,18 @@ modifier restricted() {
   // donat for someone have have a project;
   function donate() public payable {
     require (msg.value > minimumDonation)
-    donors.push(msg.sender)
+    donors[msg.sender] = true;
   }
 
 
   //create request to spend the money;
   function spend(string description, uint value; address recipient)
     public restricted {
+      require(donors[msg.sender])
       Request newRequst = Request({
         description: description,
         value: value,
-        resipient: resipient,
+        recipient: recipient,
         complete: false
         })
         requests.push(newRequst)
