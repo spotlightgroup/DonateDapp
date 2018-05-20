@@ -50,6 +50,14 @@ post :any;
   }
   sendPost() {
     let that = this
+    if(this.model.user === "") {
+      this.message = "log in first"
+      return;
+    }
+    if (this.model.publicKey === "") {
+      this.message = "you sould use meta mask to complete the process"
+      return;
+    }
     this.http.post('/addPost',this.model).subscribe(res => {
 
 
