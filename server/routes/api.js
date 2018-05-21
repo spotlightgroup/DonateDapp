@@ -29,10 +29,12 @@ router.post('/register', function(req, res) {
 });
 
 router.post('/profile', function(req, res) {
+  console.log("req.bodyyyyy",req.body);
   User.findOne({username: req.body.username},function(err, user) {
     if (!user) {
       res.status(401).send({success: false, msg: 'Authentication failed. User not found.'});
     } else {
+      console.log("useeeeeer",user.fullName)
       user.fullName=req.body.fullName;
       user.phoneNumber1=req.body.phoneNumber1;
       user.phoneNumber2=req.body.phoneNumber2;

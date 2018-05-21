@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -10,7 +9,7 @@ import { Router } from '@angular/router';
 export class AppComponent {
   User = "";
   message = "";
-  constructor(private http:HttpClient , private router:Router ) {
+  constructor(private http:HttpClient) {
     this.islogged();
   };
 
@@ -21,7 +20,6 @@ export class AppComponent {
       return;
     });
     window.location.reload()
-    this.router.navigate(['home']);
   }
   islogged(){
     this.http.get('/api/currentUser',{}).subscribe(res => {
