@@ -19,6 +19,9 @@ export class ProfileComponent implements OnInit {
     email: "",
     overview: ""
   };
+
+  message: "";
+
   constructor(private http:HttpClient , private router:Router) { }
 
   ngOnInit() {
@@ -47,5 +50,20 @@ export class ProfileComponent implements OnInit {
           console.log(err);
       }
     );
+  }
+
+  photoUpload() {
+    var file = photo.target.files[0]
+    var fileReader = new FileReader();
+    fileReader.readAsDataURL(file);
+    fileReader.onload = function(e) {
+     this.http.post('/photo', {image: e.target.result})
+        .subscribe(res => {
+            this.message = "photo uploaded";
+        })
+        .catch(error => {
+            this.message = error.msg;
+      });
+    }
   }
 }
