@@ -1,14 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
-import {MatIconModule} from '@angular/material/icon';
+
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.css']
 })
 export class ProfileComponent implements OnInit {
-  panelOpenState: boolean = false;
   user="";
   model = {
     username:"",
@@ -42,7 +41,7 @@ export class ProfileComponent implements OnInit {
     this.model.username=this.user;
     this.http.post('/api/profile', this.model)
       .subscribe(res => {
-        window.location.reload();
+        //this.router.navigate(['/login']);
       }, (err) => {
           console.log(err);
       }
