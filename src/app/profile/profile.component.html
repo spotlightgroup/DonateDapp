@@ -1,6 +1,8 @@
 <div class="container">
   <h1>Profile</h1>
   <div class="row">
+    <img src={{model.image}} alt="profile image">
+    <input type="file" name="upload" value="change">
     <div class="col-md-6">
       <form (ngSubmit)="profile()" #profileForm="ngForm">
         <div class="form-group">

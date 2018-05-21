@@ -10,6 +10,7 @@ import { Router } from '@angular/router';
 export class ProfileComponent implements OnInit {
   user="";
   model = {
+    image: "https://i.imgur.com/YKhObkG.jpg",
     username:"",
     fullName: "",
     phoneNumber1: 0,
