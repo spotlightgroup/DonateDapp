@@ -49,6 +49,14 @@ post :any;
 
   }
   sendPost() {
+    if (this.model.publicKey === '') {
+      this.message = 'use metamask to continue'
+      return;
+    }
+    if (this.model.user === '') {
+      this.message = 'log in first'
+      return;
+    }
     let that = this
     if(this.model.user === "") {
       this.message = "log in first"
