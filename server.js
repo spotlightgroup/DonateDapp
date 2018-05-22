@@ -43,7 +43,7 @@ app.get("/getPosts", (req, res)=> {
   Post.aggregate([
     {
       $lookup: {
-        from: 'User',
+        from: 'users',
          localField: "user",
          foreignField: "username",
          as: "userInfo"
@@ -55,6 +55,7 @@ app.get("/getPosts", (req, res)=> {
     }
     else {
       res.send(data.reverse())
+
     };
   });
 });

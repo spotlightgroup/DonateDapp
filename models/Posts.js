@@ -21,6 +21,10 @@ const PostSchema = new Schema({
     publicKey: {
       type: String,
       required: true
+    },
+    time: {
+      type:Date,
+      default:Date.now
     }
 });
 
