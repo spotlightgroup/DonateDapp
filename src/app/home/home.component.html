@@ -20,6 +20,7 @@
   <p>{{post.needed}}</p>
   <p>{{post.time}}</p>
   <a  [routerLink]="['/donate']" type="submit" class="btn btn-success" (click)="setReciever(post.publicKey)">Donate</a>
+  <a  [routerLink]="['/requests']" type="submit" class="btn btn-success" (click)="getRequests(post)">spend</a>
   <div class="form-group">
 
 
