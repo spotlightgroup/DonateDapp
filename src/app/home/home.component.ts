@@ -10,7 +10,7 @@ import {DataService} from '../util/data.service';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-model = {
+model:any = {
   user: '',
   header: "",
   needed: 0,
@@ -30,7 +30,7 @@ post :any;
   ngOnInit() {
     this.model.publicKey = this.data.publicKey
     this.http.get('/api/currentUser').subscribe(res => {
-        this.model.user = res['username'];
+        this.model.user = res['msg'].username;
         console.log(this.model)
     }, err => {
       console.log(err.error);
