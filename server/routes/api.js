@@ -29,14 +29,28 @@ router.post('/register', function(req, res) {
 });
 
 router.post('/profile', function(req, res) {
-  User.findOneAndUpdate({username: req.body.username}, {$set: req.body}, function(err, user) {
-    if (err) {
-      console.log(err);
+  console.log("req.bodyyyyy",req.body);
+  User.findOne({username: req.body.username},function(err, user) {
+    if (!user) {
+      res.status(401).send({success: false, msg: 'Authentication failed. User not found.'});
+    } else {
+      console.log("useeeeeer",user.fullName)
+      user.fullName=req.body.fullName;
+      user.phoneNumber1=req.body.phoneNumber1;
+      user.phoneNumber2=req.body.phoneNumber2;
+      user.address=req.body.address;
+      user.email=req.body.email;
+      user.overview=req.body.overview;
+      // save the user
+      user.save(function(err) {
+        if (err) {
+          return res.json({success: false, msg: 'Username already exists.'});
+        }
+        res.json({success: true, msg: 'Successful created new user.'});
+      });
     }
-    else {
-      res.send(user)
-    }
-  });
+  })
+
 });
 
 
@@ -93,35 +107,19 @@ router.get("/Reciever",function(req,res){
   console.log("request session in reciever",req.session)
   res.status(200).send( {"reciever":reciever});
 })
-
-
-
 router.get('/currentUser',function(req,res){
 	if(req.session.username){
     User.findOne({username: req.session.username},function(err, user) {
-      if (err) {
-        console.log(err);
-      }
-      else {
-        res.send(user)
-      }
+      res.status(201).send({success: true, msg: user});
     })
+  }else{
+    res.status(401).send({success: false, msg: ""});
   }
 });
 
-
-//for upload the profile image;
-router.post('/profileImage', (req, res) => {
-  User.findOneAndUpdate({username: req.session.username},{$set: req.body} , (err, data) => {
-    if (err) {
-      res.sendStatus(404)
-    }
-    else {
-      res.send(data)
-    }
-  });
-
-});
+router.get('/test', ()=> {
+  res.send('hello')
+})
 //
 getToken = function (headers) {
   if (headers && headers.authorization) {
