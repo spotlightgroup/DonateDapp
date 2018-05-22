@@ -20,16 +20,15 @@ export class AppComponent {
       return;
     });
     window.location.reload()
-  }
-  islogged(){
-    this.http.get('/api/currentUser',{}).subscribe(res => {
+  };
 
-      if(res['msg']){
-        this.User = res['msg'].username;
-        console.log("resss",this.User);
-      }
+
+  islogged(){
+    this.http.get('/api/currentUser',{})
+    .subscribe(res => {
+        this.User = res['username'];
     }, err => {
-      console.log(err.error);
-    })
-  }
+      console.log(err);
+    });
+  };
 }
