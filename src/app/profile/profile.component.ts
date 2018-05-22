@@ -10,14 +10,11 @@ import swal from 'sweetalert2';
   styleUrls: ['./profile.component.css']
 })
 export class ProfileComponent implements OnInit {
+  panelOpenState: boolean = false;
   user="";
-  message = "";
-  model :any = {
-    image: "http://sreeguru.in/public/images/male.png",
-    username: '',
-    email: '',
-    address: '',
-    fullName: '',
+  model = {
+    username:"",
+    fullName: "",
     phoneNumber1: 0,
     phoneNumber2: 0,
     address: "",
@@ -27,53 +24,39 @@ export class ProfileComponent implements OnInit {
   constructor(private http:HttpClient , private router:Router ) { }
 
   ngOnInit() {
-    this.model = this.data.userInfo;
+    this.http.get('/api/currentUser',{}).subscribe(res => {
+      console.log("resss",res);
+      if(res['msg']){
+        this.user = res['msg'].username;
+        this.model.username = res['msg'].username;
+        this.model.fullName = res['msg'].fullName;
+        this.model.phoneNumber1 = res['msg'].phoneNumber1;
+        this.model.phoneNumber2 = res['msg'].phoneNumber2;
+        this.model.address = res['msg'].address;
+        this.model.email = res['msg'].email;
+        this.model.overview = res['msg'].overview;
+      }
+    }, err => {
+      console.log(err.error);
+    })
   }
-
-
-
-
-
   profile() {
+    this.model.username=this.user;
     this.http.post('/api/profile', this.model)
       .subscribe(res => {
         this.alert()
       }, (err) => {
           console.log(err);
-          this.alert()
       }
     );
   }
-
-
-  photoUpload(photo) {
-
-    let that = this;
-    let file = photo.target.files[0]
-    let fileReader = new FileReader();
-    fileReader.readAsDataURL(file);
-    fileReader.onload = (e) => {
-     that.http.post('/api/profileImage', {image: e.target['result']})
-        .subscribe(res => {
-          that.message = "photo uploaded";
-          that.model = res;
-        }, error => {
-          if (error.status === 413) {
-            that.message = "this image is too large";
-
-          }
-      });
-    }
-  };
-
   alert(){
     swal({
       position: 'top-end',
       type: 'success',
-      title: 'Your work has been saved',
+      title: 'Your change has been saved',
       showConfirmButton: false,
       timer: 1500
     })
-
   }
 }

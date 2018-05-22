@@ -59,35 +59,33 @@ export class MetaSenderComponent implements OnInit {
       return;
     }
     let receiver = '';
-    const amount = this.model.amount;
-       this.http.get("/api/Reciever").subscribe(async res=>{
-             receiver = res["reciever"];
+          this.http.get("/api/Reciever").subscribe(res=>{
+            receiver = res["reciever"];
             console.log('receiver1', receiver)
-            try {
-              const deployedMetaCoin = await this.MetaCoin.deployed();
-              const transaction = await deployedMetaCoin.sendCoin.sendTransaction(receiver, amount, {from: this.model.account});
-
-              if (!transaction) {
-                this.setStatus('Transaction failed!');
-              } else {
-                this.setStatus('Transaction complete!');
-              }
-            } catch (e) {
-              console.log(e);
-              this.setStatus('Error sending coin; see log.');
-            }
 
           },err=>{
             console.log("error in get reciever ");
           });
            console.log('receiver2', receiver)
-
+    const amount = this.model.amount;
 
 
     console.log('Sending coins' + amount + ' to ' + receiver);
 
     this.setStatus('Initiating transaction... (please wait)');
+    try {
+      const deployedMetaCoin = await this.MetaCoin.deployed();
+      const transaction = await deployedMetaCoin.sendCoin.sendTransaction(receiver, amount, {from: this.model.account});
 
+      if (!transaction) {
+        this.setStatus('Transaction failed!');
+      } else {
+        this.setStatus('Transaction complete!');
+      }
+    } catch (e) {
+      console.log(e);
+      this.setStatus('Error sending coin; see log.');
+    }
 
   }
 

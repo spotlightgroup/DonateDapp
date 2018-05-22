@@ -18,7 +18,7 @@ model = {
   publicKey: ''
 };
 Posts: any;
-message = '';
+message = ''
 post :any;
 
 
@@ -29,9 +29,11 @@ post :any;
 
   ngOnInit() {
     this.model.publicKey = this.data.publicKey
-    this.http.get('/api/currentUser').subscribe(res => {
-        this.model.user = res['username'];
-        console.log(this.model)
+    this.http.get('/api/currentUser',{}).subscribe(res => {
+      console.log("resss",res);
+      if(res['msg']){
+        this.model.user = res['msg'].username;
+      }
     }, err => {
       console.log(err.error);
     })
@@ -47,14 +49,6 @@ post :any;
 
   }
   sendPost() {
-    if (this.model.publicKey === '') {
-      this.message = 'use metamask to continue'
-      return;
-    }
-    if (this.model.user === '') {
-      this.message = 'log in first'
-      return;
-    }
     let that = this
     if(this.model.user === "") {
       this.message = "log in first"

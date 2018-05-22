@@ -1,4 +1,3 @@
-
   <section class="view intro-2 rgba-gradient">
         <div class="full-bg-img mask">
             <div class="container flex-center">
@@ -17,6 +16,7 @@
                                   {{ panelOpenState ? 'change your data' : model.fullName }}
                                 </mat-panel-description>
                               </mat-expansion-panel-header>
+                              <br>
                               <mat-form-field appearance="outline">
                                 <mat-label>Full name</mat-label>
                                 <mat-icon matSuffix><i class="fa fa-user-circle-o" aria-hidden="true"></i></mat-icon>
@@ -34,6 +34,7 @@
                                   {{ panelOpenState ? 'change your data' : model.email }}
                                 </mat-panel-description>
                               </mat-expansion-panel-header>
+                              <br>
                               <mat-form-field appearance="outline">
                                 <mat-label>Email</mat-label>
                                 <mat-icon matSuffix><i class="fa fa-envelope prefix grey-text"></i></mat-icon>
@@ -54,6 +55,7 @@
                                   {{ panelOpenState ? '' : model.phoneNumber2 }}
                                 </mat-panel-description>
                               </mat-expansion-panel-header>
+                              <br>
                               <mat-form-field appearance="outline">
                                 <mat-label>First Phone number</mat-label>
                                 <mat-icon matSuffix><i class="fa fa-mobile-phone" aria-hidden="true"></i></mat-icon>
@@ -76,6 +78,7 @@
                                   {{ panelOpenState ? 'change your data' : model.address }}
                                 </mat-panel-description>
                               </mat-expansion-panel-header>
+                              <br>
                               <mat-form-field appearance="outline">
                                 <mat-label>Address</mat-label>
                                 <mat-icon matSuffix><i class="fa fa-address-card-o" aria-hidden="true"></i></mat-icon>
@@ -93,6 +96,7 @@
                                   {{ panelOpenState ? 'change your data' : 'your overview' }}
                                 </mat-panel-description>
                               </mat-expansion-panel-header>
+                              <br>
                               <mat-form-field>
                                 <mat-icon matSuffix><i class="fa fa-pencil prefix grey-text"></i></mat-icon>
                                 <textarea matInput placeholder="Edit your overview" [(ngModel)]="model.overview"></textarea>
@@ -106,11 +110,10 @@
 
                     <div class="col-md-6 wow fadeInRight d-flex justify-content-center" data-wow-delay="0.3s">
                       <div class="text-center">
-                        <img src={{model.image}} class="avatar img-circle" alt="avatar">
+                        <img src="//placehold.it/100" class="avatar img-circle" alt="avatar">
                         <br>
-
                         <h6>Upload a different photo...</h6>
-                        <input id="f" type="file" class="form-control" (change)="photoUpload($event)">
+                        <input id="f" type="file" class="form-control">
                       </div>
                     </div>
                 </div>

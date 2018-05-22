@@ -37,9 +37,6 @@ var UserSchema = new Schema({
     },
     phoneNumber2: {
       type: Number
-    },
-    image: {
-      type: String
     }
 });
 
