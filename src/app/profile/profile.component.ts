@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
-import { DataService } from '../util/data.service'
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import swal from 'sweetalert2';
+
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
@@ -17,13 +19,12 @@ export class ProfileComponent implements OnInit {
     address: '',
     fullName: '',
     phoneNumber1: 0,
-    phoneNumber2: 0
-
-  }
-
-
-
-  constructor(private http:HttpClient , private router:Router, private data:DataService) { }
+    phoneNumber2: 0,
+    address: "",
+    email: "",
+    overview: ""
+  };
+  constructor(private http:HttpClient , private router:Router ) { }
 
   ngOnInit() {
     this.model = this.data.userInfo;
@@ -36,12 +37,14 @@ export class ProfileComponent implements OnInit {
   profile() {
     this.http.post('/api/profile', this.model)
       .subscribe(res => {
-        //this.router.navigate(['/login']);
+        this.alert()
       }, (err) => {
           console.log(err);
+          this.alert()
       }
     );
   }
+
 
   photoUpload(photo) {
 
@@ -57,9 +60,20 @@ export class ProfileComponent implements OnInit {
         }, error => {
           if (error.status === 413) {
             that.message = "this image is too large";
-            
+
           }
       });
     }
+  };
+
+  alert(){
+    swal({
+      position: 'top-end',
+      type: 'success',
+      title: 'Your work has been saved',
+      showConfirmButton: false,
+      timer: 1500
+    })
+
   }
 }
