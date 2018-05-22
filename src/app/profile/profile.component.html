@@ -1,37 +1,124 @@
-<div class="container">
-  <h1>Profile</h1>
-      <h3>{{message}}</h3>
-      <img class="profileImage col-md-6" src={{model.image}} alt="profile image" >
-      <input type="file" name="upload" value="" (change)="photoUpload($event)" >
+<section class="view intro-2 rgba-gradient">
+        <div class="full-bg-img mask">
+            <div class="container flex-center">
+                <div class="row flex-center pt-5 mt-3 w-100">
+                    <div class="col-md-6 text-center text-md-left margins">
+                      <div id="fullComponent">
+                          <mat-accordion>
 
-<div class="row">
-    <div class="col-md-6">
-      <form (ngSubmit)="profile()" #profileForm="ngForm">
-        <div class="form-group">
-          <label for="name">Name (Full name)</label>
-          <input type="text" class="form-control" [(ngModel)]="model.fullName" placeholder="{{model.fullName}}" name="fullName" required>
+                            <mat-expansion-panel (opened)="panelOpenState = true"
+                                                 (closed)="panelOpenState = false">
+                              <mat-expansion-panel-header>
+                                <mat-panel-title>
+                                  Name (Full name)
+                                </mat-panel-title>
+                                <mat-panel-description>
+                                  {{ panelOpenState ? 'change your data' : model.fullName }}
+                                </mat-panel-description>
+                              </mat-expansion-panel-header>
+                              <br>
+                              <mat-form-field appearance="outline">
+                                <mat-label>Full name</mat-label>
+                                <mat-icon matSuffix><i class="fa fa-user-circle-o" aria-hidden="true"></i></mat-icon>
+                                <input matInput [(ngModel)]="model.fullName">
+                              </mat-form-field>
+                            </mat-expansion-panel>
+
+                            <mat-expansion-panel (opened)="panelOpenState = true"
+                                                 (closed)="panelOpenState = false">
+                              <mat-expansion-panel-header>
+                                <mat-panel-title>
+                                  Email Address
+                                </mat-panel-title>
+                                <mat-panel-description>
+                                  {{ panelOpenState ? 'change your data' : model.email }}
+                                </mat-panel-description>
+                              </mat-expansion-panel-header>
+                              <br>
+                              <mat-form-field appearance="outline">
+                                <mat-label>Email</mat-label>
+                                <mat-icon matSuffix><i class="fa fa-envelope prefix grey-text"></i></mat-icon>
+                                <input matInput [(ngModel)]="model.email">
+                              </mat-form-field>
+                            </mat-expansion-panel>
+
+                            <mat-expansion-panel (opened)="panelOpenState = true"
+                                                 (closed)="panelOpenState = false">
+                              <mat-expansion-panel-header>
+                                <mat-panel-title>
+                                  Phone number
+                                </mat-panel-title>
+                                <mat-panel-description>
+                                  {{ panelOpenState ? 'change your data' : model.phoneNumber1 }}
+                                </mat-panel-description>
+                                <mat-panel-description>
+                                  {{ panelOpenState ? '' : model.phoneNumber2 }}
+                                </mat-panel-description>
+                              </mat-expansion-panel-header>
+                              <br>
+                              <mat-form-field appearance="outline">
+                                <mat-label>First Phone number</mat-label>
+                                <mat-icon matSuffix><i class="fa fa-mobile-phone" aria-hidden="true"></i></mat-icon>
+                                <input matInput [(ngModel)]="model.phoneNumber1">
+                              </mat-form-field>
+                              <mat-form-field appearance="outline">
+                                <mat-label>Second Phone number</mat-label>
+                                <mat-icon matSuffix><i class="fa fa-phone" aria-hidden="true"></i></mat-icon>
+                                <input matInput [(ngModel)]="model.phoneNumber2">
+                              </mat-form-field>
+                            </mat-expansion-panel>
+
+                            <mat-expansion-panel (opened)="panelOpenState = true"
+                                                 (closed)="panelOpenState = false">
+                              <mat-expansion-panel-header>
+                                <mat-panel-title>
+                                  Address
+                                </mat-panel-title>
+                                <mat-panel-description>
+                                  {{ panelOpenState ? 'change your data' : model.address }}
+                                </mat-panel-description>
+                              </mat-expansion-panel-header>
+                              <br>
+                              <mat-form-field appearance="outline">
+                                <mat-label>Address</mat-label>
+                                <mat-icon matSuffix><i class="fa fa-address-card-o" aria-hidden="true"></i></mat-icon>
+                                <input matInput [(ngModel)]="model.address">
+                              </mat-form-field>
+                            </mat-expansion-panel>
+
+                            <mat-expansion-panel (opened)="panelOpenState = true"
+                                                 (closed)="panelOpenState = false">
+                              <mat-expansion-panel-header>
+                                <mat-panel-title>
+                                  Overview
+                                </mat-panel-title>
+                                <mat-panel-description>
+                                  {{ panelOpenState ? 'change your data' : 'your overview' }}
+                                </mat-panel-description>
+                              </mat-expansion-panel-header>
+                              <br>
+                              <mat-form-field>
+                                <mat-icon matSuffix><i class="fa fa-pencil prefix grey-text"></i></mat-icon>
+                                <textarea matInput placeholder="Edit your overview" [(ngModel)]="model.overview"></textarea>
+                              </mat-form-field>
+                            </mat-expansion-panel>
+                          </mat-accordion>
+                          <br>
+                          <button  (click)="profile()" class="btn btn-outline-white wow fadeInLeft waves-light" data-wow-delay="0.3s" mdbWavesEffect color="primary">Submit</button>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6 wow fadeInRight d-flex justify-content-center" data-wow-delay="0.3s">
+                      <div class="text-center">
+                        <img src={{model.image}} class="profileImage img-circle" alt="profile image">
+                        <br>
+                        <h6>Upload a different photo...</h6>
+                        <input id="f" type="file" class="form-control" ame="upload" value="" (change)="photoUpload($event)">
+                        <br>
+                        <h3>{{model.username}}</h3>
+                      </div>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="form-group">
-          <label for="name">Email Address</label>
-          <input type="email" class="form-control" [(ngModel)]="model.email" placeholder="{{model.email}}" name="email" required>
-        </div>
-        <div class="form-group">
-          <label for="name">Phone number</label>
-          <input type="number" class="form-control" [(ngModel)]="model.phoneNumber1" placeholder="{{model.phoneNumber1}}" name="phoneNumber1" required>
-          <input type="number" class="form-control" [(ngModel)]="model.phoneNumber2" placeholder="{{model.phoneNumber2}}" name="phoneNumber2" required>
-        </div>
-        <div class="form-group">
-          <label for="name">Address</label>
-          <input type="text" class="form-control" [(ngModel)]="model.address" placeholder="{{model.address}}" name="address" required>
-        </div>
-        <div class="form-group">
-          <label for="name">Overview (max 200 words)</label>
-          <textarea cols="50" rows="5" class="form-control" [(ngModel)]="model.overview" placeholder="{{model.overview}}" name="overview" required></textarea>
-        </div>
-        <div class="form-group">
-          <button type="submit" class="btn btn-success" [disabled]="!profileForm.form.valid">Sign up</button>
-        </div>
-      </form>
-    </div>
-  </div>
-</div>
+    </section>
