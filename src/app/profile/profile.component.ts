@@ -28,7 +28,7 @@ export class ProfileComponent implements OnInit {
   constructor(private http:HttpClient , private router:Router, private data:DataService) { }
 
   ngOnInit() {
-      this.model = this.data.userInfo.msg;
+      this.model = this.data.userInfo;
       console.log(this.model)
 
   }
