@@ -95,6 +95,11 @@ const appRoutes: Routes = [
  data: { title: 'about' }
 },
 {
+ path: 'viewRequests',
+ component: ViewRequestsComponent,
+ data: { title: 'viewRequests' }
+},
+{
  path: 'requests',
  component: RequestsComponent,
  data: { title: 'requests' }
