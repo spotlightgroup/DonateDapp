@@ -1,8 +1,10 @@
 <div class="container">
   <h1>Profile</h1>
-  <div class="row">
-    <img class="profileImage col-md-6" src={{model.image}} alt="profile image" >
-    <input type="file" name="upload" value="" (change)="photoUpload($event)" >
+      <h3>{{message}}</h3>
+      <img class="profileImage col-md-6" src={{model.image}} alt="profile image" >
+      <input type="file" name="upload" value="" (change)="photoUpload($event)" >
+
+<div class="row">
     <div class="col-md-6">
       <form (ngSubmit)="profile()" #profileForm="ngForm">
         <div class="form-group">

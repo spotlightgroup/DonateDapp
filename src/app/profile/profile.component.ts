@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
-
+import { DataService } from '../util/data.service'
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
@@ -10,21 +10,27 @@ import { Router } from '@angular/router';
 export class ProfileComponent implements OnInit {
   user="";
   message = "";
-  model : any;
+  model :any = {
+    image: "http://sreeguru.in/public/images/male.png",
+    username: '',
+    email: '',
+    address: '',
+    fullName: '',
+    phoneNumber1: 0,
+    phoneNumber2: 0
+
+  }
 
 
 
-  constructor(private http:HttpClient , private router:Router) { }
+  constructor(private http:HttpClient , private router:Router, private data:DataService) { }
 
   ngOnInit() {
-    this.model.image = "http://sreeguru.in/public/images/male.png"
-    this.http.get('/api/currentUser',{}).subscribe(res => {
-      this.model = res;
-      console.log('res', res)
-    }, err => {
-      console.log(err.error);
-    })
+    this.model = this.data.userInfo;
   }
+
+
+
 
 
   profile() {
@@ -49,7 +55,10 @@ export class ProfileComponent implements OnInit {
           that.message = "photo uploaded";
           that.model = res;
         }, error => {
-            that.message = "error >>"
+          if (error.status === 413) {
+            that.message = "this image is too large";
+            
+          }
       });
     }
   }
