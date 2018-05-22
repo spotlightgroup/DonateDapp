@@ -1,4 +1,4 @@
-  <section class="view intro-2 rgba-gradient">
+<section class="view intro-2 rgba-gradient">
         <div class="full-bg-img mask">
             <div class="container flex-center">
                 <div class="row flex-center pt-5 mt-3 w-100">
@@ -110,10 +110,12 @@
 
                     <div class="col-md-6 wow fadeInRight d-flex justify-content-center" data-wow-delay="0.3s">
                       <div class="text-center">
-                        <img src="//placehold.it/100" class="avatar img-circle" alt="avatar">
+                        <img src={{model.image}} class="profileImage img-circle" alt="profile image">
                         <br>
                         <h6>Upload a different photo...</h6>
-                        <input id="f" type="file" class="form-control">
+                        <input id="f" type="file" class="form-control" ame="upload" value="" (change)="photoUpload($event)">
+                        <br>
+                        <h3>{{model.username}}</h3>
                       </div>
                     </div>
                 </div>

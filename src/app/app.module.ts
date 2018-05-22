@@ -17,7 +17,7 @@ import { ProfileComponent } from './profile/profile.component';
 import { AboutComponent } from './about/about.component';
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
-import { SweetAlert2Module } from '@toverux/ngx-sweetalert2';
+
 import {
   MatFormFieldModule,
   MatAutocompleteModule,
@@ -56,6 +56,8 @@ import {
   MatTreeModule,
   MatTooltipModule
 } from '@angular/material';
+
+
 
 const appRoutes: Routes = [
   { path: 'home',
@@ -146,7 +148,7 @@ const appRoutes: Routes = [
     MatBadgeModule,
     MatBottomSheetModule,
     MatTreeModule,
-    SweetAlert2Module.forRoot(),
+    //SweetAlert2Module.forRoot(),
     MDBBootstrapModule.forRoot(),
     RouterModule.forRoot(
     appRoutes,

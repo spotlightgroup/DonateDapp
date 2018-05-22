@@ -1,3 +1,8 @@
+.profileImage{
+  width: 70px;
+  height: 70px;
+  border-radius: 50px;
+}
 #fullComponent{
   margin-top: 60px;
 }
@@ -8,6 +13,10 @@
 .view {
     height: 100vh !important;
 }
+.btn .fa {
+    margin-left: 3px;
+}
+
 h6 {
     line-height: 1.7;
 }
@@ -21,8 +30,14 @@ h6 {
 .img-circle {
     border-radius: 50%;
     vertical-align: middle;
-    margin-left: 100px;
+    margin-left: 110px;
 }
 #f{
   background-color: rgb(255,255,255,0.4);
+}
+
+.profileImage{
+  width: 100px;
+  height: 100px;
+  border-radius: 50px;
 }
