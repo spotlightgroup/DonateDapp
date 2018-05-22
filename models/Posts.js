@@ -25,8 +25,9 @@ const PostSchema = new Schema({
     time: {
       type:Date,
       default:Date.now
-    }
-});
+    },
+    donors:[String]
+  });
 
 
 
