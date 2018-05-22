@@ -68,3 +68,6 @@ var port = 3000
 app.listen(process.env.PORT || port , function () {
 	console.log("server is listening "+ port +" Port")
 });
+
+
+module.exports = app; // for testing
