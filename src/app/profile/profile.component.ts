@@ -9,40 +9,25 @@ import { Router } from '@angular/router';
 })
 export class ProfileComponent implements OnInit {
   user="";
-  model = {
-    image: "https://i.imgur.com/YKhObkG.jpg",
-    username:"",
-    fullName: "",
-    phoneNumber1: 0,
-    phoneNumber2: 0,
-    address: "",
-    email: "",
-    overview: ""
-  };
+  message = "";
+  model : any;
 
-  message: "";
+
 
   constructor(private http:HttpClient , private router:Router) { }
 
   ngOnInit() {
+    this.model.image = "http://sreeguru.in/public/images/male.png"
     this.http.get('/api/currentUser',{}).subscribe(res => {
-      console.log("resss",res);
-      if(res['msg']){
-        this.user = res['msg'].username;
-        this.model.username = res['msg'].username;
-        this.model.fullName = res['msg'].fullName;
-        this.model.phoneNumber1 = res['msg'].phoneNumber1;
-        this.model.phoneNumber2 = res['msg'].phoneNumber2;
-        this.model.address = res['msg'].address;
-        this.model.email = res['msg'].email;
-        this.model.overview = res['msg'].overview;
-      }
+      this.model = res;
+      console.log('res', res)
     }, err => {
       console.log(err.error);
     })
   }
+
+
   profile() {
-    this.model.username=this.user;
     this.http.post('/api/profile', this.model)
       .subscribe(res => {
         //this.router.navigate(['/login']);
@@ -52,17 +37,19 @@ export class ProfileComponent implements OnInit {
     );
   }
 
-  photoUpload() {
-    var file = photo.target.files[0]
-    var fileReader = new FileReader();
+  photoUpload(photo) {
+
+    let that = this;
+    let file = photo.target.files[0]
+    let fileReader = new FileReader();
     fileReader.readAsDataURL(file);
-    fileReader.onload = function(e) {
-     this.http.post('/photo', {image: e.target.result})
+    fileReader.onload = (e) => {
+     that.http.post('/api/profileImage', {image: e.target['result']})
         .subscribe(res => {
-            this.message = "photo uploaded";
-        })
-        .catch(error => {
-            this.message = error.msg;
+          that.message = "photo uploaded";
+          that.model = res;
+        }, error => {
+            that.message = "error >>"
       });
     }
   }

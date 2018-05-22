@@ -2,7 +2,7 @@
   <h1>Profile</h1>
   <div class="row">
     <img class="profileImage col-md-6" src={{model.image}} alt="profile image" >
-    <input type="file" name="upload" value="change" (change)="photoUpload()" >
+    <input type="file" name="upload" value="" (change)="photoUpload($event)" >
     <div class="col-md-6">
       <form (ngSubmit)="profile()" #profileForm="ngForm">
         <div class="form-group">
