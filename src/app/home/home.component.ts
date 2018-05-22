@@ -104,4 +104,9 @@ post :any;
   }
 
 
+  getRequests(post) {
+    console.log('post', post)
+  }
+
+
 }
