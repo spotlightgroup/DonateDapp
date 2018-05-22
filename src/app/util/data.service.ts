@@ -15,7 +15,7 @@ export class DataService {
 
   getUserInfo() {
     this.http.get('/api/currentUser').subscribe(res => {
-      this.userInfo = res;
+      this.userInfo = res['msg'];
     }, err => {
       console.log(err.error);
     })
