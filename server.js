@@ -43,7 +43,7 @@ app.get("/getPosts", (req, res)=> {
   Post.aggregate([
     {
       $lookup: {
-        from: 'User',
+        from: 'users',
          localField: "user",
          foreignField: "username",
          as: "userInfo"
@@ -55,6 +55,7 @@ app.get("/getPosts", (req, res)=> {
     }
     else {
       res.send(data.reverse())
+
     };
   });
 });
@@ -68,3 +69,6 @@ var port = 3000
 app.listen(process.env.PORT || port , function () {
 	console.log("server is listening "+ port +" Port")
 });
+
+
+module.exports = app; // for testing
