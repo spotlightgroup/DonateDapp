@@ -19,6 +19,7 @@ export class DataService {
       this.userInfo = res['msg'].userInfo;
     }, err => {
       console.log(err.error);
-    })
+    });
+
   }
 }
