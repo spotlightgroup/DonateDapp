@@ -1,32 +1,32 @@
-var MetaCoin = artifacts.require("./MetaCoin.sol");
+var rbCoin = artifacts.require("./RbCoin.sol");
 
-contract('MetaCoin', function(accounts) {
-  it("should put 10000 MetaCoin in the first account", function() {
-    return MetaCoin.deployed().then(function(instance) {
+contract('rbCoin', function(accounts) {
+  it("should put 10000 rbCoin in the first account", function() {
+    return rbCoin.deployed().then(function(instance) {
       return instance.getBalance.call(accounts[0]);
     }).then(function(balance) {
       assert.equal(balance.valueOf(), 10000, "10000 wasn't in the first account");
     });
   });
   it("should call a function that depends on a linked library", function() {
-    var meta;
-    var metaCoinBalance;
-    var metaCoinEthBalance;
+    var rb;
+    var rbCoinBalance;
+    var rbCoinEthBalance;
 
-    return MetaCoin.deployed().then(function(instance) {
-      meta = instance;
-      return meta.getBalance.call(accounts[0]);
+    return rbCoin.deployed().then(function(instance) {
+      rb = instance;
+      return rb.getBalance.call(accounts[0]);
     }).then(function(outCoinBalance) {
-      metaCoinBalance = outCoinBalance.toNumber();
-      return meta.getBalanceInEth.call(accounts[0]);
+      rbCoinBalance = outCoinBalance.toNumber();
+      return rb.getBalanceInEth.call(accounts[0]);
     }).then(function(outCoinBalanceEth) {
-      metaCoinEthBalance = outCoinBalanceEth.toNumber();
+      rbCoinEthBalance = outCoinBalanceEth.toNumber();
     }).then(function() {
-      assert.equal(metaCoinEthBalance, 2 * metaCoinBalance, "Library function returned unexpected function, linkage may be broken");
+      assert.equal(rbCoinEthBalance, 2 * rbCoinBalance, "Library function returned unexpected function, linkage may be broken");
     });
   });
   it("should send coin correctly", function() {
-    var meta;
+    var rb;
 
     // Get initial balances of first and second account.
     var account_one = accounts[0];
@@ -39,20 +39,20 @@ contract('MetaCoin', function(accounts) {
 
     var amount = 10;
 
-    return MetaCoin.deployed().then(function(instance) {
-      meta = instance;
-      return meta.getBalance.call(account_one);
+    return rbCoin.deployed().then(function(instance) {
+      rb = instance;
+      return rb.getBalance.call(account_one);
     }).then(function(balance) {
       account_one_starting_balance = balance.toNumber();
-      return meta.getBalance.call(account_two);
+      return rb.getBalance.call(account_two);
     }).then(function(balance) {
       account_two_starting_balance = balance.toNumber();
-      return meta.sendCoin(account_two, amount, {from: account_one});
+      return rb.sendCoin(account_two, amount, {from: account_one});
     }).then(function() {
-      return meta.getBalance.call(account_one);
+      return rb.getBalance.call(account_one);
     }).then(function(balance) {
       account_one_ending_balance = balance.toNumber();
-      return meta.getBalance.call(account_two);
+      return rb.getBalance.call(account_two);
     }).then(function(balance) {
       account_two_ending_balance = balance.toNumber();
 
