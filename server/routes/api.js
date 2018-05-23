@@ -6,6 +6,8 @@ var express = require('express');
 var jwt = require('jsonwebtoken');
 var router = express.Router();
 var User = require("../../models/User");
+var Request = require("../../models/Requests");
+
 
 // router for register new user
 
@@ -152,7 +154,15 @@ getToken = function (headers) {
     return null;
   }
 };
-
-
+router.post("/addRequest",(req,res)=>{
+  console.log(req.body)
+  Request.create(req.body,(err,data)=>{
+    if(err){
+      console.log(err);
+    }else{
+      console.log(data);
+    }
+  })
+})
 
 module.exports = router;

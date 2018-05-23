@@ -24,11 +24,11 @@ export class RequestsComponent implements OnInit {
 
   ngOnInit() {
     this.model.postId=this.data.post._id;
-    this.model.balance=this.data.balance;
+    this.model.balance=this.data.post.balance;
   }
 
   sendRequest(){
-    this.http.post("/addRequest",this.model)
+    this.http.post("/api/addRequest",this.model)
     .subscribe(res=>{
       console.log(res);
     },err=>{
