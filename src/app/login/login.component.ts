@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
+import {DataService} from '../util/data.service';
 
 @Component({
   selector: 'app-login',
@@ -12,7 +13,7 @@ export class LoginComponent implements OnInit {
   UserPassword = {}
   data : any
   message = ""
-  constructor(private router: Router,private http:HttpClient) { }
+  constructor(private router: Router,private http:HttpClient, private Data:DataService) { }
 
   ngOnInit() {
   }
@@ -22,9 +23,9 @@ export class LoginComponent implements OnInit {
     this.data = res;
     //to store data in the browser's session
     localStorage.setItem('jwtToken', this.data.token);
-    window.location.reload()
+    // window.location.reload()
+    this.Data.getUserInfo();
     this.router.navigate(['home']);
-
   }, err => {
     this.message = err.error.msg;
   });

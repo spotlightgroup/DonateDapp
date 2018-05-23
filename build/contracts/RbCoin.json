@@ -99,7 +99,6 @@
   "sourcePath": "/home/ahmad/Desktop/DonateDapp/contracts/RbCoin.sol",
   "ast": {
     "absolutePath": "/home/ahmad/Desktop/DonateDapp/contracts/RbCoin.sol",
->>>>>>> Add user type to signUp
     "exportedSymbols": {
       "RbCoin": [
         169
@@ -2502,12 +2501,12 @@
     "5777": {
       "events": {},
       "links": {
-        "ConvertLib": "0x60b4152542c0e907c77bf64a614dbec8b2217cf8"
+        "ConvertLib": "0xd14364f5e45d454d531cc0b41be807351658bd47"
       },
-      "address": "0xef61b6c036b3276e72a148a8f5eec039d397ecef",
-      "transactionHash": "0xc7c746d47f452f602d0b36c377c02818cf7d82d0667b8290d91b455a3ba4e68d"
+      "address": "0xbd2c7b750d10f83abfb79115c9306fb5be98707a",
+      "transactionHash": "0x0ec4b5b76437672168350198f8c8937153bf25793a99bad8bea9bc9d0764539c"
     }
   },
   "schemaVersion": "2.0.0",
-  "updatedAt": "2018-05-23T18:54:55.277Z"
+  "updatedAt": "2018-05-23T20:14:12.598Z"
 }
