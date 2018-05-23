@@ -11,6 +11,13 @@
           <label for="name">Email:</label>
           <input type="email" class="form-control" [(ngModel)]="User.email" name="email" required>
         </div>
+        <mat-form-field>
+          <mat-select placeholder="Select an option" [(ngModel)]="User.type" name="type" required>
+          <mat-option value="donor">Donor</mat-option>
+          <mat-option value="project-maker">Project maker</mat-option>
+          </mat-select>
+
+        </mat-form-field>
         <div class="form-group">
           <label for="name">Password:</label>
           <input type="password" class="form-control" [(ngModel)]="User.password" name="password" required>
