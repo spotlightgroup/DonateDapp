@@ -7,6 +7,7 @@ import { HttpClient } from '@angular/common/http';
 export class DataService {
   public publicKey = "";
   public userInfo: any;
+  public post:any;
 
   constructor(private http:HttpClient) {
     this.getUserInfo()

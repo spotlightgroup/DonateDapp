@@ -65,9 +65,9 @@ isDonor= true;
       this.message = "error"
       return;
     });
-    that.message = "done"
-    console.log('this',that.message)
-    that.model = {
+    this.message = "done"
+    console.log('this',this.message)
+    this.model = {
       user: "",
       header: "",
       needed: 0,
@@ -100,7 +100,8 @@ isDonor= true;
   }
 
 
-  getRequests(post) {
+  setPost(post) {
+    this.data.post=post;
     console.log('post', post)
   }
 

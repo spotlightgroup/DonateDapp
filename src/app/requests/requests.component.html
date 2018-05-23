@@ -2,11 +2,12 @@
   <br><br><br><br>
 <h3>Full Balance: <span>10</span></h3>
 <br><br>
-<label for="description">description: </label> <input type="text" name="" value="description">
+<label for="description">description: </label> <input [(ngModel)]="model.description" type="text" name="" value="">
 <br><br>
-<label for="amount">amount</label> <input type="number" name="" value="">
+<label for="amount">amount</label> <input [(ngModel)]="model.amount" type="text" name="" value="">
+<br><br> type="number" name="" value="">
 <br><br>
-<label for="receiver">receiver</label><input type="text" name="" value="">
+<label for="receiver">receiver</label><input [(ngModel)]="model.receiver" type="text" name="" value="">
 <br><br>
-<button [routerLink]="['/viewRequests']" type="button" name="button">send request</button>
+<button [routerLink]="['/viewRequests']" (click)=sendRequest() type="button" name="button">send request</button>
 </div>
