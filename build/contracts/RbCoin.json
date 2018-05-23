@@ -99,6 +99,7 @@
   "sourcePath": "/home/ahmad/Desktop/DonateDapp/contracts/RbCoin.sol",
   "ast": {
     "absolutePath": "/home/ahmad/Desktop/DonateDapp/contracts/RbCoin.sol",
+>>>>>>> Add user type to signUp
     "exportedSymbols": {
       "RbCoin": [
         169
