@@ -22,12 +22,13 @@ const PostSchema = new Schema({
       type: String,
       required: true
     },
+    donors: [String],
+    balance: Number,
     time: {
-      type:Date,
-      default:Date.now
-    },
-    donors:[String]
-  });
+      type: Date,
+      default: Date.now
+    }
+});
 
 
 

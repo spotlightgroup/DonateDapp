@@ -56,6 +56,8 @@ import {
   MatTreeModule,
   MatTooltipModule
 } from '@angular/material';
+import { RequestsComponent } from './requests/requests.component';
+import { ViewRequestsComponent } from './view-requests/view-requests.component';
 
 
 
@@ -91,6 +93,16 @@ const appRoutes: Routes = [
  path: 'about',
  component: AboutComponent,
  data: { title: 'about' }
+},
+{
+ path: 'viewRequests',
+ component: ViewRequestsComponent,
+ data: { title: 'viewRequests' }
+},
+{
+ path: 'requests',
+ component: RequestsComponent,
+ data: { title: 'requests' }
 }
 ];
 
@@ -102,6 +114,8 @@ const appRoutes: Routes = [
     RegisterComponent,
     ProfileComponent,
     AboutComponent,
+    RequestsComponent,
+    ViewRequestsComponent,
   ],
   imports: [
     BrowserAnimationsModule,

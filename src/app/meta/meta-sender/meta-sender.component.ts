@@ -6,7 +6,7 @@ import { HttpClient } from '@angular/common/http';
 
 
 declare let require: any;
-const metacoin_artifacts = require('../../../../build/contracts/MetaCoin.json');
+const metacoin_artifacts = require('../../../../build/contracts/RbCoin.json');
 
 @Component({
   selector: 'app-meta',
@@ -15,7 +15,7 @@ const metacoin_artifacts = require('../../../../build/contracts/MetaCoin.json');
 })
 export class MetaSenderComponent implements OnInit {
   accounts: string[];
-  MetaCoin: any;
+  RbCoin: any;
 
   model = {
     amount: 5,
@@ -33,8 +33,8 @@ export class MetaSenderComponent implements OnInit {
   ngOnInit(): void {
     this.watchAccount();
     this.web3Service.artifactsToContract(metacoin_artifacts)
-      .then((MetaCoinAbstraction) => {
-        this.MetaCoin = MetaCoinAbstraction;
+      .then((RbCoinAbstraction) => {
+        this.RbCoin = RbCoinAbstraction;
       });
 
 
@@ -54,7 +54,7 @@ export class MetaSenderComponent implements OnInit {
   }
 
   async sendCoin() {
-    if (!this.MetaCoin) {
+    if (!this.RbCoin) {
       this.setStatus('Metacoin is not loaded, unable to send transaction');
       return;
     }
@@ -64,8 +64,8 @@ export class MetaSenderComponent implements OnInit {
              receiver = res["reciever"];
             console.log('receiver1', receiver)
             try {
-              const deployedMetaCoin = await this.MetaCoin.deployed();
-              const transaction = await deployedMetaCoin.sendCoin.sendTransaction(receiver, amount, {from: this.model.account});
+              const deployedRbCoin = await this.RbCoin.deployed();
+              const transaction = await deployedRbCoin.sendCoin.sendTransaction(receiver, amount, {from: this.model.account});
 
               if (!transaction) {
                 this.setStatus('Transaction failed!');
@@ -95,10 +95,10 @@ export class MetaSenderComponent implements OnInit {
     console.log('Refreshing balance');
 
     try {
-      const deployedMetaCoin = await this.MetaCoin.deployed();
-      console.log(deployedMetaCoin);
+      const deployedRbCoin = await this.RbCoin.deployed();
+      console.log(deployedRbCoin);
       console.log('Account', this.model.account);
-      const metaCoinBalance = await deployedMetaCoin.getBalance.call(this.model.account);
+      const metaCoinBalance = await deployedRbCoin.getBalance.call(this.model.account);
       console.log('Found balance: ' + metaCoinBalance);
       this.model.balance = metaCoinBalance;
     //  window.location.reload()
