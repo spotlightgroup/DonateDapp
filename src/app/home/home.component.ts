@@ -23,13 +23,6 @@ message = '';
 post :any;
 isDonor = true;
 isLogged = false;
-
-
-
-
-
-
-
   constructor(private http:HttpClient, private web3:Web3Service, private data:DataService) { }
 
   ngOnInit() {
