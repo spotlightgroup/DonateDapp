@@ -7,12 +7,12 @@ import { HttpClient } from '@angular/common/http';
   styleUrls: ['./view-requests.component.css']
 })
 export class ViewRequestsComponent implements OnInit {
-  posts:any;
+  requests:any;
   constructor(private http:HttpClient) { }
 
   ngOnInit() {
     this.http.get("/api/getRequests").subscribe(res=>{
-      this.posts=res;
+      this.requests=res;
     },err=>{
       console.log(err);
     })

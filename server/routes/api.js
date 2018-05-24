@@ -163,6 +163,15 @@ router.post("/addRequest",(req,res)=>{
       console.log(data);
     }
   })
+});
+router.get("/getRequests",(req,res)=>{
+  Request.find({user:req.session.username},(err,Requests)=>{
+    if(err){
+      console.log(err);
+    }else{
+      res.send(Requests);
+    }
+  })
 })
 
 module.exports = router;

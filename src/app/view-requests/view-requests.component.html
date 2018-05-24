@@ -1,8 +1,8 @@
-<div class="">
-  <h2>description</h2>
-  <h3>amount</h3>
-  <h3>approvals number</h3>
-  <h3>receiver</h3>
-  <h3>number of donors</h3>
+<div *ngFor="let request of requests" class="">
+  <h2>description:  {{request.description}}</h2>
+  <h3>amount:  {{request.amount}}</h3>
+  <h3>approvals number: 00</h3>
+  <h3>receiver: {{request.receiver}}</h3>
+  <h3>number of donors: 00</h3>
   <button type="button" name="button">finalize</button>
 </div>

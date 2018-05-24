@@ -12,6 +12,7 @@ import swal from 'sweetalert2';
 })
 export class RequestsComponent implements OnInit {
   model:any={
+    user:"",
     postId:"",
     description:"",
     amount:0,
@@ -28,12 +29,22 @@ export class RequestsComponent implements OnInit {
   }
 
   sendRequest(){
-    this.http.post("/api/addRequest",this.model)
+    this.http.get("/api/currentUser")
     .subscribe(res=>{
-      console.log(res);
+      this.model.user=res['msg'].username;
+      this.http.post("/api/addRequest",this.model)
+      .subscribe(res=>{
+        console.log(res);
+      },err=>{
+        console.log(err);
+      });
+      console.log("userrr",this.model);
     },err=>{
       console.log(err);
-    })
+    });
+
+
+
   }
 
 }
