@@ -30,7 +30,10 @@ export class ProfileComponent implements OnInit {
   ngOnInit() {
     setTimeout(()=>{
       this.model = this.data.userInfo;
-    }, 1000)
+      if(!this.model.image){
+        this.model.image = "http://sreeguru.in/public/images/male.png";
+      }
+    }, 400)
         this.router.navigate(['profile']);
   }
 
