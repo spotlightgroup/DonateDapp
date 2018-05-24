@@ -33,6 +33,7 @@ isLogged = false;
   constructor(private http:HttpClient, private web3:Web3Service, private data:DataService) { }
 
   ngOnInit() {
+    this.data.getUserInfo()
     this.model.publicKey = this.data.publicKey
     this.http.get('/api/currentUser').subscribe(res => {
         this.model.user = res['msg'].username;

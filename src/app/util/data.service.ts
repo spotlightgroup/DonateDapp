@@ -8,12 +8,15 @@ export class DataService {
   public publicKey = "";
   public userInfo: any;
   public post:any;
+  public isLogged = false;
   constructor(private http:HttpClient) {
-    this.getUserInfo()
-   }
+    setTimeout(()=> {
+      this.getUserInfo()
+    },100)
+  }
 
 
-  getUserInfo() {
+  public getUserInfo() {
     this.http.get('/api/currentUser').subscribe(res => {
       this.userInfo = res['msg'];
     }, err => {
