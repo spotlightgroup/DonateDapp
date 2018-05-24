@@ -100,6 +100,7 @@ isDonor= true;
   }
 
 
+
   setPost(post) {
     this.data.post=post;
     console.log('post', post)
