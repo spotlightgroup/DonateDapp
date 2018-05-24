@@ -28,9 +28,10 @@ export class ProfileComponent implements OnInit {
   constructor(private http:HttpClient , private router:Router, private data:DataService) { }
 
   ngOnInit() {
+    setTimeout(()=>{
       this.model = this.data.userInfo;
-      console.log(this.model)
-
+    }, 1000)
+        this.router.navigate(['profile']);
   }
 
 

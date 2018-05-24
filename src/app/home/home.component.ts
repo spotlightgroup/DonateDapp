@@ -21,7 +21,10 @@ model:any = {
 Posts: any;
 message = '';
 post :any;
-isDonor= true;
+isDonor = true;
+isLogged = false;
+
+
 
 
 
@@ -33,6 +36,7 @@ isDonor= true;
     this.model.publicKey = this.data.publicKey
     this.http.get('/api/currentUser').subscribe(res => {
         this.model.user = res['msg'].username;
+        this.isLogged = true;
         console.log(this.model)
     }, err => {
       console.log(err.error);

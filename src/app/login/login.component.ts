@@ -23,9 +23,11 @@ export class LoginComponent implements OnInit {
     this.data = res;
     //to store data in the browser's session
     localStorage.setItem('jwtToken', this.data.token);
-    // window.location.reload()
+
     this.Data.getUserInfo();
+
     this.router.navigate(['home']);
+     // window.location.reload()
   }, err => {
     this.message = err.error.msg;
   });

@@ -9,7 +9,9 @@ import { HttpClient } from '@angular/common/http';
 })
 export class RegisterComponent implements OnInit {
 
-  User = {};
+  User = {
+    image: "http://sreeguru.in/public/images/male.png" 
+  };
   message = '';
 
 
