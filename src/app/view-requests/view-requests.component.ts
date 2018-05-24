@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-view-requests',
@@ -6,10 +7,15 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./view-requests.component.css']
 })
 export class ViewRequestsComponent implements OnInit {
-
-  constructor() { }
+  requests:any;
+  constructor(private http:HttpClient) { }
 
   ngOnInit() {
+    this.http.get("/api/getRequests").subscribe(res=>{
+      this.requests=res;
+    },err=>{
+      console.log(err);
+    })
   }
 
 }

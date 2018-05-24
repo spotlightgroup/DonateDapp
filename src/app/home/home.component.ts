@@ -15,11 +15,13 @@ model:any = {
   header: "",
   needed: 0,
   description: "",
-  publicKey: ''
+  publicKey: '',
+  balance: 0
 };
 Posts: any;
 message = '';
 post :any;
+isDonor= true;
 
 
 
@@ -55,15 +57,7 @@ post :any;
       this.message = 'log in first'
       return;
     }
-    let that = this
-    if(this.model.user === "") {
-      this.message = "log in first"
-      return;
-    }
-    if (this.model.publicKey === "") {
-      this.message = "you sould use meta mask to complete the process"
-      return;
-    }
+
     this.http.post('/addPost',this.model).subscribe(res => {
 
 
@@ -71,14 +65,16 @@ post :any;
       this.message = "error"
       return;
     });
-    that.message = "done"
-    console.log('this',that.message)
-    that.model = {
+    this.message = "done"
+    console.log('this',this.message)
+    this.model = {
       user: "",
       header: "",
       needed: 0,
       description: "",
-      publicKey: ''
+      publicKey: '',
+      balance: 0,
+      donors: []
     };
     this.getPosts()
   }
@@ -104,7 +100,8 @@ post :any;
   }
 
 
-  getRequests(post) {
+  setPost(post) {
+    this.data.post=post;
     console.log('post', post)
   }
 
