@@ -1,9 +1,14 @@
 var User = require('../models/User');
 var Posts = require('../models/Posts');
 var expect = require('chai').expect;
+var assert = require('chai').assert;
+
 var mongoose = require('mongoose');
 
 describe('database `User Model`',function(){
+  beforeEach(()=>{
+    
+  });
   it('should be a Mongoose model',function(){
     expect(new User()).to.be.instanceOf(mongoose.Model);
   });

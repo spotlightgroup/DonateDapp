@@ -12,7 +12,7 @@ var Request = require("../../models/Requests");
 // router for register new user
 
 router.post('/register', function(req, res) {
-  console.log("dooooonoooor",req.body)
+  //console.log("dooooonoooor",req.body)
   if (!req.body.username || !req.body.password) {
     res.json({success: false, msg: 'Please pass username and password.'});
   } else {
@@ -33,12 +33,12 @@ router.post('/register', function(req, res) {
 });
 
 router.post('/profile', function(req, res) {
-  console.log("req.bodyyyyy",req.body);
+  //console.log("req.bodyyyyy",req.body);
   User.findOne({username: req.body.username},function(err, user) {
     if (!user) {
       res.status(401).send({success: false, msg: 'Authentication failed. User not found.'});
     } else {
-      console.log("useeeeeer",user.fullName)
+      //console.log("useeeeeer",user.fullName)
       user.fullName=req.body.fullName;
       user.phoneNumber1=req.body.phoneNumber1;
       user.phoneNumber2=req.body.phoneNumber2;
@@ -85,9 +85,9 @@ router.post('/login', function(req, res) {
   });
 });
 // route add Posts
-router.post('/addPost',function(req,res){
-  console.log("req body add post",req.body);
-});
+// router.post('/addPost',function(req,res){
+//   console.log("req body add post",req.body);
+// });
 
 
 router.post('/logout',function(req,res){
@@ -106,16 +106,16 @@ router.post('/logout',function(req,res){
 
 let reciever="";
 router.post("/Reciever",(req,res)=>{
-  console.log("request body reciever",req.body)
+//  console.log("request body reciever",req.body)
   req.session['reciever']=req.body.key;
   reciever=req.body.key;
-  console.log("request session",req.session);
+//  console.log("request session",req.session);
 
 });
 
 
 router.get("/Reciever",function(req,res){
-  console.log("request session in reciever",req.session)
+//  console.log("request session in reciever",req.session)
   res.status(200).send( {"reciever":reciever});
 });
 
@@ -155,7 +155,7 @@ getToken = function (headers) {
   }
 };
 router.post("/addRequest",(req,res)=>{
-  console.log(req.body)
+//  console.log(req.body)
   Request.create(req.body,(err,data)=>{
     if(err){
       console.log(err);

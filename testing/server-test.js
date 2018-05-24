@@ -31,11 +31,23 @@ describe('User', () => {
         chai.request(server)
             .get('/getPosts')
             .end((err, res) => {
-                res.should.have.status(200);
+              //  res.should.have.status(200);
+                expect(res.body).to.exist;
                 res.body.should.be.a('array');
               done();
             });
       });
+      it('it should post all the posts', (done) => {
+        chai.request(server)
+            .post('/addPosts')
+            .end((err, res) => {
+               res.should.have.status(404);
+                //expect(res.body).to.exist;
+                res.body.should.be.a('object');
+              done();
+            });
+      });
+
   });
 
 
