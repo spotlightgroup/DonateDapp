@@ -7,7 +7,7 @@ var mongoose = require('mongoose');
 
 describe('database `User Model`',function(){
   beforeEach(()=>{
-    console.log("hi")
+    
   });
   it('should be a Mongoose model',function(){
     expect(new User()).to.be.instanceOf(mongoose.Model);
