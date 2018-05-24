@@ -58,6 +58,8 @@ import {
 } from '@angular/material';
 import { RequestsComponent } from './requests/requests.component';
 import { ViewRequestsComponent } from './view-requests/view-requests.component';
+import { NotificationComponent } from './notification/notification.component';
+import { NavbarComponent } from './navbar/navbar.component';
 
 
 
@@ -116,6 +118,8 @@ const appRoutes: Routes = [
     AboutComponent,
     RequestsComponent,
     ViewRequestsComponent,
+    NotificationComponent,
+    NavbarComponent,
   ],
   imports: [
     BrowserAnimationsModule,

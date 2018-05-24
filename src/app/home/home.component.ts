@@ -21,7 +21,10 @@ model:any = {
 Posts: any;
 message = '';
 post :any;
-isDonor= true;
+isDonor = true;
+isLogged = false;
+
+
 
 
 
@@ -30,9 +33,11 @@ isDonor= true;
   constructor(private http:HttpClient, private web3:Web3Service, private data:DataService) { }
 
   ngOnInit() {
+    this.data.getUserInfo()
     this.model.publicKey = this.data.publicKey
     this.http.get('/api/currentUser').subscribe(res => {
         this.model.user = res['msg'].username;
+        this.isLogged = true;
         console.log(this.model)
     }, err => {
       console.log(err.error);
@@ -98,6 +103,7 @@ isDonor= true;
       window.location.reload()
     }, 3000)
   }
+
 
 
   setPost(post) {
