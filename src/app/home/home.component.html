@@ -17,7 +17,7 @@
 
 <div  class="card container" *ngFor="let post of Posts" >
 
-  <h3><img class="postImage" src="https://cdn3.iconfinder.com/data/icons/gray-user-toolbar/512/manager-512.png" ><a href="#">@{{post.user}}</a></h3>
+  <h3><img class="postImage" src={{post.userInfo[0].image}} ><a href="#">@{{post.user}}</a></h3>
   <h2>{{post.header}}</h2>
   <p>{{post.description}}</p>
   <p>total needed: {{post.needed}}</p>
