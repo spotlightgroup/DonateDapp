@@ -54,6 +54,8 @@ export class MetaSenderComponent implements OnInit {
   }
 
   async sendCoin() {
+    let post = JSON.parse(localStorage.getItem('post'))
+        console.log(post);
     if (!this.RbCoin) {
       this.setStatus('Metacoin is not loaded, unable to send transaction');
       return;
@@ -71,10 +73,19 @@ export class MetaSenderComponent implements OnInit {
                 this.setStatus('Transaction failed!');
               } else {
                 this.setStatus('Transaction complete!');
+                // setTimeout(()=> {
+                //   window.location.reload()
+                // }, 3000)
+                this.http.post('/api/donate', {_id: post._id}).subscribe(res => {
+                  console.log('res', res);
+                }, err => {
+                  console.log(err);
+                })
               }
-            } catch (e) {
+            }
+            catch (e) {
               console.log(e);
-              this.setStatus('Error sending coin; see log.');
+              // this.setStatus('Error sending coin; see log.');
             }
 
           },err=>{

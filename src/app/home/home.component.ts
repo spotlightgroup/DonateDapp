@@ -29,7 +29,6 @@ isLogged = false;
   constructor(private http:HttpClient, private web3:Web3Service, private data:DataService) { }
 
   ngOnInit() {
-    this.isLogged = this.data.isLogged;
     this.data.getUserInfo()
     this.model.publicKey = this.data.publicKey
     this.http.get('/api/currentUser').subscribe(res => {
@@ -44,7 +43,7 @@ isLogged = false;
     })
     this.web3.bootstrapWeb3()
     this.getPosts()
-
+    this.isLogged = this.data.isLogged;
     setTimeout(()=>{
 
       this.model.publicKey = this.web3.accounts[0]
@@ -93,22 +92,21 @@ isLogged = false;
       return;
     })
   }
-  setReciever(key) {
-    this.http.post("/api/Reciever",{"key":key}).subscribe(res => {
+  setReciever(post) {
+    this.http.post("/api/Reciever",{"key":post.publicKey}).subscribe(res => {
       console.log("reciever sent")
     }, err => {
       console.log("Reciever sent failed !!");
     })
     setTimeout(()=> {
       window.location.reload()
-    }, 3000)
+    }, 1000)
   }
 
 
 
   setPost(post) {
-    this.data.post=post;
-    console.log('post', post)
+    localStorage.setItem('post', JSON.stringify(post));
   }
 
 

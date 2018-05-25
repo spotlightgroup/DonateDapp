@@ -7,6 +7,8 @@ var jwt = require('jsonwebtoken');
 var router = express.Router();
 var User = require("../../models/User");
 var Request = require("../../models/Requests");
+var Post = require("../../models/Posts");
+
 
 
 // router for register new user
@@ -174,4 +176,15 @@ router.get("/getRequests",(req,res)=>{
   })
 })
 
+
+router.post('/donate', (req, res)=> {
+  Post.update(req.body, { $push: { donors: req.session.name } }, (err, data) => {
+    if (err) {
+      console.log(err);
+    }
+    else {
+      res.send(data);
+    }
+  })
+})
 module.exports = router;
