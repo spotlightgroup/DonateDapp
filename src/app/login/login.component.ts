@@ -44,14 +44,17 @@ export class LoginComponent implements OnInit {
   login() {
   this.http.post('/api/login',this.User).subscribe(res => {
     this.data = res;
+    this.Data.getUserInfo();
     //to store data in the browser's session
     localStorage.setItem('jwtToken', this.data.token);
-
-    this.Data.getUserInfo();
-    this.dialogRef.close();
-    setTimeout(()=> {
+      this.dialogRef.close();
+      this.router.navigate(['profile']);
+      setTimeout(()=> {
         this.router.navigate(['home']);
-    }, 500)
+      }, 200)
+
+
+
 
 
   }, err => {

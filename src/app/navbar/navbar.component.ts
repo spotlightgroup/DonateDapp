@@ -17,12 +17,11 @@ export class NavbarComponent implements OnInit {
   constructor(private http:HttpClient, private data: DataService, private router: Router, public dialog: MatDialog) { }
 
   ngOnInit() {
-    this.data.isLogged = true;
     setInterval(()=> {
       if(this.data.userInfo.username) {
         this.isLogged = this.data.isLogged;
       }
-    }, 2000)
+    }, 400)
 
   }
 

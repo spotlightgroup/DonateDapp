@@ -6,21 +6,21 @@ import { HttpClient } from '@angular/common/http';
 })
 export class DataService {
   public publicKey = "";
-  public userInfo: any;
+  public userInfo: any = {};
   public post:any;
   public isLogged = false;
-  constructor(private http:HttpClient) {
-    setTimeout(()=> {
-      this.getUserInfo()
-    },100)
-  }
+  constructor(private http:HttpClient) {}
 
 
   public getUserInfo() {
     this.http.get('/api/currentUser').subscribe(res => {
       this.userInfo = res['msg'];
+      if (this.userInfo.username) {
+        this.isLogged = true;
+      }
     }, err => {
-      console.log("not logges in");
+      this.isLogged = false;
+      console.log("not logged in");
     });
 
   }
