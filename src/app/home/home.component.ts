@@ -21,16 +21,19 @@ model:any = {
 Posts: any;
 message = '';
 post :any;
-isDonor = true;
+isDonor = false;
 isLogged = false;
   constructor(private http:HttpClient, private web3:Web3Service, private data:DataService) { }
 
   ngOnInit() {
+    this.isLogged = this.data.isLogged;
     this.data.getUserInfo()
     this.model.publicKey = this.data.publicKey
     this.http.get('/api/currentUser').subscribe(res => {
         this.model.user = res['msg'].username;
-        this.isLogged = true;
+        if(this.data.userInfo.type === "donor") {
+          this.isDonor = true;
+        }
         console.log(this.model)
     }, err => {
       console.log(err.error);
