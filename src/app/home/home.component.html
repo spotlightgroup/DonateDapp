@@ -1,6 +1,6 @@
 <div class="" *ngIf="isLogged">
 
-<div class="inputPost container-fluid" >
+<div class="inputPost container-fluid" *ngIf="!isDonor" >
     <h3>What Is Your Project ?</h3>
     <input type="text" class="form-control" [(ngModel)]="model.header" >
     <h3>Descrip Your Project</h3>
@@ -16,7 +16,7 @@
 <div class="posts">
 
 <div  class="card container" *ngFor="let post of Posts" >
-
+  <div *ngIf="post.user === user || isDonor" >
   <h3><img class="postImage" src={{post.userInfo[0].image}} ><a href="#">@{{post.user}}</a></h3>
   <h2>{{post.header}}</h2>
   <p>{{post.description}}</p>
@@ -25,6 +25,7 @@
   <p>gained balance{{post.balance}}</p>
   <a  *ngIf="isDonor" [routerLink]="['/donate']" type="submit" class="btn btn-success" (click)="setReciever(post.publicKey)">Donate</a>
   <a  *ngIf="!isDonor" [routerLink]="['/requests']" type="submit" class="btn btn-success" (click)="setPost(post)">spend</a>
+</div>
 </div>
 </div>
 </div>

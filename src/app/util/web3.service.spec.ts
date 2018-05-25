@@ -3,7 +3,7 @@ import Web3 from 'web3';
 
 import {Web3Service} from './web3.service';
 
-import metacoin_artifacts from '../../../build/contracts/MetaCoin.json';
+import metacoin_artifacts from '../../../build/contracts/RbCoin.json';
 
 declare let window: any;
 

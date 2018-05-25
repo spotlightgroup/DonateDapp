@@ -51,7 +51,7 @@ export class LoginComponent implements OnInit {
       this.router.navigate(['profile']);
       setTimeout(()=> {
         this.router.navigate(['home']);
-      }, 200)
+      }, 400)
 
 
 
