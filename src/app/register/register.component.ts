@@ -1,8 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit , Inject , ViewEncapsulation } from '@angular/core';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
+import { MatDialog , MatDialogRef , MAT_DIALOG_DATA } from '@angular/material';
+import { LoginComponent } from '../login/login.component';
 
 @Component({
+  encapsulation: ViewEncapsulation.None ,
   selector: 'app-register',
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.css']
@@ -10,24 +13,41 @@ import { HttpClient } from '@angular/common/http';
 export class RegisterComponent implements OnInit {
 
   User = {
-    image: "http://sreeguru.in/public/images/male.png" 
+    image: "http://sreeguru.in/public/images/male.png"
   };
   message = '';
 
 
-  constructor(private http: HttpClient, private router: Router) { }
+  constructor(private http: HttpClient,
+     private router: Router,
+     public dialog: MatDialog,
+     public dialogRef: MatDialogRef<RegisterComponent>,
+     @Inject(MAT_DIALOG_DATA) public _data: any
+   ) { }
 
   ngOnInit() {
   }
-
-register() {
-    this.http.post('/api/register', this.User)
-      .subscribe(res => {
-          this.router.navigate(['/login']);
-        }, (err) => {
-          console.log(err);
-        }
-      );
+  onNoClick(): void {
+    this.dialogRef.close();
   }
+  register() {
+      this.http.post('/api/register', this.User)
+        .subscribe(res => {
+            this.goToLogin();
+          }, (err) => {
+            console.log(err);
+          }
+        );
+    }
+
+    goToLogin(){
+      this.dialogRef.close();
+      let dialogRef = this.dialog.open( LoginComponent, {
+        panelClass: 'custom-dialog-container'
+      });
+      dialogRef.afterClosed().subscribe(result => {
+        console.log('The dialog was closed');
+      });
+    }
 
 }

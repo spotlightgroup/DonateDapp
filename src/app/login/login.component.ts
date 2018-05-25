@@ -3,6 +3,8 @@ import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { DataService } from '../util/data.service';
 import { MatDialog , MatDialogRef , MAT_DIALOG_DATA } from '@angular/material';
+import { RegisterComponent } from '../register/register.component';
+
 @Component({
   encapsulation: ViewEncapsulation.None ,
   selector: 'app-login',
@@ -19,6 +21,7 @@ export class LoginComponent implements OnInit {
     private router: Router,
     private http:HttpClient,
     private Data:DataService ,
+    public dialog: MatDialog,
     public dialogRef: MatDialogRef<LoginComponent>,
     @Inject(MAT_DIALOG_DATA) public _data: any
   ) { }
@@ -29,10 +32,15 @@ export class LoginComponent implements OnInit {
   onNoClick(): void {
     this.dialogRef.close();
   }
-  goToSignup(){
-    this.dialogRef.close();
-    this.router.navigate(['/signup']);
-  }
+  goToSignup(): void {
+    let dialogRef = this.dialog.open(RegisterComponent, {
+      panelClass: 'custom-dialog-container'
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+    });
+  };
+
   login() {
   this.http.post('/api/login',this.User).subscribe(res => {
     this.data = res;

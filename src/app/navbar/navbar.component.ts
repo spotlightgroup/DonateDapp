@@ -42,7 +42,7 @@ export class NavbarComponent implements OnInit {
     });
 
     };
-    openDialog(): void {
+    openLogin(): void {
       let dialogRef = this.dialog.open(LoginComponent, {
         panelClass: 'custom-dialog-container'
 
