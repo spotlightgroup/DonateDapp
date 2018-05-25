@@ -24,7 +24,7 @@
   <p>created at: {{post.time}}</p>
   <p>gained balance{{post.balance}}</p>
   <a  *ngIf="isDonor" [routerLink]="['/donate']" type="submit" class="btn btn-success" (click)="setReciever(post)">Donate</a>
-  <a  *ngIf="!isDonor" [routerLink]="['/requests']" type="submit" class="btn btn-success" (click)="setPost(post)">spend</a>
+  <a  *ngIf="!isDonor" (click)="setPost(post)" [routerLink]="['/requests']" type="submit" class="btn btn-success" >spend</a>
 </div>
 </div>
 </div>
