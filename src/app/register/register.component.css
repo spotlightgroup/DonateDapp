@@ -1,0 +1,8 @@
+.custom-dialog-container .mat-dialog-container {
+padding: 0 0 ;
+box-shadow: none;
+width: 500px;
+height: 800px;
+background-color:#ff000000;
+overflow :visible;
+}
