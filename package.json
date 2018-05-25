@@ -60,6 +60,8 @@
     "chai": "^4.1.2",
     "chai-http": "^4.0.0",
     "codelyzer": "~4.2.1",
+    "eslint": "^4.19.1",
+    "eslint-config-google": "^0.9.1",
     "jasmine-core": "~2.99.1",
     "jasmine-spec-reporter": "~4.2.1",
     "karma": "~1.7.1",
