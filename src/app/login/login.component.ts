@@ -48,12 +48,13 @@ export class LoginComponent implements OnInit {
     localStorage.setItem('jwtToken', this.data.token);
 
     this.Data.getUserInfo();
+    this.dialogRef.close();
     setTimeout(()=> {
-        this.dialogRef.close();
         this.router.navigate(['home']);
+        window.location.reload()
     }, 1000)
 
-     // window.location.reload()
+
   }, err => {
     this.message = err.error.msg;
   });
