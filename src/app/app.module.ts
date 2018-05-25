@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule , NO_ERRORS_SCHEMA } from '@angular/core';
 import { MetaSenderComponent } from './meta/meta-sender/meta-sender.component';
 import { CdkTableModule } from '@angular/cdk/table';
 import { AppComponent } from './app.component';
@@ -54,7 +54,8 @@ import {
   MatBadgeModule,
   MatBottomSheetModule,
   MatTreeModule,
-  MatTooltipModule
+  MatTooltipModule,
+  MAT_DIALOG_DEFAULT_OPTIONS
 } from '@angular/material';
 import { RequestsComponent } from './requests/requests.component';
 import { ViewRequestsComponent } from './view-requests/view-requests.component';
@@ -217,6 +218,7 @@ const appRoutes: Routes = [
     MatTooltipModule
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  schemas: [ NO_ERRORS_SCHEMA ]
 })
 export class AppModule { }

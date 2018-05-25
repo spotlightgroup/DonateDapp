@@ -1,31 +1,47 @@
-import { Component, OnInit } from '@angular/core';
+import { Component , OnInit , Inject , ViewEncapsulation} from '@angular/core';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
-import {DataService} from '../util/data.service';
-
+import { DataService } from '../util/data.service';
+import { MatDialog , MatDialogRef , MAT_DIALOG_DATA } from '@angular/material';
 @Component({
+  encapsulation: ViewEncapsulation.None ,
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
 
-  UserPassword = {}
+  User = {}
   data : any
   message = ""
-  constructor(private router: Router,private http:HttpClient, private Data:DataService) { }
+
+  constructor(
+    private router: Router,
+    private http:HttpClient,
+    private Data:DataService ,
+    public dialogRef: MatDialogRef<LoginComponent>,
+    @Inject(MAT_DIALOG_DATA) public _data: any
+  ) { }
 
   ngOnInit() {
   }
 
+  onNoClick(): void {
+    this.dialogRef.close();
+  }
+  goToSignup(){
+    this.dialogRef.close();
+    this.router.navigate(['/signup']);
+  }
   login() {
-  this.http.post('/api/login',this.UserPassword).subscribe(res => {
+  this.http.post('/api/login',this.User).subscribe(res => {
     this.data = res;
     //to store data in the browser's session
     localStorage.setItem('jwtToken', this.data.token);
 
     this.Data.getUserInfo();
     setTimeout(()=> {
+        this.dialogRef.close();
         this.router.navigate(['home']);
     }, 1000)
 

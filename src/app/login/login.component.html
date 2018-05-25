@@ -1,25 +1,38 @@
-<div class="container">
-  <h1>Login</h1>
-  <div class="row">
-    <div class="col-md-6">
-      <form (ngSubmit)="login()" #loginForm="ngForm">
-        <div class="alert alert-warning alert-dismissible" role="alert" *ngIf="message !== ''">
-          <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-          {{message}}
+<form (ngSubmit)="login()" #loginForm="ngForm">
+<div class="modal-dialog cascading-modal" role="document">
+    <!--Content-->
+    <div class="modal-content">
+
+        <!--Header-->
+        <div class="modal-header light-blue darken-3 white-text">
+            <h4 class="title"><i class="fa fa-user"></i> Log in</h4>
         </div>
-        <div class="form-group">
-          <label for="name">User Name</label>
-          <input type="text" class="form-control" [(ngModel)]="UserPassword.username" name="username" required>
+        <!--Body-->
+        <div class="modal-body">
+            <div class="md-form form-sm">
+                <i class="fa fa-envelope prefix"></i>
+                <input mdbInputDirective type="text" id="form30" [(ngModel)]="User.username" name="username" class="form-control">
+                <label for="form30">Your Name</label>
+            </div>
+              <br>
+            <div class="md-form form-sm">
+                <i class="fa fa-lock prefix"></i>
+                <input mdbInputDirective type="password" id="form31" [(ngModel)]="User.password" name="password" class="form-control">
+                <label for="form31">Your password</label>
+            </div>
+
+            <div class="text-center mt-2">
+                <button class="btn btn-info waves-light" type="submit" mdbWavesEffect [disabled]="!loginForm.form.valid">Log in <i class="fa fa-sign-in ml-1"></i></button>
+            </div>
+
         </div>
-        <div class="form-group">
-          <label for="name">Password</label>
-          <input type="password" class="form-control" [(ngModel)]="UserPassword.password" name="password" required>
+        <!--Footer-->
+        <div class="modal-footer">
+            <div class="options text-center text-md-right mt-1">
+                <p>Not a member? <a  (click)="goToSignup()"> create account </a></p>
+            </div>
         </div>
-        <div class="form-group">
-          <button type="submit" class="btn btn-success" [disabled]="!loginForm.form.valid">Login</button>
-          <a  [routerLink]="['/signup']" class="nav-link" href="#"> create account </a>
-        </div>
-      </form>
     </div>
-  </div>
+    <!--/.Content-->
 </div>
+</form>
