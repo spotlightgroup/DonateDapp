@@ -71,6 +71,12 @@ export class MetaSenderComponent implements OnInit {
                 this.setStatus('Transaction failed!');
               } else {
                 this.setStatus('Transaction complete!');
+                this.http.post('/api/donate', {_id: this.data.post._id})
+                .subscribe(res => {
+                  console.log(res);
+                }, err => {
+                  console.log(err);
+                })
               }
             } catch (e) {
               console.log(e);

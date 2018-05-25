@@ -93,8 +93,9 @@ isLogged = false;
       return;
     })
   }
-  setReciever(key) {
-    this.http.post("/api/Reciever",{"key":key}).subscribe(res => {
+  setReciever(post) {
+    this.data.post = post;
+    this.http.post("/api/Reciever",{"key":key.publicKey}).subscribe(res => {
       console.log("reciever sent")
     }, err => {
       console.log("Reciever sent failed !!");
@@ -108,7 +109,6 @@ isLogged = false;
 
   setPost(post) {
     this.data.post=post;
-    console.log('post', post)
   }
 
 
