@@ -51,8 +51,7 @@ export class LoginComponent implements OnInit {
     this.dialogRef.close();
     setTimeout(()=> {
         this.router.navigate(['home']);
-        window.location.reload()
-    }, 1000)
+    }, 500)
 
 
   }, err => {
