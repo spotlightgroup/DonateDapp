@@ -176,6 +176,16 @@ router.post('/donate', (req, res)=> {
           }
         })
       }
+      else {
+        Post.update({_id: req.body._id }, { $inc : {balance: req.body.amount} }, (err, data) => {
+          if (err) {
+            console.log(err);
+          }
+          else {
+            res.send(data);
+          }
+        })
+      }
     }
   })
 
