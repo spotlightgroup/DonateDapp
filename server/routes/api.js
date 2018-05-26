@@ -150,24 +150,48 @@ router.post("/addRequest",(req,res)=>{
   })
 });
 router.get("/getRequests",(req,res)=>{
-  Request.find({user:req.session.username},(err,Requests)=>{
+  let data = [];
+  Request.find({user: req.session.username},(err,Requests)=>{
     if(err){
       console.log(err);
     }else{
-      res.send(Requests);
+      data = data.concat(Requests)
+    }
+  })
+
+  Request.find({receiver: req.session.username},(err,Requests)=>{
+    if(err){
+      console.log(err);
+    }else{
+      data = data.concat(Requests);
+      console.log(data);
+      let requests = data.filter((ele) => {
+        return !ele.approvals.includes(req.session.username)
+      })
+      res.send(requests);
     }
   })
 })
 
 
 router.post('/donate', (req, res)=> {
-  Post.findOne(req.body, (err, data) => {
+  Post.findOne({_id: req.body._id}, (err, data) => {
     if (err) {
       console.log(err);
     }
     else {
       if (data.donors.indexOf(req.session.username) === -1) {
-        Post.update(req.body, { $push: { donors: req.session.username } }, (err, data) => {
+        Post.update({_id: req.body._id }, { $push: { donors: req.session.username }, $inc : {balance: req.body.amount} }, (err, data) => {
+          if (err) {
+            console.log(err);
+          }
+          else {
+            res.send(data);
+          }
+        })
+      }
+      else {
+        Post.update({_id: req.body._id }, { $inc : {balance: req.body.amount} }, (err, data) => {
           if (err) {
             console.log(err);
           }
@@ -178,6 +202,30 @@ router.post('/donate', (req, res)=> {
       }
     }
   })
+})
 
+
+router.post('/approve', (req, res) => {
+  Request.findOne(req.body, (err, data) => {
+    if (err) {
+      console.log(err);
+    }
+    else {
+      if (!data.approvals.includes(req.session.username)) {
+        Request.update(req.body, { $push: {approvals: req.session.username}}, (err, data) => {
+          if (err) {
+            console.log(err);
+          }
+          else {
+            console.log(data);
+          }
+        })
+
+      }
+      else {
+        console.log('the request is already approved');
+      }
+    }
+  })
 })
 module.exports = router;

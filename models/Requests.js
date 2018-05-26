@@ -7,7 +7,7 @@ const RequestSchema = new Schema({
   description: String,
   amount: Number,
   receiver: String,
-  approvals: Number
+  approvals: [String]
 });
 
 
