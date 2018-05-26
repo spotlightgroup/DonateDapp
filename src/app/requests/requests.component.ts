@@ -38,13 +38,8 @@ export class RequestsComponent implements OnInit {
       },err=>{
         console.log(err);
       });
-      console.log("userrr",this.model);
     },err=>{
       console.log(err);
     });
-
-
-
   }
-
 }

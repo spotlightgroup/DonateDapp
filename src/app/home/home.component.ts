@@ -26,7 +26,10 @@ isDonor = false;
 isLogged = false;
 
 
-  constructor(private http:HttpClient, private web3:Web3Service, private data:DataService) { }
+  constructor(
+    private http:HttpClient,
+    private web3:Web3Service,
+    private data:DataService) { }
 
   ngOnInit() {
     this.data.getUserInfo()
@@ -34,6 +37,7 @@ isLogged = false;
     this.http.get('/api/currentUser').subscribe(res => {
         this.model.user = res['msg'].username;
         this.user = res['msg'].username;
+        this.isLogged = true;
         if(this.data.userInfo.type === "donor") {
           this.isDonor = true;
         }
@@ -93,11 +97,7 @@ isLogged = false;
     })
   }
   setReciever(post) {
-    this.http.post("/api/Reciever",{"key":post.publicKey}).subscribe(res => {
-      console.log("reciever sent")
-    }, err => {
-      console.log("Reciever sent failed !!");
-    })
+    localStorage.setItem('post',JSON.stringify(post));
     setTimeout(()=> {
       window.location.reload()
     }, 1000)
@@ -106,7 +106,7 @@ isLogged = false;
 
 
   setPost(post) {
-    localStorage.setItem('post', JSON.stringify(post));
+    localStorage.setItem('post',JSON.stringify(post));
   }
 
 
