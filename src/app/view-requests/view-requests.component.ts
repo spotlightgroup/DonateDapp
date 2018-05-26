@@ -39,4 +39,13 @@ export class ViewRequestsComponent implements OnInit {
 
   }
 
+  approve(request) {
+    this.http.post('/api/approve', request)
+    .subscribe(res=> {
+      window.location.reload()
+    }, err=> {
+      console.log(err)
+    })
+  }
+
 }

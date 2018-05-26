@@ -165,7 +165,10 @@ router.get("/getRequests",(req,res)=>{
     }else{
       data = data.concat(Requests);
       console.log(data);
-      res.send(data);
+      let requests = data.filter((ele) => {
+        return !ele.approvals.includes(req.session.username)
+      })
+      res.send(requests);
     }
   })
 })
@@ -199,6 +202,30 @@ router.post('/donate', (req, res)=> {
       }
     }
   })
+})
 
+
+router.post('/approve', (req, res) => {
+  Request.findOne(req.body, (err, data) => {
+    if (err) {
+      console.log(err);
+    }
+    else {
+      if (!data.approvals.includes(req.session.username)) {
+        Request.update(req.body, { $push: {approvals: req.session.username}}, (err, data) => {
+          if (err) {
+            console.log(err);
+          }
+          else {
+            console.log(data);
+          }
+        })
+
+      }
+      else {
+        console.log('the request is already approved');
+      }
+    }
+  })
 })
 module.exports = router;
