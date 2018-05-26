@@ -16,7 +16,7 @@ const metacoin_artifacts = require('../../../../build/contracts/RbCoin.json');
 export class MetaSenderComponent implements OnInit {
   accounts: string[];
   RbCoin: any;
-
+  sent = false;
   model = {
     amount: 5,
     receiver: '',
@@ -62,31 +62,38 @@ export class MetaSenderComponent implements OnInit {
     }
     let receiver = JSON.parse(localStorage.getItem('post')).publicKey;
     const amount = this.model.amount;
+    const id = JSON.parse(localStorage.getItem('post'))._id
             console.log('receiver1', receiver)
+            this.setStatus('Initiating transaction... (please wait)');
             try {
               const deployedRbCoin = await this.RbCoin.deployed();
               const transaction = await deployedRbCoin.sendCoin.sendTransaction(receiver, amount, {from: this.model.account});
-              this.setStatus('Initiating transaction... (please wait)');
+
               if (!transaction) {
                 this.setStatus('Transaction failed!');
               } else {
+                this.setStatus('Transaction complete!');
+                this.sent = true;
 
-                let id = JSON.parse(localStorage.getItem('post'))._id;
-
-                this.http.post('/api/donate', {_id: id, amount: amount})
-                .subscribe(res => {
-                  console.log(res);
-                  this.setStatus('Transaction complete!');
-                }, err => {
-                  console.log(err);
-                })
               }
             }
             catch (e) {
               console.log(e);
-              // this.setStatus('Error sending coin; see log.');
+               this.setStatus('Error sending coin; see log.');
+               return;
+            }
+            if (this.sent) {
+              this.http.post('/api/donate', {_id: id, amount: amount})
+              .subscribe(res => {
+                console.log(res);
+              }, err => {
+                console.log(err);
+              })
             }
 
+            setTimeout(()=> {
+              window.location.reload()
+            },2000)
 
 
 
