@@ -161,13 +161,13 @@ router.get("/getRequests",(req,res)=>{
 
 
 router.post('/donate', (req, res)=> {
-  Post.findOne(req.body, (err, data) => {
+  Post.findOne({_id: req.body._id}, (err, data) => {
     if (err) {
       console.log(err);
     }
     else {
       if (data.donors.indexOf(req.session.username) === -1) {
-        Post.update(req.body, { $push: { donors: req.session.username } }, (err, data) => {
+        Post.update({_id: req.body._id }, { $push: { donors: req.session.username }, $inc : {balance: req.body.amount} }, (err, data) => {
           if (err) {
             console.log(err);
           }

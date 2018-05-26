@@ -73,7 +73,7 @@ export class MetaSenderComponent implements OnInit {
 
                 let id = JSON.parse(localStorage.getItem('post'))._id;
 
-                this.http.post('/api/donate', {_id: id})
+                this.http.post('/api/donate', {_id: id, amount: amount})
                 .subscribe(res => {
                   console.log(res);
                   this.setStatus('Transaction complete!');
