@@ -105,23 +105,6 @@ router.post('/logout',function(req,res){
 });
 
 
-
-let reciever="";
-router.post("/Reciever",(req,res)=>{
-//  console.log("request body reciever",req.body)
-  req.session['reciever']=req.body.key;
-  reciever=req.body.key;
-//  console.log("request session",req.session);
-
-});
-
-
-router.get("/Reciever",function(req,res){
-//  console.log("request session in reciever",req.session)
-  res.status(200).send( {"reciever":reciever});
-});
-
-
 router.get('/currentUser',function(req,res){
 	if(req.session.username){
     User.findOne({username: req.session.username},function(err, user) {
@@ -178,13 +161,23 @@ router.get("/getRequests",(req,res)=>{
 
 
 router.post('/donate', (req, res)=> {
-  Post.update(req.body, { $push: { donors: req.session.name } }, (err, data) => {
+  Post.findOne(req.body, (err, data) => {
     if (err) {
       console.log(err);
     }
     else {
-      res.send(data);
+      if (data.donors.indexOf(req.session.username) === -1) {
+        Post.update(req.body, { $push: { donors: req.session.username } }, (err, data) => {
+          if (err) {
+            console.log(err);
+          }
+          else {
+            res.send(data);
+          }
+        })
+      }
     }
   })
+
 })
 module.exports = router;
