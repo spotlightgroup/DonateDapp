@@ -60,24 +60,23 @@ export class MetaSenderComponent implements OnInit {
       this.setStatus('Metacoin is not loaded, unable to send transaction');
       return;
     }
-    let receiver = '';
+    let receiver = JSON.parse(localStorage.getItem('post')).publicKey;
     const amount = this.model.amount;
-       this.http.get("/api/Reciever").subscribe(async res=>{
-             receiver = res["reciever"];
             console.log('receiver1', receiver)
             try {
               const deployedRbCoin = await this.RbCoin.deployed();
               const transaction = await deployedRbCoin.sendCoin.sendTransaction(receiver, amount, {from: this.model.account});
-
+              this.setStatus('Initiating transaction... (please wait)');
               if (!transaction) {
                 this.setStatus('Transaction failed!');
               } else {
-                this.setStatus('Transaction complete!');
-                // setTimeout(()=> {
-                //   window.location.reload()
-                // }, 3000)
-                this.http.post('/api/donate', {_id: post._id}).subscribe(res => {
-                  console.log('res', res);
+
+                let id = JSON.parse(localStorage.getItem('post'))._id;
+
+                this.http.post('/api/donate', {_id: id})
+                .subscribe(res => {
+                  console.log(res);
+                  this.setStatus('Transaction complete!');
                 }, err => {
                   console.log(err);
                 })
@@ -88,16 +87,8 @@ export class MetaSenderComponent implements OnInit {
               // this.setStatus('Error sending coin; see log.');
             }
 
-          },err=>{
-            console.log("error in get reciever ");
-          });
-           console.log('receiver2', receiver)
 
 
-
-    console.log('Sending coins' + amount + ' to ' + receiver);
-
-    this.setStatus('Initiating transaction... (please wait)');
 
 
   }
