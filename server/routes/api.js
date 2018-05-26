@@ -150,11 +150,22 @@ router.post("/addRequest",(req,res)=>{
   })
 });
 router.get("/getRequests",(req,res)=>{
-  Request.find({user:req.session.username},(err,Requests)=>{
+  let data = [];
+  Request.find({user: req.session.username},(err,Requests)=>{
     if(err){
       console.log(err);
     }else{
-      res.send(Requests);
+      data = data.concat(Requests)
+    }
+  })
+
+  Request.find({receiver: req.session.username},(err,Requests)=>{
+    if(err){
+      console.log(err);
+    }else{
+      data = data.concat(Requests);
+      console.log(data);
+      res.send(data);
     }
   })
 })
