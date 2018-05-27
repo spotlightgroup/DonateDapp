@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import {Web3Service} from '../util/web3.service';
 import {DataService} from '../util/data.service';
-
+import * as $ from 'jquery';
 
 @Component({
   selector: 'app-home',
@@ -10,6 +10,8 @@ import {DataService} from '../util/data.service';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
+  g='https://material.angular.io/assets/img/examples/shiba2.jpg';
+flip={};
 model:any = {
   user: '',
   header: "",
@@ -110,8 +112,26 @@ isLogged = false;
       window.location.reload()
     }, 1000)
   }
+  flipOn(i){
+    this.flip[i]=false
+    console.log(this.flip[i])
+    var f=".card"+i
+      $(f).addClass('magictime flipOutY ');
+    setTimeout(()=> {
+      this.flip[i]=true;
+      $(f).removeClass('animated flipOutY ');
+    }, 600)
 
 
+  }
+  flipOf(i){
+    var f=".card"+i
+      $(f).addClass('animated flipOutY ');
+    setTimeout(()=> {
+      $(f).removeClass('animated flipOutX ');
+      this.flip[i]=false;
+    }, 600)
+  }
 
   setPost(post) {
     localStorage.setItem('post',JSON.stringify(post));
