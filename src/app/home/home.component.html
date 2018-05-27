@@ -17,7 +17,7 @@
 <div class="posts">
 
 <div  class="card container" *ngFor="let post of Posts" >
-  <div *ngIf="post.user === user || isDonor" >
+  <div *ngIf="post.user === userInfo.username || isDonor" >
   <h3><img class="postImage" src={{post.userInfo[0].image}} ><a href="#">@{{post.user}}</a></h3>
   <h2>{{post.header}}</h2>
   <p>{{post.description}}</p>

@@ -33,10 +33,17 @@ isLogged = false;
     private data:DataService) { }
 
   ngOnInit() {
+    // this.data.getUserInfo();
     if (localStorage.getItem('isLogged') === "true") {
       this.isLogged = true;
     }
-    if (localStorage.getItem('isDonor') === "true") {
+
+    else {
+      this.isLogged = false;
+      return;
+    }
+    this.userInfo = JSON.parse(localStorage.getItem('userInfo'))
+    if(this.userInfo.type === "donor") {
       this.isDonor = true;
     }
 
@@ -50,7 +57,6 @@ isLogged = false;
 
     setTimeout(()=>{
       this.model.publicKey = this.web3.accounts[0]
-      console.log(this.model.publicKey)
     }, 500)
 
 
@@ -92,6 +98,7 @@ isLogged = false;
   getPosts() {
     this.http.get("/getPosts").subscribe(res => {
       this.Posts = res;
+      console.log('Posts', this.Posts)
     }, err => {
       this.message = "error"
       return;

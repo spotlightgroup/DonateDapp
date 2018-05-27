@@ -31,12 +31,14 @@ export class NavbarComponent implements OnInit {
 
   logout(){
     setTimeout(() => {
+      this.router.navigate(['home']);
       window.location.reload()
     },400)
     localStorage.setItem('isLogged', 'false');
     this.http.post('/api/logout',{}).subscribe(res => {
       localStorage.remove('jwtToken');
-      this.router.navigate(['home']);
+      localStorage.remove('userInfo');
+      localStorage.remove('isLogged');
 
     }, err => {
       this.message = err.error.msg;
