@@ -8,18 +8,13 @@ export class DataService {
   public publicKey = "";
   public userInfo: any = {};
   public post:any;
-  public isLogged = false;
   constructor(private http:HttpClient) {}
 
 
   public getUserInfo() {
     this.http.get('/api/currentUser').subscribe(res => {
-      this.userInfo = res['msg'];
-      if (this.userInfo.username) {
-        this.isLogged = true;
-      }
+      localStorage.setItem('userInfo', JSON.stringify(res['msg']));
     }, err => {
-      this.isLogged = false;
       console.log("not logged in");
     });
 

@@ -18,7 +18,7 @@ model:any = {
   publicKey: '',
   balance: 0
 };
-user = "";
+userInfo :any;
 Posts: any;
 message = '';
 post :any;
@@ -32,30 +32,29 @@ isLogged = false;
     private data:DataService) { }
 
   ngOnInit() {
+    if (localStorage.getItem('isLogged') === "true") {
+      this.isLogged = true;
+    }
+    
     this.data.getUserInfo()
-    this.model.publicKey = this.data.publicKey
-    this.http.get('/api/currentUser').subscribe(res => {
-        this.model.user = res['msg'].username;
-        this.user = res['msg'].username;
-        this.isLogged = true;
-        if(this.data.userInfo.type === "donor") {
-          this.isDonor = true;
-        }
-        console.log(this.model)
-    }, err => {
-      console.log(err.error);
-    })
-    this.web3.bootstrapWeb3()
-    this.getPosts()
-    this.isLogged = this.data.isLogged;
-    setTimeout(()=>{
+    this.userInfo = this.data.userInfo;
+    if(this.userInfo.type === "donor") {
+      this.isDonor = true;
+    }
+    this.model.user = this.userInfo.username;
 
+        this.web3.bootstrapWeb3()
+        this.getPosts()
+
+    setTimeout(()=>{
       this.model.publicKey = this.web3.accounts[0]
       console.log(this.model.publicKey)
-    }, 2000)
+    }, 500)
 
 
   }
+
+
   sendPost() {
     if (this.model.publicKey === '') {
       this.message = 'use metamask to continue'
@@ -68,7 +67,7 @@ isLogged = false;
 
     this.http.post('/addPost',this.model).subscribe(res => {
 
-
+      this.message = "post added"
     }, err => {
       this.message = "error"
       return;

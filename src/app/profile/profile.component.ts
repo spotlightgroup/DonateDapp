@@ -28,13 +28,14 @@ export class ProfileComponent implements OnInit {
   constructor(private http:HttpClient , private router:Router, private data:DataService) { }
 
   ngOnInit() {
-    setTimeout(()=>{
+    this.data.getUserInfo()
+    // setTimeout(()=>{
       this.model = this.data.userInfo;
       if(!this.model.image){
         this.model.image = "http://sreeguru.in/public/images/male.png";
       }
-    }, 400)
-        this.router.navigate(['profile']);
+    // }, 400)
+        // this.router.navigate(['profile']);
   }
 
 
