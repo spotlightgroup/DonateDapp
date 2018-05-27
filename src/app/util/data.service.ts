@@ -14,6 +14,16 @@ export class DataService {
   public getUserInfo() {
     this.http.get('/api/currentUser').subscribe(res => {
       localStorage.setItem('userInfo', JSON.stringify(res['msg']));
+      this.userInfo = res['msg']
+      if (res['msg'].type === 'donor') {
+        localStorage.setItem('isDonor','true');
+      }
+      else {
+        localStorage.setItem('isDonor','false');
+
+      }
+
+
     }, err => {
       console.log("not logged in");
     });

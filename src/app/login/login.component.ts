@@ -47,7 +47,7 @@ export class LoginComponent implements OnInit {
     //to store data in the browser's session
     localStorage.setItem('jwtToken', this.data.token);
     localStorage.setItem('isLogged', 'true');
-
+    this.Data.getUserInfo()
       this.dialogRef.close();
       this.router.navigate(['profile']);
       setTimeout(()=> {
