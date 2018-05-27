@@ -20,6 +20,7 @@ model:any = {
 };
 userInfo :any;
 Posts: any;
+user: '';
 message = '';
 post :any;
 isDonor = false;
@@ -36,6 +37,7 @@ isLogged = false;
     if (localStorage.getItem('isLogged') === "true") {
       this.isLogged = true;
     }
+
     else {
       this.isLogged = false;
       return;
@@ -44,6 +46,10 @@ isLogged = false;
     if(this.userInfo.type === "donor") {
       this.isDonor = true;
     }
+
+
+    this.userInfo = this.data.userInfo;
+    this.user = this.userInfo.username;
     this.model.user = this.userInfo.username;
 
         this.web3.bootstrapWeb3()
