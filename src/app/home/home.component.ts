@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import {Web3Service} from '../util/web3.service';
 import {DataService} from '../util/data.service';
-
+import * as $ from 'jquery';
 
 @Component({
   selector: 'app-home',
@@ -10,6 +10,8 @@ import {DataService} from '../util/data.service';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
+  img='https://i.imgur.com/hvctU41.jpg';
+flip={};
 model:any = {
   user: '',
   header: "",
@@ -110,8 +112,23 @@ isLogged = false;
       window.location.reload()
     }, 1000)
   }
-
-
+  flipOn(i){
+    this.flip[i]=false
+    var index=".card"+i
+      $(index).addClass('animated flipOutY ');
+    setTimeout(()=> {
+      $(index).removeClass('animated flipOutY ');
+      this.flip[i]=true;
+    }, 600)
+  }
+  flipOf(i){
+    var index=".card"+i
+      $(index).addClass('animated flipOutY ');
+    setTimeout(()=> {
+      $(index).removeClass('animated flipOutY ');
+      this.flip[i]=false;
+    }, 600)
+  }
 
   setPost(post) {
     localStorage.setItem('post',JSON.stringify(post));
