@@ -100,7 +100,7 @@ router.post('/logout',function(req,res){
 			}
 		});
 	}else {
-    res.status(401).send({success: false, msg: 'log in first doom ass'});
+    res.status(401).send({success: false, msg: ''});
   }
 });
 
