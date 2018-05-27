@@ -10,7 +10,7 @@ import * as $ from 'jquery';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-  g='https://material.angular.io/assets/img/examples/shiba2.jpg';
+  img='https://i.imgur.com/hvctU41.jpg';
 flip={};
 model:any = {
   user: '',
@@ -114,21 +114,18 @@ isLogged = false;
   }
   flipOn(i){
     this.flip[i]=false
-    console.log(this.flip[i])
-    var f=".card"+i
-      $(f).addClass('magictime flipOutY ');
+    var index=".card"+i
+      $(index).addClass('animated flipOutY ');
     setTimeout(()=> {
+      $(index).removeClass('animated flipOutY ');
       this.flip[i]=true;
-      $(f).removeClass('animated flipOutY ');
     }, 600)
-
-
   }
   flipOf(i){
-    var f=".card"+i
-      $(f).addClass('animated flipOutY ');
+    var index=".card"+i
+      $(index).addClass('animated flipOutY ');
     setTimeout(()=> {
-      $(f).removeClass('animated flipOutX ');
+      $(index).removeClass('animated flipOutY ');
       this.flip[i]=false;
     }, 600)
   }

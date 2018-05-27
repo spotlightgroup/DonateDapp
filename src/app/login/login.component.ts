@@ -33,6 +33,7 @@ export class LoginComponent implements OnInit {
     this.dialogRef.close();
   }
   goToSignup(): void {
+    this.dialogRef.close();
     let dialogRef = this.dialog.open(RegisterComponent, {
       panelClass: 'custom-dialog-container'
     });

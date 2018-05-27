@@ -11,6 +11,7 @@
   padding: 0;
   margin: 30px;
   text-align: center;
+  background-color: #F5F2F2;
 }
 
 .cardHead{
@@ -36,7 +37,7 @@
 .cardButtom {
   padding: 10%;
   position:relative;
-  top:25px
+  top:25px;
 }
 h3{
   font-weight: bold;
@@ -47,4 +48,7 @@ h3{
 }
 .face2{
   padding :5% 10% 5%  10%;
+}
+.Row {
+  height: 140px;
 }
