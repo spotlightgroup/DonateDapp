@@ -10,17 +10,22 @@ export class ViewRequestsComponent implements OnInit {
   requests:any;
   message = "";
   isDonor = false;
+  donorsCount = 0;
   constructor(private http:HttpClient, private data: DataService) { }
 
 
 
   ngOnInit() {
+    this.donorsCount = JSON.parse(localStorage.getItem('post')).donors.length;
     if (this.data.userInfo.type === "donor") {
       this.isDonor = true;
     }
     this.http.get("/api/getRequests")
     .subscribe(res=>{
       this.requests = res;
+      if (this.requests.length === 0) {
+        this.message = "there is no requests yet !"
+      }
     },err=>{
       console.log(err);
     })
