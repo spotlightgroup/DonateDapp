@@ -49,8 +49,6 @@ isLogged = false;
       this.isDonor = true;
     }
 
-
-    this.userInfo = this.data.userInfo;
     this.user = this.userInfo.username;
     this.model.user = this.userInfo.username;
 
