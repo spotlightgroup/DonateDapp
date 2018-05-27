@@ -15,10 +15,10 @@
     </div>
 </div>
 
-<app-about *ngIf="!isLogged"></app-about> 
+<!-- <app-about *ngIf="!isLogged"></app-about> -->
 <div class="row">
-  <div class="col-4 posts" *ngFor="let post of Posts;let i =index" >
-    <mat-card [ngClass]="'card'+i" *ngIf="post.user === user || isDonor">
+  <div class="col-lg-4 col-sm-10 col-sm-6 posts" *ngFor="let post of Posts;let i =index" >
+    <mat-card [ngClass]="'card'+i" *ngIf="post.user === model.user || isDonor">
       <div class="face1" *ngIf="!flip[i]">
         <div class="cardHead" [ngStyle]="{'background-image': 'url('+img+')'}"></div>
         <img class="userImg" src={{post.userInfo[0].image}}  alt="Avatar" >
