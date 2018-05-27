@@ -19,7 +19,8 @@ export class ProfileComponent implements OnInit {
     address: '',
     fullName: '',
     phoneNumber1: 0,
-    phoneNumber2: 0
+    phoneNumber2: 0,
+    overview: ''
 
   }
 
@@ -28,13 +29,13 @@ export class ProfileComponent implements OnInit {
   constructor(private http:HttpClient , private router:Router, private data:DataService) { }
 
   ngOnInit() {
-    setTimeout(()=>{
-      this.model = this.data.userInfo;
+    // setTimeout(()=>{
+      this.model = JSON.parse(localStorage.getItem('userInfo'));
       if(!this.model.image){
         this.model.image = "http://sreeguru.in/public/images/male.png";
       }
-    }, 400)
-        this.router.navigate(['profile']);
+    // }, 400)
+        // this.router.navigate(['profile']);
   }
 
 
@@ -45,6 +46,7 @@ export class ProfileComponent implements OnInit {
       this.http.post('/api/profile', this.model)
         .subscribe(res => {
           this.alert()
+
         }, (err) => {
             console.log(err);
         }

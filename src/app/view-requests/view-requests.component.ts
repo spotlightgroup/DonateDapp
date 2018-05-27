@@ -23,9 +23,12 @@ export class ViewRequestsComponent implements OnInit {
     this.http.get("/api/getRequests")
     .subscribe(res=>{
       this.requests = res;
-      if (this.requests.length === 0) {
-        this.message = "there is no requests yet !"
-      }
+      setTimeout(() => {
+        if (this.requests.length === 0) {
+          this.message = "there is no requests yet !"
+        }
+      }, 200)
+
     },err=>{
       console.log(err);
     })
