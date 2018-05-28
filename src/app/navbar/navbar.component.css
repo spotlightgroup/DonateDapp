@@ -1,0 +1,34 @@
+.img-circle {
+    border-radius: 50%;
+    vertical-align: middle;
+    height: 30px;
+    width: 30px;
+}
+
+.circle {
+  display: block;
+  width: 50px;
+  height: 50px;
+  background: red;
+  border-radius: 50%;
+  background: -webkit-radial-gradient(25px 25px, circle, red, #000);
+  background-size: cover;
+  position: absolute;
+  left: 95%;
+}
+.fadeIn{
+  position: absolute;
+  left: 80%;
+  color: red;
+}
+
+/* Spinning the sphere using key frames */
+
+@-webkit-keyframes spinR {
+  from { -webkit-transform: rotate(0deg); }
+  to { -webkit-transform: rotate(360deg); }
+}
+@-webkit-keyframes spinL {
+  from { -webkit-transform: rotate(360deg); }
+  to { -webkit-transform: rotate(0deg); }
+}
