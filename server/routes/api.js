@@ -127,7 +127,11 @@ router.post('/profileImage', (req, res) => {
   })
 })
 
-//
+
+
+
+
+
 getToken = function (headers) {
   if (headers && headers.authorization) {
     var parted = headers.authorization.split(' ');
@@ -140,8 +144,12 @@ getToken = function (headers) {
     return null;
   }
 };
+
+
+
+
+
 router.post("/addRequest",(req,res)=>{
-//  console.log(req.body)
   Request.create(req.body,(err,data)=>{
     if(err){
       console.log(err);
@@ -150,28 +158,48 @@ router.post("/addRequest",(req,res)=>{
     }
   })
 });
-router.get("/getRequests",(req,res)=>{
+
+
+
+
+
+router.post("/getRequests",(req,res)=>{
   let data = [];
-  Request.find({user: req.session.username},(err,Requests)=>{
+  let user = req.body.username;
+  // for the project maker
+  Request.find({user: user},(err,Requests)=>{
     if(err){
       console.log(err);
     }else{
       data = data.concat(Requests)
     }
   })
-
-  Request.find({receiver: req.session.username},(err,Requests)=>{
-    if(err){
+  // for the donor
+  Post.find({},(err,posts) => {
+    if(err) {
       console.log(err);
-    }else{
-      data = data.concat(Requests);
-      console.log(data);
-      let requests = data.filter((ele) => {
-        return !ele.approvals.includes(req.session.username)
-      })
-      res.send(requests);
     }
-  })
+    else{
+      for (var i = 0; i < posts.length; i++) {
+        for (var j = 0; j < posts[i].donors.length; j++) {
+          if (posts[i].donors[j] === user) {
+            Request.find({postId: posts[i]._id}, (err,requests) =>{
+              if (err) {
+                console.log(err);
+              }
+              else {
+                data = data.concat(requests)
+                console.log(requests);
+                res.send(data)
+              }
+            })
+          }
+        }
+      }
+    }
+  });
+
+
 })
 
 
@@ -207,24 +235,26 @@ router.post('/donate', (req, res)=> {
 
 
 router.post('/approve', (req, res) => {
-  Request.findOne(req.body, (err, data) => {
+  Request.findOne(req.body.request, (err, data) => {
     if (err) {
       console.log(err);
+      res.sendStatus(404)
     }
     else {
-      if (!data.approvals.includes(req.session.username)) {
-        Request.update(req.body, { $push: {approvals: req.session.username}}, (err, data) => {
+      if (!data.approvals.includes(req.body.username)) {
+        Request.update(req.body.request, { $push: {approvals: req.body.username}}, (err, data) => {
           if (err) {
             console.log(err);
+            res.sendStatus(404)
           }
           else {
-            console.log(data);
+            res.send(data);
           }
         })
 
       }
-      else {
-        console.log('the request is already approved');
+        else {
+        res.sendStatus(404)
       }
     }
   })
