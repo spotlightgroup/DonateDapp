@@ -32,7 +32,7 @@ export class RequestsComponent implements OnInit {
   sendRequest(){
     this.model.user = JSON.parse(localStorage.getItem('userInfo')).username;
     this.model.postId = JSON.parse(localStorage.getItem('post'))._id;
-    this.model.postId = JSON.parse(localStorage.getItem('post')).donors.length;
+    this.model.donorsCount = JSON.parse(localStorage.getItem('post')).donors.length;
 
 
       this.http.post("/api/addRequest",this.model)
