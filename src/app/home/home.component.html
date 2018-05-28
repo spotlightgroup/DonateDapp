@@ -14,19 +14,54 @@
       {{message}}
     </div>
 </div>
-<div class="posts">
 
-<div  class="card container" *ngFor="let post of Posts" >
-  <div *ngIf="post.user === user || isDonor" >
-  <h3><img class="postImage" src={{post.userInfo[0].image}} ><a href="#">@{{post.user}}</a></h3>
-  <h2>{{post.header}}</h2>
-  <p>{{post.description}}</p>
-  <p>total needed: {{post.needed}}</p>
-  <p>created at: {{post.time}}</p>
-  <p>gained balance{{post.balance}}</p>
-  <a  *ngIf="isDonor" [routerLink]="['/donate']" type="submit" class="btn btn-success" (click)="setReciever(post)">Donate</a>
-  <a  *ngIf="!isDonor" (click)="setPost(post)" [routerLink]="['/requests']" type="submit" class="btn btn-success" >spend</a>
-</div>
-</div>
-</div>
+<!-- <app-about *ngIf="!isLogged"></app-about> -->
+<div class="row">
+  <div class="col-lg-4 col-sm-10 col-sm-6 posts" *ngFor="let post of Posts;let i =index" >
+    <mat-card [ngClass]="'card'+i" *ngIf="post.user === model.user || isDonor">
+      <div class="face1" *ngIf="!flip[i]">
+        <div class="cardHead" [ngStyle]="{'background-image': 'url('+img+')'}"></div>
+        <img class="userImg" src={{post.userInfo[0].image}}  alt="Avatar" >
+        <div class="cardButtom">
+          <mat-card-title>{{post.user}}</mat-card-title>
+          <mat-card-subtitle>{{post.header}}</mat-card-subtitle>
+          <mat-card-content></mat-card-content>
+          <mat-card-actions>
+            <button mat-button *ngIf="isDonor" (click)="setReciever(post)" [routerLink]="['/donate']" >Donate</button>
+            <button mat-button *ngIf="!isDonor" (click)="setPost(post)" [routerLink]="['/requests']">Spend</button>
+            <button mat-button (click)="flipOn(i)"><i class="fa fa-repeat"></i>  Flip</button>
+          </mat-card-actions>
+        </div>
+      </div>
+      <div class="face2" *ngIf="flip[i]">
+        <div class="Row">
+          <h3>About my idea</h3>
+          <hr>
+          <p>{{post.description}}</p>
+        </div>
+        <div class="Row">
+          <h3>Amount</h3>
+          <hr>
+          <div class="amounTable">
+            <table>
+              <tr>
+                <td>total needed</td>
+                <td> &nbsp; </td>
+                <td>gained balance</td>
+              </tr>
+              <tr>
+                <td>{{post.needed}}</td>
+                <td> / </td>
+                <td>{{post.balance}}</td>
+              </tr>
+            </table>
+          </div>
+        </div>
+        <div class="Row">
+          <p>created at: {{post.time}}</p>
+          <button mat-button (click)="flipOf(i)"><i class="fa fa-repeat"></i>  Flip</button>
+        </div>
+      </div>
+    </mat-card>
+  </div>
 </div>
