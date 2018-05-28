@@ -12,12 +12,14 @@ import * as $ from 'jquery';
 })
 export class NavbarComponent implements OnInit {
   fadeShow=true;
-  User = "";
+  //User = "";
+  userInfo:any;
   message = "";
   isLogged = false;
   constructor(private http:HttpClient, private data: DataService, private router: Router, public dialog: MatDialog) { }
 
   ngOnInit() {
+    this.userInfo = JSON.parse(localStorage.getItem('userInfo'))
     setInterval(()=> {
       if(localStorage.getItem('isLogged') === "true") {
         this.isLogged = true;
@@ -26,8 +28,7 @@ export class NavbarComponent implements OnInit {
         this.isLogged = false;
       }
     }, 1000)
-$(".fadeIn").hide();
-$(".circle").css('background-image', 'url(model.image)');
+    $(".fadeIn").hide();
   }
 
 
@@ -59,6 +60,7 @@ $(".circle").css('background-image', 'url(model.image)');
         console.log('The dialog was closed');
       });
     };
+
     fadeClick(){
       if(this.fadeShow===true){
         $(".fadeIn").addClass('animated fadeInRight');

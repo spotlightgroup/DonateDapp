@@ -6,20 +6,19 @@
 }
 
 .circle {
-  display: block;
   width: 50px;
   height: 50px;
   background: red;
   border-radius: 50%;
   background: -webkit-radial-gradient(25px 25px, circle, red, #000);
   background-size: cover;
-  position: absolute;
-  left: 95%;
+  position: relative;
+  left: 0.8%;
 }
 .fadeIn{
-  position: absolute;
-  left: 80%;
-  color: red;
+  position: relative;
+  left:40%;
+  color: white;
 }
 
 /* Spinning the sphere using key frames */
@@ -31,4 +30,20 @@
 @-webkit-keyframes spinL {
   from { -webkit-transform: rotate(360deg); }
   to { -webkit-transform: rotate(0deg); }
+}
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+li {
+    display: inline;
+    margin: 0 5px 0 5px;
+}
+a{
+  font-weight: bold;
+  font-family: fantasy;
+  font-size: 15px;
+  color:white;
 }
