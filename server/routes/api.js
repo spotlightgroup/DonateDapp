@@ -150,16 +150,40 @@ router.post("/addRequest",(req,res)=>{
   })
 });
 router.post("/getRequests",(req,res)=>{
-  //let data = [];
-  console.log("hiiiiiiii",req.body.username);
-  Request.find({user: req.body.username},(err,Requests)=>{
+  let data = [];
+  let user = req.body.username;
+  // for the project maker
+  Request.find({user: user},(err,Requests)=>{
     if(err){
       console.log(err);
     }else{
-      console.log(Requests)
-      res.send(Requests);
+      data = data.concat(Requests)
     }
   })
+  // for the donor
+  Post.find({},(err,posts) => {
+    if(err) {
+      console.log(err);
+    }
+    else{
+      for (var i = 0; i < posts.length; i++) {
+        for (var j = 0; j < posts[i].donors.length; j++) {
+          if (posts[i].donors[j] === user) {
+            Request.find({postId: posts[i]._id}, (err,requests) =>{
+              if (err) {
+                console.log(err);
+              }
+              else {
+                data = data.concat(requests)
+                console.log(requests);
+                res.send(data)
+              }
+            })
+          }
+        }
+      }
+    }
+  });
 
 
 })
