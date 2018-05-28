@@ -52,9 +52,12 @@ export class ViewRequestsComponent implements OnInit {
   approve(request) {
     this.http.post('/api/approve', {request:request, username:this.userInfo.username})
     .subscribe(res=> {
-      window.location.reload()
+      console.log("esheeee",res)
+      this.message = "Approved !"
+
     }, err=> {
       console.log(err)
+      this.message = " you already approved !"
     })
   }
 

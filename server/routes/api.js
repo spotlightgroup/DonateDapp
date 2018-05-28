@@ -224,21 +224,23 @@ router.post('/approve', (req, res) => {
   Request.findOne(req.body.request, (err, data) => {
     if (err) {
       console.log(err);
+      res.sendStatus(404)
     }
     else {
       if (!data.approvals.includes(req.body.username)) {
         Request.update(req.body.request, { $push: {approvals: req.body.username}}, (err, data) => {
           if (err) {
             console.log(err);
+            res.sendStatus(404)
           }
           else {
-            console.log(data);
+            res.send(data);
           }
         })
 
       }
-      else {
-        console.log('the request is already approved');
+        else {
+        res.sendStatus(404)
       }
     }
   })
