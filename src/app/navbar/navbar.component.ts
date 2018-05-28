@@ -32,7 +32,7 @@ $(".circle").css('background-image', 'url(model.image)');
 
 
   logout(){
-    fadeClick()
+    this.fadeClick()
     setTimeout(() => {
       this.router.navigate(['home']);
       window.location.reload()

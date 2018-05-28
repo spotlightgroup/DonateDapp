@@ -1,26 +1,30 @@
 
 
 <nav class="navbar ">
-  <a class="nav-link" [routerLink]="['/home']">DonateDapp</a>
-  <!-- <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-  <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button> -->
-  <div class="fadeIn">
+
+    <a class="nav-link" [routerLink]="['/home']">DonateDapp</a>
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item" *ngIf="isLogged">
-        <a  [routerLink]="['/profile']" class="nav-link" (click)="fadeClick()">Profile</a>
+        <a  [routerLink]="['/profile']" class="nav-link" href="#">Profile</a>
+      </li>
+      <li class="nav-item" *ngIf="!isLogged">
+        <a (click)="openLogin()" class="nav-link" >Login</a>
       </li>
       <li class="nav-item" *ngIf="isLogged">
-        <a [routerLink]="['/viewRequests']" class="nav-link" (click)="fadeClick()">requests</a>
+        <a [routerLink]="['/viewRequests']" class="nav-link" >requests</a>
       </li>
       <li class="nav-item" *ngIf="isLogged">
         <a (click)="logout()" class="nav-link" >log out</a>
       </li>
     </ul>
+    <form class="form-inline my-2 my-lg-0">
+      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+    </form>
   </div>
-  <a *ngIf="!isLogged" style="color : white ; position:absolute ; left:95%" (click)="openLogin()" class="nav-link" >Login</a>
-  <div class="circle" (click)="fadeClick()" *ngIf="isLogged"></div>
 </nav>
 <div class="alert alert-warning alert-dismissible" role="alert" *ngIf="message !== ''">
     <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
     {{message}}
-</div>
+  </div>
