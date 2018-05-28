@@ -7,7 +7,7 @@ donate decentralize App help you to kickoff your projects, secure and track your
 
 ## **Installation**
 
-`<$ npm install>` 
+`$ npm install` 
 to install the dependencies
 
 you will need to use a local development ethereum enviroment 
@@ -15,13 +15,13 @@ you will need to use a local development ethereum enviroment
 use ganache with truffle framework 
 you can download it from here [TRUFFLE](http://truffleframework.com)
 
-`<$ <truffle compile>`
+`$ truffle compile`
 to compile the contracts to the ABI
 
-`<$ truffle migrate>`
+`$ truffle migrate`
 to deploy the contracts to the dev network
 
- `<$ npm start>`
+ `$ npm start`
 to run the local server
 
 
@@ -36,13 +36,13 @@ to run the local server
 1. run ganache 
 
 1. compile and deploy the contracts to the dev network
-`<$ <truffle migrate --compile-all --reset>`
+`$ truffle migrate --compile-all --reset`
 
 1. make an account in meta mask 
 
 1. save the memonic words because it is important
 
-1. make a new network on `<http://localhost:7545>`
+1. make a new network on `http://localhost:7545`
 
 1. copy the private key from ganache 
 
