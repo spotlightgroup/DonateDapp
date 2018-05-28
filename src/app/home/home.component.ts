@@ -56,6 +56,7 @@ isLogged = false;
         this.getPosts()
 
     setTimeout(()=>{
+      //this.model.publicKey = this.userInfo.publicKey;
       this.model.publicKey = this.web3.accounts[0]
     }, 500)
 
