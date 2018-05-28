@@ -221,13 +221,13 @@ router.post('/donate', (req, res)=> {
 
 
 router.post('/approve', (req, res) => {
-  Request.findOne(req.body, (err, data) => {
+  Request.findOne(req.body.request, (err, data) => {
     if (err) {
       console.log(err);
     }
     else {
-      if (!data.approvals.includes(req.session.username)) {
-        Request.update(req.body, { $push: {approvals: req.session.username}}, (err, data) => {
+      if (!data.approvals.includes(req.body.username)) {
+        Request.update(req.body.request, { $push: {approvals: req.body.username}}, (err, data) => {
           if (err) {
             console.log(err);
           }

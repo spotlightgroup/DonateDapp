@@ -11,16 +11,17 @@ export class ViewRequestsComponent implements OnInit {
   message = "";
   isDonor = false;
   donorsCount = 0;
+  userInfo :any;
   constructor(private http:HttpClient, private data: DataService) { }
 
 
 
   ngOnInit() {
-  //  this.donorsCount = JSON.parse(localStorage.getItem('post')).donors.length;
-    if (JSON.parse(localStorage.getItem('userInfo')).type === "donor") {
+    this.userInfo = JSON.parse(localStorage.getItem('userInfo'));
+    if (this.userInfo.type === "donor") {
       this.isDonor = true;
     }
-    this.http.post("/api/getRequests",{username:JSON.parse(localStorage.getItem('userInfo')).username})
+    this.http.post("/api/getRequests",{username:this.userInfo.username})
     .subscribe(res=>{
       this.requests = res;
       console.log('res',res)
@@ -49,7 +50,7 @@ export class ViewRequestsComponent implements OnInit {
   }
 
   approve(request) {
-    this.http.post('/api/approve', request)
+    this.http.post('/api/approve', {request:request, username:this.userInfo.username})
     .subscribe(res=> {
       window.location.reload()
     }, err=> {
