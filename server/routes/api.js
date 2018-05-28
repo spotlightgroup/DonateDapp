@@ -47,6 +47,7 @@ router.post('/profile', function(req, res) {
       user.address=req.body.address;
       user.email=req.body.email;
       user.overview=req.body.overview;
+      user.publicKey=req.body.publicKey;
       // save the user
       user.save(function(err) {
         if (err) {

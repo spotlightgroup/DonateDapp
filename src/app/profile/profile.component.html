@@ -41,6 +41,23 @@
                                 <input matInput [(ngModel)]="model.email">
                               </mat-form-field>
                             </mat-expansion-panel>
+                            <mat-expansion-panel (opened)="panelOpenState = true"
+                                                 (closed)="panelOpenState = false">
+                              <mat-expansion-panel-header>
+                                <mat-panel-title>
+                                  public Key
+                                </mat-panel-title>
+                                <mat-panel-description>
+                                  {{ panelOpenState ? 'change your data' : model.publicKey }}
+                                </mat-panel-description>
+                              </mat-expansion-panel-header>
+                              <br>
+                              <mat-form-field appearance="outline">
+                                <mat-label>publicKey</mat-label>
+                                <mat-icon matSuffix><i class="fa fa-key"></i></mat-icon>
+                                <input matInput [(ngModel)]="model.publicKey">
+                              </mat-form-field>
+                            </mat-expansion-panel>
 
                             <mat-expansion-panel (opened)="panelOpenState = true"
                                                  (closed)="panelOpenState = false">
