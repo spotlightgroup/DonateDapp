@@ -12,9 +12,7 @@ import { LoginComponent } from '../login/login.component';
 })
 export class RegisterComponent implements OnInit {
 
-  User = {
-    image: "http://sreeguru.in/public/images/male.png"
-  };
+  User = {};
   message = '';
 
 
@@ -31,6 +29,7 @@ export class RegisterComponent implements OnInit {
     this.dialogRef.close();
   }
   register() {
+    this.User['image'] = "http://sreeguru.in/public/images/male.png"
       this.http.post('/api/register', this.User)
         .subscribe(res => {
             this.goToLogin();

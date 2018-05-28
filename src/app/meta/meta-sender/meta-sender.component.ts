@@ -16,7 +16,7 @@ const metacoin_artifacts = require('../../../../build/contracts/RbCoin.json');
 export class MetaSenderComponent implements OnInit {
   accounts: string[];
   RbCoin: any;
-
+  sent = false;
   model = {
     amount: 5,
     receiver: '',
@@ -26,27 +26,32 @@ export class MetaSenderComponent implements OnInit {
 
   status = '';
 
-  constructor(private http:HttpClient,private web3Service: Web3Service, private matSnackBar: MatSnackBar, private data:DataService) {
+  constructor(
+    private http:HttpClient,
+    private web3Service: Web3Service,
+    private matSnackBar: MatSnackBar,
+    private data:DataService) {}
 
-    }
+
 
   ngOnInit(): void {
     this.watchAccount();
     this.web3Service.artifactsToContract(metacoin_artifacts)
-      .then((RbCoinAbstraction) => {
-        this.RbCoin = RbCoinAbstraction;
-      });
+    .then((RbCoinAbstraction) => {
+      this.RbCoin = RbCoinAbstraction;
+    });
 
 
   }
 
   watchAccount() {
-    this.web3Service.accountsObservable.subscribe((accounts) => {
-      this.accounts = accounts;
-      this.model.account = accounts[0];
-      this.data.publicKey = this.model.account;
-      this.refreshBalance();
-    });
+      this.web3Service.accountsObservable
+      .subscribe((accounts) => {
+        this.accounts = accounts;
+        this.model.account = accounts[0];
+        this.data.publicKey = this.model.account;
+        this.refreshBalance();
+      });
   }
 
   setStatus(status) {
@@ -54,44 +59,51 @@ export class MetaSenderComponent implements OnInit {
   }
 
   async sendCoin() {
-    let post = JSON.parse(localStorage.getItem('post'))
-        console.log(post);
+    const receiver = JSON.parse(localStorage.getItem('post')).publicKey;
+    const amount = this.model.amount;
+    const id = JSON.parse(localStorage.getItem('post'))._id
+    const post = JSON.parse(localStorage.getItem('post'))
+
     if (!this.RbCoin) {
       this.setStatus('Metacoin is not loaded, unable to send transaction');
       return;
     }
-    let receiver = JSON.parse(localStorage.getItem('post')).publicKey;
-    const amount = this.model.amount;
-            console.log('receiver1', receiver)
-            try {
-              const deployedRbCoin = await this.RbCoin.deployed();
-              const transaction = await deployedRbCoin.sendCoin.sendTransaction(receiver, amount, {from: this.model.account});
-              this.setStatus('Initiating transaction... (please wait)');
-              if (!transaction) {
-                this.setStatus('Transaction failed!');
-              } else {
 
-                let id = JSON.parse(localStorage.getItem('post'))._id;
+    this.setStatus('Initiating transaction... (please wait)');
 
-                this.http.post('/api/donate', {_id: id})
-                .subscribe(res => {
-                  console.log(res);
-                  this.setStatus('Transaction complete!');
-                }, err => {
-                  console.log(err);
-                })
-              }
-            }
-            catch (e) {
-              console.log(e);
-              // this.setStatus('Error sending coin; see log.');
-            }
+    try {
+      const deployedRbCoin = await this.RbCoin.deployed();
+      const transaction = await deployedRbCoin.sendCoin.sendTransaction(receiver, amount, {from: this.model.account});
 
+      if (!transaction) {
+        this.setStatus('Transaction failed!');
+      }
+      else {
+        this.setStatus('Transaction complete!');
+        this.sent = true;
 
+      }
+    }
+    catch (e) {
+      console.log(e);
+      this.setStatus('Error sending coin; see log.');
+      return;
+    }
 
+    if (this.sent) {
+      this.http.post('/api/donate', {_id: id, amount: amount})
+      .subscribe(res => {
+        console.log(res);
+      }, err => {
+        console.log(err);
+      })
+    }
 
-
+    setTimeout(()=> {
+      window.location.reload()
+    },2000)
   }
+
 
   async refreshBalance() {
     console.log('Refreshing balance');
@@ -103,7 +115,7 @@ export class MetaSenderComponent implements OnInit {
       const metaCoinBalance = await deployedRbCoin.getBalance.call(this.model.account);
       console.log('Found balance: ' + metaCoinBalance);
       this.model.balance = metaCoinBalance;
-    //  window.location.reload()
+      //  window.location.reload()
 
     } catch (e) {
       console.log(e);
@@ -113,6 +125,6 @@ export class MetaSenderComponent implements OnInit {
 
   setAmount(e) {
     console.log('Setting amount: ' + e.target.value);
-      this.model.amount = e.target.value;
+    this.model.amount = e.target.value;
   }
 }

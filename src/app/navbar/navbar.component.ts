@@ -18,29 +18,34 @@ export class NavbarComponent implements OnInit {
 
   ngOnInit() {
     setInterval(()=> {
-      if(this.data.userInfo.username) {
-        this.isLogged = this.data.isLogged;
+      if(localStorage.getItem('isLogged') === "true") {
+        this.isLogged = true;
       }
-    }, 400)
+      else {
+        this.isLogged = false;
+      }
+    }, 1000)
 
   }
 
 
   logout(){
-    setTimeout(()=> {
-      window.location.reload()
-    }, 1000)
-    this.http.post('/api/logout',{}).subscribe(res => {
-      this.data.isLogged = false;
-
+    setTimeout(() => {
       this.router.navigate(['home']);
-
+      window.location.reload()
+    },400)
+    localStorage.setItem('isLogged', 'false');
+    this.http.post('/api/logout',{}).subscribe(res => {
+      localStorage.remove('jwtToken');
+      localStorage.remove('userInfo');
+      localStorage.remove('isLogged');
 
     }, err => {
       this.message = err.error.msg;
     });
 
     };
+
     openLogin(): void {
       let dialogRef = this.dialog.open(LoginComponent, {
         panelClass: 'custom-dialog-container'
@@ -51,4 +56,5 @@ export class NavbarComponent implements OnInit {
         console.log('The dialog was closed');
       });
     };
+
 }

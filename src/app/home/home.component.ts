@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import {Web3Service} from '../util/web3.service';
 import {DataService} from '../util/data.service';
-
+import * as $ from 'jquery';
 
 @Component({
   selector: 'app-home',
@@ -10,6 +10,8 @@ import {DataService} from '../util/data.service';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
+  img='https://i.imgur.com/hvctU41.jpg';
+flip={};
 model:any = {
   user: '',
   header: "",
@@ -18,8 +20,9 @@ model:any = {
   publicKey: '',
   balance: 0
 };
-user = "";
+userInfo :any;
 Posts: any;
+user: '';
 message = '';
 post :any;
 isDonor = false;
@@ -32,30 +35,34 @@ isLogged = false;
     private data:DataService) { }
 
   ngOnInit() {
-    this.data.getUserInfo()
-    this.model.publicKey = this.data.publicKey
-    this.http.get('/api/currentUser').subscribe(res => {
-        this.model.user = res['msg'].username;
-        this.user = res['msg'].username;
-        this.isLogged = true;
-        if(this.data.userInfo.type === "donor") {
-          this.isDonor = true;
-        }
-        console.log(this.model)
-    }, err => {
-      console.log(err.error);
-    })
-    this.web3.bootstrapWeb3()
-    this.getPosts()
-    this.isLogged = this.data.isLogged;
-    setTimeout(()=>{
+    // this.data.getUserInfo();
+    if (localStorage.getItem('isLogged') === "true") {
+      this.isLogged = true;
+    }
 
+    else {
+      this.isLogged = false;
+      return;
+    }
+    this.userInfo = JSON.parse(localStorage.getItem('userInfo'))
+    if(this.userInfo.type === "donor") {
+      this.isDonor = true;
+    }
+
+    this.user = this.userInfo.username;
+    this.model.user = this.userInfo.username;
+
+        this.web3.bootstrapWeb3()
+        this.getPosts()
+
+    setTimeout(()=>{
       this.model.publicKey = this.web3.accounts[0]
-      console.log(this.model.publicKey)
-    }, 2000)
+    }, 500)
 
 
   }
+
+
   sendPost() {
     if (this.model.publicKey === '') {
       this.message = 'use metamask to continue'
@@ -68,7 +75,7 @@ isLogged = false;
 
     this.http.post('/addPost',this.model).subscribe(res => {
 
-
+      this.message = "post added"
     }, err => {
       this.message = "error"
       return;
@@ -91,6 +98,7 @@ isLogged = false;
   getPosts() {
     this.http.get("/getPosts").subscribe(res => {
       this.Posts = res;
+      console.log('Posts', this.Posts)
     }, err => {
       this.message = "error"
       return;
@@ -102,8 +110,23 @@ isLogged = false;
       window.location.reload()
     }, 1000)
   }
-
-
+  flipOn(i){
+    this.flip[i]=false
+    var index=".card"+i
+      $(index).addClass('animated flipOutY ');
+    setTimeout(()=> {
+      $(index).removeClass('animated flipOutY ');
+      this.flip[i]=true;
+    }, 600)
+  }
+  flipOf(i){
+    var index=".card"+i
+      $(index).addClass('animated flipOutY ');
+    setTimeout(()=> {
+      $(index).removeClass('animated flipOutY ');
+      this.flip[i]=false;
+    }, 600)
+  }
 
   setPost(post) {
     localStorage.setItem('post',JSON.stringify(post));
