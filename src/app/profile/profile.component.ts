@@ -16,6 +16,7 @@ export class ProfileComponent implements OnInit {
     image: "http://sreeguru.in/public/images/male.png",
     username: '',
     email: '',
+    publicKey:'',
     address: '',
     fullName: '',
     phoneNumber1: 0,
