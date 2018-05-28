@@ -17,7 +17,7 @@ export class ViewRequestsComponent implements OnInit {
 
   ngOnInit() {
   //  this.donorsCount = JSON.parse(localStorage.getItem('post')).donors.length;
-    if (this.data.userInfo.type === "donor") {
+    if (JSON.parse(localStorage.getItem('userInfo')).type === "donor") {
       this.isDonor = true;
     }
     this.http.post("/api/getRequests",{username:JSON.parse(localStorage.getItem('userInfo')).username})
