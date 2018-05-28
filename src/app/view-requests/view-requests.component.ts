@@ -16,18 +16,19 @@ export class ViewRequestsComponent implements OnInit {
 
 
   ngOnInit() {
-    this.donorsCount = JSON.parse(localStorage.getItem('post')).donors.length;
+  //  this.donorsCount = JSON.parse(localStorage.getItem('post')).donors.length;
     if (this.data.userInfo.type === "donor") {
       this.isDonor = true;
     }
-    this.http.get("/api/getRequests")
+    this.http.post("/api/getRequests",{username:JSON.parse(localStorage.getItem('userInfo')).username})
     .subscribe(res=>{
       this.requests = res;
+      console.log('res',res)
       setTimeout(() => {
         if (this.requests.length === 0) {
           this.message = "there is no requests yet !"
         }
-      }, 200)
+      }, 1000)
 
     },err=>{
       console.log(err);

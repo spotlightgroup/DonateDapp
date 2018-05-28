@@ -141,7 +141,6 @@ getToken = function (headers) {
   }
 };
 router.post("/addRequest",(req,res)=>{
-//  console.log(req.body)
   Request.create(req.body,(err,data)=>{
     if(err){
       console.log(err);
@@ -150,28 +149,19 @@ router.post("/addRequest",(req,res)=>{
     }
   })
 });
-router.get("/getRequests",(req,res)=>{
-  let data = [];
-  Request.find({user: req.session.username},(err,Requests)=>{
+router.post("/getRequests",(req,res)=>{
+  //let data = [];
+  console.log("hiiiiiiii",req.body.username);
+  Request.find({user: req.body.username},(err,Requests)=>{
     if(err){
       console.log(err);
     }else{
-      data = data.concat(Requests)
+      console.log(Requests)
+      res.send(Requests);
     }
   })
 
-  Request.find({receiver: req.session.username},(err,Requests)=>{
-    if(err){
-      console.log(err);
-    }else{
-      data = data.concat(Requests);
-      console.log(data);
-      let requests = data.filter((ele) => {
-        return !ele.approvals.includes(req.session.username)
-      })
-      res.send(requests);
-    }
-  })
+
 })
 
 

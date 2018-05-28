@@ -29,17 +29,14 @@ export class RequestsComponent implements OnInit {
   }
 
   sendRequest(){
-    this.http.get("/api/currentUser")
-    .subscribe(res=>{
-      this.model.user=res['msg'].username;
+    this.model.user = JSON.parse(localStorage.getItem('userInfo')).username;
+    this.model.postId = JSON.parse(localStorage.getItem('post'))._id;
+
       this.http.post("/api/addRequest",this.model)
       .subscribe(res=>{
         console.log(res);
       },err=>{
         console.log(err);
       });
-    },err=>{
-      console.log(err);
-    });
   }
 }
