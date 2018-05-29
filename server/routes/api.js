@@ -95,6 +95,7 @@ router.post('/login', function(req, res) {
 
 router.post('/logout',function(req,res){
 	if(req.session.username){
+    console.log("session log out",req.session);
 		req.session.destroy(function(err){
 			if(err){
 				res.status(401).send({success: false, msg: 'failed to log out'});
@@ -246,7 +247,16 @@ router.post('/donate', (req, res)=> {
   })
 })
 
-
+router.post('/getReceiver',(req,res)=>{
+  User.findOne(req.body,(err,data)=>{
+  if(err){
+    console.log(err);
+    res.sendStatus(404);
+  }else{
+    res.send(data.publicKey);
+  }
+  })
+})
 router.post('/approve', (req, res) => {
   Request.findOne(req.body.request, (err, data) => {
     if (err) {
