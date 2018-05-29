@@ -28,19 +28,21 @@ export class RegisterComponent implements OnInit {
   onNoClick(): void {
     this.dialogRef.close();
   }
+  // send the user info to the server;
   register() {
     this.User['image'] = "http://sreeguru.in/public/images/male.png"
-      this.http.post('/api/register', this.User)
-        .subscribe(res => {
-            this.goToLogin();
-          }, (err) => {
-            console.log(err);
-          }
-        );
+    this.http.post('/api/register', this.User)
+    .subscribe(res => {
+      this.goToLogin();
+    }, (err) => {
+         console.log(err);
+    });
     }
 
+    // close the sign up dialog
     goToLogin(){
       this.dialogRef.close();
+      //open the login dialog;
       let dialogRef = this.dialog.open( LoginComponent, {
         panelClass: 'custom-dialog-container'
       });
