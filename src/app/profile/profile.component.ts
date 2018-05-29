@@ -44,18 +44,27 @@ export class ProfileComponent implements OnInit {
   }
 
 
-
-
-// send the edited user info
-  profile() {
-    this.http.post('/api/profile', this.model)
-    .subscribe(res => {
-      this.model = res['msg']
-      localStorage.setItem('userInfo', JSON.stringify(this.model))
-      this.alert()
-
-    }, (err) => {
-      console.log(err);
+  async profile() {
+    await  this.http.post('/api/profile', this.model)
+        .subscribe(res => {
+          console.log('resss in profile' ,res)
+          this.model.email=res['email'];
+          this.model.fullName=res['fullName'];
+          this.model.publicKey=res['publicKey'];
+        //  this.model=res;
+        }, (err) => {
+            console.log(err);
+        }
+      );
+    }
+    alert(){
+      swal({
+        position: 'top-end',
+        type: 'success',
+        title: 'Your work has been saved',
+        showConfirmButton: false,
+        timer: 1500
+      });
     }
   );
 }

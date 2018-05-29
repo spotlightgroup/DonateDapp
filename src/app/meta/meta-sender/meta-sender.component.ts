@@ -64,7 +64,6 @@ constructor(
 setStatus(status) {
   this.matSnackBar.open(status, null, {duration: 3000});
 }
-
 // the money transfer function;
 async sendCoin() {
 // set the receiver that the user want to donate for;

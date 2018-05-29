@@ -227,6 +227,16 @@ router.post('/donate', (req, res)=> {
   })
 })
 
+router.post('/getReceiver',(req,res)=>{
+  User.findOne(req.body,(err,data)=>{
+  if(err){
+    console.log(err);
+    res.sendStatus(404);
+  }else{
+    res.send(data.publicKey);
+  }
+  })
+})
 //route to add approved request to Request schema
 router.post('/approve', (req, res) => {
   Request.findOne(req.body.request, (err, data) => {
