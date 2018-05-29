@@ -51,6 +51,7 @@ constructor( private http :HttpClient, private web3 :Web3Service, private data :
     // check if the user is logged in or not;
     if (localStorage.getItem('isLogged') === "true") {
     this.isLogged = true;
+    }
     else {
       this.isLogged = false;
       return;
@@ -72,8 +73,7 @@ constructor( private http :HttpClient, private web3 :Web3Service, private data :
     setTimeout(()=>{
       this.model.publicKey = this.web3.accounts[0]
     }, 500)
-  };
-}
+  }
 
 // send the post information to the server;
 sendPost() {
@@ -104,7 +104,7 @@ sendPost() {
   };
   // reget the posts after addin g the new post
   this.getPosts();
-}
+};
 
 getPosts() {
   this.http.get("/getPosts").subscribe(res => {
@@ -114,7 +114,7 @@ getPosts() {
     return;
 
   })
-}
+};
 
 // the jquery animation for the post cards;
 flipOn(i){
@@ -125,7 +125,8 @@ flipOn(i){
     $(index).removeClass('animated flipOutY ');
     this.flip[i]=true;
   }, 600)
-}
+};
+
 flipOf(i){
   var index=".card"+i
   $(index).addClass('animated flipOutY ');
@@ -133,7 +134,7 @@ flipOf(i){
     $(index).removeClass('animated flipOutY ');
     this.flip[i]=false;
   }, 600)
-}
+};
 
 // save the post in the localStorage temporary after click donate or spend;
 setPost(post) {
