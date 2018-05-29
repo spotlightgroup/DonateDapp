@@ -12,6 +12,7 @@ import swal from 'sweetalert2';
 export class ProfileComponent implements OnInit {
   user="";
   message = "";
+  // the user info model;
   model :any = {
     image: "http://sreeguru.in/public/images/male.png",
     username: '',
@@ -22,63 +23,71 @@ export class ProfileComponent implements OnInit {
     phoneNumber1: 0,
     phoneNumber2: 0,
     overview: ''
-
   }
 
 
 
-  constructor(private http:HttpClient , private router:Router, private data:DataService) { }
+  constructor(
+    private http:HttpClient,
+    private router:Router,
+    private data:DataService) { }
 
   ngOnInit() {
+    // get the user info from the localStorage;
+    this.model = JSON.parse(localStorage.getItem('userInfo'));
 
-      this.model = JSON.parse(localStorage.getItem('userInfo'));
-      if(!this.model.image){
-        this.model.image = "http://sreeguru.in/public/images/male.png";
-      }
+    // if the user doesn't have an image give him a default one;
+    if(!this.model.image){
+      this.model.image = "http://sreeguru.in/public/images/male.png";
+    }
 
   }
 
 
 
 
-
+// send the edited user info
   profile() {
-      this.http.post('/api/profile', this.model)
-        .subscribe(res => {
-          this.alert()
+    this.http.post('/api/profile', this.model)
+    .subscribe(res => {
+      this.model = res['msg']
+      localStorage.setItem('userInfo', JSON.stringify(this.model))
+      this.alert()
 
-        }, (err) => {
-            console.log(err);
-        }
-      );
+    }, (err) => {
+      console.log(err);
     }
-    alert(){
-      swal({
-        position: 'top-end',
-        type: 'success',
-        title: 'Your work has been saved',
-        showConfirmButton: false,
-        timer: 1500
-      })
-    }
+  );
+}
+// the success message;
+alert(){
+  swal({
+    position: 'top-end',
+    type: 'success',
+    title: 'Your work has been saved',
+    showConfirmButton: false,
+    timer: 1500
+  })
+}
 
-  photoUpload(photo) {
+// upload the profile photo
+photoUpload(photo) {
+//get the image from the user input;
+  let file = photo.target.files[0]
+  let fileReader = new FileReader();
+  fileReader.readAsDataURL(file);
+  fileReader.onload = (e) => {
+    // send it to the server
+    this.http.post('/api/profileImage', {image: e.target['result']})
+    .subscribe(res => {
+      this.message = "photo uploaded";
+      this.model = res;
+    }, error => {
+      if (error.status === 413) {
+        this.message = "this image is too large";
 
-    let that = this;
-    let file = photo.target.files[0]
-    let fileReader = new FileReader();
-    fileReader.readAsDataURL(file);
-    fileReader.onload = (e) => {
-     that.http.post('/api/profileImage', {image: e.target['result']})
-        .subscribe(res => {
-          that.message = "photo uploaded";
-          that.model = res;
-        }, error => {
-          if (error.status === 413) {
-            that.message = "this image is too large";
-
-          }
-      });
-    }
+      }
+    });
   }
+}
 }
