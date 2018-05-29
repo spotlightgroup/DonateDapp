@@ -42,11 +42,14 @@ export class ProfileComponent implements OnInit {
 
 
 
-  profile() {
-      this.http.post('/api/profile', this.model)
+  async profile() {
+    await  this.http.post('/api/profile', this.model)
         .subscribe(res => {
-          this.alert()
-
+          console.log('resss in profile' ,res)
+          this.model.email=res['email'];
+          this.model.fullName=res['fullName'];
+          this.model.publicKey=res['publicKey'];
+        //  this.model=res;
         }, (err) => {
             console.log(err);
         }
@@ -59,7 +62,7 @@ export class ProfileComponent implements OnInit {
         title: 'Your work has been saved',
         showConfirmButton: false,
         timer: 1500
-      })
+      });
     }
 
   photoUpload(photo) {
