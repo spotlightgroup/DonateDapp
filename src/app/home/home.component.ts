@@ -38,27 +38,28 @@ isLogged = false;
     // this.data.getUserInfo();
     if (localStorage.getItem('isLogged') === "true") {
       this.isLogged = true;
+      this.userInfo = JSON.parse(localStorage.getItem('userInfo'))
+      if(this.userInfo.type === "donor") {
+        this.isDonor = true;
+      }
+
+      this.user = this.userInfo.username;
+      this.model.user = this.userInfo.username;
+
+          this.web3.bootstrapWeb3()
+          this.getPosts()
+
+      setTimeout(()=>{
+        //this.model.publicKey = this.userInfo.publicKey;
+        this.model.publicKey = this.web3.accounts[0]
+      }, 500)
     }
 
     else {
       this.isLogged = false;
       return;
     }
-    this.userInfo = JSON.parse(localStorage.getItem('userInfo'))
-    if(this.userInfo.type === "donor") {
-      this.isDonor = true;
-    }
 
-    this.user = this.userInfo.username;
-    this.model.user = this.userInfo.username;
-
-        this.web3.bootstrapWeb3()
-        this.getPosts()
-
-    setTimeout(()=>{
-      //this.model.publicKey = this.userInfo.publicKey;
-      this.model.publicKey = this.web3.accounts[0]
-    }, 500)
 
 
   }
