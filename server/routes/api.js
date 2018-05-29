@@ -164,18 +164,29 @@ router.post("/addRequest",(req,res)=>{
 
 
 router.post("/getRequests",(req,res)=>{
+  console.log("get request called");
   let data = [];
   let user = req.body.username;
+  console.log("user",user);
   // for the project maker
   Request.find({user: user},(err,Requests)=>{
     if(err){
       console.log(err);
     }else{
       data = data.concat(Requests)
+      console.log("project maker requests",data);
+      res.send(data);
+
     }
   })
+
+
+});
+router.post('/getDonorRequests',async(req,res)=>{
+  let data = [];
+  let user = req.body.username;
   // for the donor
-  Post.find({},(err,posts) => {
+  await Post.find({},async(err,posts) => {
     if(err) {
       console.log(err);
     }
@@ -183,24 +194,26 @@ router.post("/getRequests",(req,res)=>{
       for (var i = 0; i < posts.length; i++) {
         for (var j = 0; j < posts[i].donors.length; j++) {
           if (posts[i].donors[j] === user) {
-            Request.find({postId: posts[i]._id}, (err,requests) =>{
+            await Request.find({postId: posts[i]._id}, async(err,requests) =>{
               if (err) {
                 console.log(err);
               }
               else {
                 data = data.concat(requests)
-                console.log(requests);
-                res.send(data)
+                console.log("request data",data);
               }
             })
           }
         }
+
       }
+      console.log("request data 222222",data);
+
     }
   });
+  res.send(data)
 
-
-})
+});
 
 
 router.post('/donate', (req, res)=> {
