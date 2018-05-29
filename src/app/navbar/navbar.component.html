@@ -16,7 +16,7 @@
         <a (click)="openLogin()" class="nav-link" >Login</a>
       </li>
       <li class="nav-item" *ngIf="isLogged">
-        <a [routerLink]="['/viewRequests']" class="nav-link" >requests</a>
+        <a [routerLink]="['/viewRequests']" (click)="loadRequests()" class="nav-link" >requests</a>
       </li>
       <li class="nav-item" *ngIf="isLogged">
         <a (click)="logout()" class="nav-link" >log out</a>
