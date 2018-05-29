@@ -52,3 +52,14 @@ h3{
 .Row {
   height: 140px;
 }
+.modal-body{
+  width: 350px;
+  margin: auto;
+}
+.modal-sm .modal-content {
+    margin: 0 auto;
+    max-width: 400px;
+}
+.example-full-width {
+  width: 100%;
+}
