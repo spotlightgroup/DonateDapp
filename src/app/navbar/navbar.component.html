@@ -10,17 +10,16 @@
       <li>
         <a [routerLink]="['/viewRequests']" (click)="fadeClick()">requests</a>
       </li>
-      <li class="nav-item" *ngIf="isLogged">
-        <a [routerLink]="['/viewRequests']" (click)="loadRequests()" class="nav-link" >requests</a>
-      </li>
-      <li class="nav-item" *ngIf="isLogged">
-        <a (click)="logout()" class="nav-link" >log out</a>
+      <li>
+        <a (click)="logout()">log out</a>
       </li>
     </ul>
   </div>
   <div class="circle" (click)="fadeClick()" *ngIf="isLogged" style="background-image: url('https://i.imgur.com/hvctU41.jpg');"></div>
 </nav>
 <div class="alert alert-warning alert-dismissible" role="alert" *ngIf="message !== ''">
-    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-    {{message}}
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+  {{message}}
 </div>
