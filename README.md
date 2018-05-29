@@ -68,11 +68,11 @@ to deploy the contracts to the dev network
   and every account will have 100 fake ether also
  ![alt tag](https://i.imgur.com/sY6PyAl.png "")
   
-1.now you are ready to start using the website
+## now you are ready to start using the website
 
-1. you just need to set up your config for your local database
+ **you just need to set up your config for your local database**
 
-1. enjoy developing this amazing website
+ enjoy developing this amazing website
 
 
 
@@ -81,11 +81,15 @@ to deploy the contracts to the dev network
 
 ## **Credits**
 
+
 [Abdullatif Jamous](https://github.com/AbdullatifJamous891) 
+
 
 [Samer Salmeh](https://github.com/SamerSalmeh)
 
+
 [abdulhameed](https://github.com/abdulhameed89)
+
 
 [Ahmad Mostafa](https://github.com/zoaby)
 
