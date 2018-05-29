@@ -50,6 +50,8 @@ export class ProfileComponent implements OnInit {
   profile() {
     this.http.post('/api/profile', this.model)
     .subscribe(res => {
+      this.model = res['msg']
+      localStorage.setItem('userInfo', JSON.stringify(this.model))
       this.alert()
 
     }, (err) => {

@@ -62,7 +62,7 @@ this.http.post('/api/login',this.User).subscribe(res => {
   //reload the page after the login is complete;
   setTimeout(()=> {
   window.location.reload()
-},400)
+},1000)
 
 }, err => {
   this.message = err.error.msg;

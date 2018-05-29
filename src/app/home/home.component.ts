@@ -27,7 +27,9 @@ export class HomeComponent implements OnInit {
 
 
 // all the information about the current user;
-userInfo :any;
+userInfo :any = {
+username :'' 
+};
 
 // array of the posts that we will get it from the database;
 Posts :any;
