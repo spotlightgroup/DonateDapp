@@ -30,7 +30,11 @@ export class NavbarComponent implements OnInit {
     }, 1000)
     $(".fadeIn").hide();
   }
-
+loadRequests(){
+  setTimeout(() => {
+window.location.reload();
+}, 1500)
+}
 
   logout(){
     this.fadeClick()
@@ -39,6 +43,7 @@ export class NavbarComponent implements OnInit {
       window.location.reload()
     },400)
     localStorage.setItem('isLogged', 'false');
+
     this.http.post('/api/logout',{}).subscribe(res => {
       localStorage.remove('jwtToken');
       localStorage.remove('userInfo');
@@ -47,6 +52,7 @@ export class NavbarComponent implements OnInit {
     }, err => {
       this.message = err.error.msg;
     });
+
 
     };
 

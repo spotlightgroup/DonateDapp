@@ -20,20 +20,35 @@ export class ViewRequestsComponent implements OnInit {
     this.userInfo = JSON.parse(localStorage.getItem('userInfo'));
     if (this.userInfo.type === "donor") {
       this.isDonor = true;
-    }
-    this.http.post("/api/getRequests",{username:this.userInfo.username})
-    .subscribe(res=>{
-      this.requests = res;
-      console.log('res',res)
-      setTimeout(() => {
-        if (this.requests.length === 0) {
-          this.message = "there is no requests yet !"
-        }
-      }, 1000)
+      this.http.post("/api/getDonorRequests",{username:this.userInfo.username})
+      .subscribe((res)=>{
+        this.requests = res;
+        console.log('res',res)
+        // if (this.requests.length === 0) {
+        //   this.message = "there is no requests yet !"
+        // }
 
-    },err=>{
-      console.log(err);
-    })
+      },err=>{
+        console.log(err);
+      });
+
+
+    }else{
+      this.http.post("/api/getRequests",{username:this.userInfo.username})
+      .subscribe(res=>{
+        this.requests = res;
+        console.log('res',res)
+          // if (this.requests.length === 0) {
+          //   this.message = "there is no requests yet !"
+          // }
+      },err=>{
+        console.log(err);
+      });
+    }
+    console.log("this.requestssssss",this.requests);
+    if (this.requests.length === 0) {
+      this.message = "there is no requests yet !"
+    }
   }
 
   finalize(request){
