@@ -13,7 +13,13 @@ var passport = require('passport');
 var config = require('./config/database');
 var session = require('express-session');
 
-app.use(session({secret:'this is secret'}));
+//app.use(session({secret:'this is secret'}));
+app.use(session({
+  secret: 'keyboard secret',
+  resave: false,
+  saveUninitialized: true,
+  cookie: { secure: true }
+}))
 app.use(logger('dev'));
 mongoose.Promise = require('bluebird');
 mongoose.connect(config.database, { promiseLibrary: require('bluebird') })
