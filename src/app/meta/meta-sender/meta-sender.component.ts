@@ -65,10 +65,10 @@ export class MetaSenderComponent implements OnInit {
     const post = JSON.parse(localStorage.getItem('post'))
 
     if (!this.RbCoin) {
-      this.setStatus('Metacoin is not loaded, unable to send transaction');
+      this.setStatus('RbCoin is not loaded, unable to send transaction');
       return;
     }
- 
+
     this.setStatus('Initiating transaction... (please wait)');
 
     try {
@@ -112,9 +112,9 @@ export class MetaSenderComponent implements OnInit {
       const deployedRbCoin = await this.RbCoin.deployed();
       console.log(deployedRbCoin);
       console.log('Account', this.model.account);
-      const metaCoinBalance = await deployedRbCoin.getBalance.call(this.model.account);
-      console.log('Found balance: ' + metaCoinBalance);
-      this.model.balance = metaCoinBalance;
+      const RbCoinBalance = await deployedRbCoin.getBalance.call(this.model.account);
+      console.log('Found balance: ' + RbCoinBalance);
+      this.model.balance = RbCoinBalance;
       //  window.location.reload()
 
     } catch (e) {
