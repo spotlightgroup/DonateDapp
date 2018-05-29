@@ -32,8 +32,8 @@ export class NavbarComponent implements OnInit {
   }
 loadRequests(){
   setTimeout(() => {
-window.location.reload();
-}, 1500)
+    window.location.reload();
+  }, 1500)
 }
 
   logout(){
