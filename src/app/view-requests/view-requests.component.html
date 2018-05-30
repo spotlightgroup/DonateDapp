@@ -4,7 +4,7 @@
   <h3>amount:  {{request.amount}}</h3>
   <h3>approvals number: {{request.approvals.length}}/{{request.donorsCount}}</h3>
   <h3>receiver: {{request.receiver}}</h3>
-  <button *ngIf="!isDonor && !sent" type="button" name="button" (click)="finalize(request)">finalize</button>
+  <button *ngIf="!isDonor" type="button" name="button" (click)="finalize(request)">finalize</button>
   <button *ngIf="isDonor" type="button" name="button" (click)="approve(request)">Approve</button>
 </div>
 <h3>{{message}}</h3>
