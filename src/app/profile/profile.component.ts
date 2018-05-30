@@ -51,7 +51,7 @@ export class ProfileComponent implements OnInit {
             console.log(err);
         }
       );
-
+}
     // the success message;
 
     alert(){
