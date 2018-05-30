@@ -30,12 +30,11 @@ export class NavbarComponent implements OnInit {
     }, 1000)
     $(".fadeIn").hide();
   }
-
-  loadRequests(){
-    setTimeout(() => {
-      window.location.reload();
-    }, 1500)
-  }
+loadRequests(){
+  setTimeout(() => {
+window.location.reload();
+}, 1500)
+}
 
   logout(){
     this.fadeClick()
@@ -44,42 +43,48 @@ export class NavbarComponent implements OnInit {
       window.location.reload()
     },400)
     localStorage.setItem('isLogged', 'false');
+
     this.http.post('/api/logout',{}).subscribe(res => {
       localStorage.remove('jwtToken');
       localStorage.remove('userInfo');
       localStorage.remove('isLogged');
+
     }, err => {
       this.message = err.error.msg;
     });
-  };
 
-  openLogin(): void {
-    let dialogRef = this.dialog.open(LoginComponent, {
-      panelClass: 'custom-dialog-container'
-    });
-    dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
-    });
-  };
 
-  fadeClick(){
-    if(this.fadeShow===true){
-      $(".fadeIn").addClass('animated fadeInRight');
-      $(".circle").css('-webkit-animation', 'spinR 600ms linear ');
-      $(".fadeIn").show();
-      setTimeout(()=> {
-        $(".fadeIn").removeClass('animated fadeInRight');
-        this.fadeShow=false;
-      }, 600)
+    };
+
+    openLogin(): void {
+      let dialogRef = this.dialog.open(LoginComponent, {
+        panelClass: 'custom-dialog-container'
+
+      });
+
+      dialogRef.afterClosed().subscribe(result => {
+        console.log('The dialog was closed');
+      });
+    };
+
+    fadeClick(){
+      if(this.fadeShow===true){
+        $(".fadeIn").addClass('animated fadeInRight');
+        $(".circle").css('-webkit-animation', 'spinR 600ms linear ');
+         $(".fadeIn").show();
+        setTimeout(()=> {
+          $(".fadeIn").removeClass('animated fadeInRight');
+          this.fadeShow=false;
+        }, 600)
+      }
+      if(this.fadeShow===false){
+        $(".fadeIn").addClass('animated fadeOutRight');
+        $(".circle").css('-webkit-animation', 'spinL 600ms linear ');
+        setTimeout(()=> {
+           $(".fadeIn").hide();
+          $(".fadeIn").removeClass('animated fadeOutRight');
+          this.fadeShow=true;
+        }, 600)
+      }
     }
-    if(this.fadeShow===false){
-      $(".fadeIn").addClass('animated fadeOutRight');
-      $(".circle").css('-webkit-animation', 'spinL 600ms linear ');
-      setTimeout(()=> {
-        $(".fadeIn").hide();
-        $(".fadeIn").removeClass('animated fadeOutRight');
-        this.fadeShow=true;
-      }, 600)
-    }
-  }
 }
