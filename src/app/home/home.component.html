@@ -1,9 +1,6 @@
 <app-about *ngIf="!isLogged"></app-about>
 <div class="" *ngIf="isLogged">
 
-
-</div>
-
 <button type="button" class="btn btn-primary waves-light" (click)="form.show()" mdbWavesEffect *ngIf="!isDonor">Have an idea !</button>
 <!--Modal: Login with Avatar Form-->
 <div mdbModal #form="mdb-modal" class="modal fade" id="modalLoginAvatar" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -16,7 +13,7 @@
             </div>
             <!--Body-->
             <div class="modal-body text-center mb-1">
-                <h5 class="mt-1 mb-2">{{userInfo.username}}</h5>
+                <!-- <h5 class="mt-1 mb-2">{{userInfo.username}}</h5> -->
                 <mat-form-field class="example-full-width">
                   <input matInput placeholder="Project name"  [(ngModel)]="model.header">
                 </mat-form-field>
@@ -40,7 +37,7 @@
         <!--/.Content-->
     </div>
 </div>
-
+</div>
 <div class="row">
   <div class="col-lg-4 col-sm-10 col-sm-6 posts" *ngFor="let post of Posts;let i =index" >
     <mat-card [ngClass]="'card'+i" *ngIf="post.user === model.user || isDonor">
