@@ -1,7 +1,7 @@
 <app-about *ngIf="!isLogged"></app-about>
 <div class="" *ngIf="isLogged">
 
-<!-- <div class="inputPost container-fluid" *ngIf="!isDonor" >
+<div class="inputPost container-fluid" *ngIf="!isDonor" >
     <h3>What Is Your Project ?</h3>
     <input type="text" class="form-control" [(ngModel)]="model.header" >
     <h3>Descrip Your Project</h3>
@@ -13,45 +13,9 @@
       <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
       {{message}}
     </div>
-</div> -->
-
-<button type="button" class="btn btn-primary waves-light" (click)="form.show()" mdbWavesEffect *ngIf="!isDonor">Have an idea !</button>
-<!--Modal: Login with Avatar Form-->
-<div mdbModal #form="mdb-modal" class="modal fade" id="modalLoginAvatar" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog cascading-modal modal-avatar modal-sm" role="document">
-        <!--Content-->
-        <div class="modal-content">
-            <!--Header-->
-            <div class="modal-header">
-                <img src="https://mdbootstrap.com/img/Photos/Avatars/img%20%281%29.jpg" class="rounded-circle img-responsive">
-            </div>
-            <!--Body-->
-            <div class="modal-body text-center mb-1">
-                <h5 class="mt-1 mb-2">{{userInfo.username}}</h5>
-                <mat-form-field class="example-full-width">
-                  <input matInput placeholder="Project name"  [(ngModel)]="model.header">
-                </mat-form-field>
-                <mat-form-field class="example-full-width">
-                  <input matInput placeholder="Amount" type="number" [(ngModel)]="model.needed" min="0">
-                  <span matPrefix>$&nbsp;</span>
-                </mat-form-field>
-                <mat-form-field class="example-full-width" hintLabel="Max 100 characters">
-                  <textarea matInput #textarea maxlength="100" placeholder="Descrip Your Project" [(ngModel)]="model.description" ></textarea>
-                  <mat-hint align="end">{{textarea.value?.length || 0}}/100</mat-hint>
-                </mat-form-field>
-                <div class="text-center">
-                    <button class="btn btn-cyan mt-1 waves-light" mdbWavesEffect name="send" value="send" (click)="sendPost()" >Send <i class="fa fa-paper-plane-o ml-1"></i></button>
-                </div>
-                <div class="alert alert-warning alert-dismissible" role="alert" *ngIf="message !== ''">
-                  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                  {{message}}
-                </div>
-            </div>
-        </div>
-        <!--/.Content-->
-    </div>
 </div>
 
+<!-- <app-about *ngIf="!isLogged"></app-about> -->
 <div class="row">
   <div class="col-lg-4 col-sm-10 col-sm-6 posts" *ngFor="let post of Posts;let i =index" >
     <mat-card [ngClass]="'card'+i" *ngIf="post.user === model.user || isDonor">
@@ -100,5 +64,4 @@
       </div>
     </mat-card>
   </div>
-</div>
 </div>
