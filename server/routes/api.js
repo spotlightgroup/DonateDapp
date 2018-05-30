@@ -61,13 +61,12 @@ router.post('/profile', function(req, res) {
 
 });
 
-let username = "";
+
 // router for login
 router.post('/login', function(req, res) {
   //find the user from database
-username = req.body.username
   User.findOne({
-    username: username
+    username: req.body.username
   }, function(err, user) {
     if (err) throw err;
 
@@ -105,15 +104,13 @@ router.post('/logout',function(req,res){
 
 //route to get all current user information from the User schema
 router.get('/currentUser',function(req,res){
-    User.findOne({username: username},function(err, user) {
-      if (err) {
-        console.log(err);
-      }
-      else {
-        res.status(201).send({success: true, msg: user});
-
-      }
+	if(req.session.username){
+    User.findOne({username: req.session.username},function(err, user) {
+      res.status(201).send({success: true, msg: user});
     })
+  }else{
+    res.status(401).send({success: false, msg: ""});
+  }
 });
 
 // route for post profile image or update it
