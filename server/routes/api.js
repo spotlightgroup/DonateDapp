@@ -191,27 +191,32 @@ router.post('/getDonorRequests',async(req,res)=>{
       console.log(err);
     }
     else{
-      for (var i = 0; i < posts.length; i++) {
-        for (var j = 0; j < posts[i].donors.length; j++) {
-          if (posts[i].donors[j] === user) {
-            await Request.find({postId: posts[i]._id}, async(err,requests) =>{
-              if (err) {
-                console.log(err);
-              }
-              else {
-                data = data.concat(requests)
-                console.log("request data",data);
-              }
-            })
+    await  (async()=>{
+        for (var i = 0; i < posts.length; i++) {
+          for (var j = 0; j < posts[i].donors.length; j++) {
+            if (posts[i].donors[j] === user) {
+              await Request.find({postId: posts[i]._id}, async(err,requests) =>{
+                if (err) {
+                  console.log(err);
+                }
+                else {
+                  data = data.concat(requests)
+                }
+              });
+            }
           }
+
         }
+      })()
+
+      if(!res.headerSent){
+        res.send(data)
 
       }
-      console.log("request data 222222",data);
-
     }
   });
-  res.send(data)
+  console.log("request data 222222",data);
+
 
 });
 
@@ -223,6 +228,7 @@ router.post('/donate', (req, res)=> {
     }
     else {
       if (data.donors.indexOf(req.session.username) === -1) {
+        console.log('session inside donor in api',req.session);
         Post.update({_id: req.body._id }, { $push: { donors: req.session.username }, $inc : {balance: req.body.amount} }, (err, data) => {
           if (err) {
             console.log(err);
@@ -248,7 +254,7 @@ router.post('/donate', (req, res)=> {
 
 
 router.post('/approve', (req, res) => {
-  Request.findOne(req.body.request, (err, data) => {
+  Request.findOne({_id:req.body.request._id}, (err, data) => {
     if (err) {
       console.log(err);
       res.sendStatus(404)

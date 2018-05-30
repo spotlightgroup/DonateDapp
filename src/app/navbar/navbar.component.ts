@@ -53,6 +53,7 @@ window.location.reload();
       this.message = err.error.msg;
     });
 
+     localStorage.clear();
 
     };
 
