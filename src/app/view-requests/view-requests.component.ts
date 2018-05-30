@@ -17,7 +17,7 @@ export class ViewRequestsComponent implements OnInit {
 
 
 async  ngOnInit() {
-    this.userInfo = JSON.parse(localStorage.getItem('userInfo'));
+     this.userInfo = await JSON.parse(localStorage.getItem('userInfo'));
     if (this.userInfo.type === "donor") {
       this.isDonor = true;
       await this.http.post("/api/getDonorRequests",{username:this.userInfo.username})
