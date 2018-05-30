@@ -40,11 +40,6 @@ constructor(private http:HttpClient,
 // hide the  logged in content;
   $(".fadeIn").hide();
   }
-loadRequests(){
-  setTimeout(() => {
-    window.location.reload();
-  }, 1500)
-}
 
 
   loadRequests(){
