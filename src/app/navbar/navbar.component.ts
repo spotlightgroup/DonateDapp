@@ -60,13 +60,13 @@ loadRequests(){
     setTimeout(() => {
       this.router.navigate(['home']);
       window.location.reload()
-    },1000)
+    },400)
     // check the user as not logged in;
     localStorage.setItem('isLogged', 'false');
     // remove the user credintial;
     this.http.post('/api/logout',{}).subscribe(res => {
-    localStorage.clear();
-
+    localStorage.remove('jwtToken');
+    localStorage.remove('userInfo');
     }, err => {
       this.message = err.error.msg;
     });
