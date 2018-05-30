@@ -1,6 +1,3 @@
-/**
- * Module dependencies.
- */
 var mongoose = require('mongoose');
 var passport = require('passport');
 var config = require('../../config/database');
@@ -15,7 +12,9 @@ var Post = require("../../models/Posts");
 
 
 // router for register new user
+
 router.post('/register', function(req, res) {
+  //console.log("dooooonoooor",req.body)
   if (!req.body.username || !req.body.password) {
     res.json({success: false, msg: 'Please pass username and password.'});
   } else {
@@ -25,7 +24,7 @@ router.post('/register', function(req, res) {
       password: req.body.password,
       type:req.body.type
     });
-    // save the user information
+    // save the user
     newUser.save(function(err) {
       if (err) {
         return res.json({success: false, msg: 'Username already exists.'});
@@ -35,13 +34,13 @@ router.post('/register', function(req, res) {
   }
 });
 
-//router for profile to save the change that user add it
 router.post('/profile', function(req, res) {
-  //looking for user inside User schema to add the changes to his model
+  //console.log("req.bodyyyyy",req.body);
   User.findOne({username: req.body.username},function(err, user) {
     if (!user) {
       res.status(401).send({success: false, msg: 'Authentication failed. User not found.'});
     } else {
+      //console.log("useeeeeer",user.fullName)
       user.fullName=req.body.fullName;
       user.phoneNumber1=req.body.phoneNumber1;
       user.phoneNumber2=req.body.phoneNumber2;
@@ -49,7 +48,7 @@ router.post('/profile', function(req, res) {
       user.email=req.body.email;
       user.overview=req.body.overview;
       user.publicKey=req.body.publicKey;
-      // save the new information in the user model
+      // save the user
       user.save(function(err) {
         if (err) {
           return res.json({success: false, msg: 'Username already exists.'});
@@ -62,15 +61,15 @@ router.post('/profile', function(req, res) {
 });
 
 
-// router for login
+// router for sigin
+
 router.post('/login', function(req, res) {
-  //find the user from database
   User.findOne({
     username: req.body.username
   }, function(err, user) {
     if (err) throw err;
 
-    if (!user) { //if user is not exist in database
+    if (!user) {
       res.status(401).send({success: false, msg: 'Authentication failed. User not found.'});
     } else {
       // check if password matches
@@ -88,10 +87,14 @@ router.post('/login', function(req, res) {
     }
   });
 });
+// route add Posts
+// router.post('/addPost',function(req,res){
+//   console.log("req body add post",req.body);
+// });
 
-// route for logout
+
 router.post('/logout',function(req,res){
-	if(req.session.username){ // destroy session if it has username
+	if(req.session.username){
 		req.session.destroy(function(err){
 			if(err){
 				res.status(401).send({success: false, msg: 'failed to log out'});
@@ -102,7 +105,7 @@ router.post('/logout',function(req,res){
   }
 });
 
-//route to get all current user information from the User schema
+
 router.get('/currentUser',function(req,res){
 	if(req.session.username){
     User.findOne({username: req.session.username},function(err, user) {
@@ -113,7 +116,6 @@ router.get('/currentUser',function(req,res){
   }
 });
 
-// route for post profile image or update it
 router.post('/profileImage', (req, res) => {
   User.findOneAndUpdate({username:req.session.username}, {$set: req.body}, (err, data) => {
     if (err) {
@@ -124,6 +126,10 @@ router.post('/profileImage', (req, res) => {
     }
   })
 })
+
+
+
+
 
 
 getToken = function (headers) {
@@ -139,7 +145,10 @@ getToken = function (headers) {
   }
 };
 
-// route to add new request to Request schema
+
+
+
+
 router.post("/addRequest",(req,res)=>{
   Request.create(req.body,(err,data)=>{
     if(err){
@@ -150,10 +159,15 @@ router.post("/addRequest",(req,res)=>{
   })
 });
 
-//route to get all requests for the current user
+
+
+
+
 router.post("/getRequests",(req,res)=>{
+  console.log("get request called");
   let data = [];
   let user = req.body.username;
+  console.log("user",user);
   // for the project maker
   Request.find({user: user},(err,Requests)=>{
     if(err){
@@ -162,11 +176,12 @@ router.post("/getRequests",(req,res)=>{
       data = data.concat(Requests)
       console.log("project maker requests",data);
       res.send(data);
+
     }
   })
+
+
 });
-
-
 router.post('/getDonorRequests',async(req,res)=>{
   let data = [];
   let user = req.body.username;
@@ -190,10 +205,14 @@ router.post('/getDonorRequests',async(req,res)=>{
             })
           }
         }
+
       }
+      console.log("request data 222222",data);
+
     }
   });
   res.send(data)
+
 });
 
 
@@ -227,7 +246,7 @@ router.post('/donate', (req, res)=> {
   })
 })
 
-//route to add approved request to Request schema
+
 router.post('/approve', (req, res) => {
   Request.findOne(req.body.request, (err, data) => {
     if (err) {
@@ -235,8 +254,7 @@ router.post('/approve', (req, res) => {
       res.sendStatus(404)
     }
     else {
-      if (!data.approvals.includes(req.body.username)) { //if the donor didn't approve this request yet
-      //if not, we will add this request to approvals array in Request schema
+      if (!data.approvals.includes(req.body.username)) {
         Request.update(req.body.request, { $push: {approvals: req.body.username}}, (err, data) => {
           if (err) {
             console.log(err);
@@ -246,6 +264,7 @@ router.post('/approve', (req, res) => {
             res.send(data);
           }
         })
+
       }
         else {
         res.sendStatus(404)
