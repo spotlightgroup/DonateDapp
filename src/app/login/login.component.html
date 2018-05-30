@@ -1,39 +1,39 @@
 <form (ngSubmit)="login()" #loginForm="ngForm">
-  <div class="modal-dialog cascading-modal" role="document">
+<div class="modal-dialog cascading-modal" role="document">
     <!--Content-->
     <div class="modal-content">
 
-      <!--Header-->
-      <div class="modal-header light-blue darken-3 white-text">
-        <h4 class="title"><i class="fa fa-user"></i> Log in</h4>
-      </div>
-      <!--Body-->
-      <div class="modal-body">
-        <div class="md-form form-sm">
-          <i class="fa fa-envelope prefix"></i>
-          <input mdbInputDirective type="text" id="form30" [(ngModel)]="User.username" name="username" class="form-control">
-          <label for="form30">Your Name</label>
+        <!--Header-->
+        <div class="modal-header light-blue darken-3 white-text">
+            <h4 class="title"><i class="fa fa-user"></i> Log in</h4>
         </div>
-        <br>
-        <div class="md-form form-sm">
-          <i class="fa fa-lock prefix"></i>
-          <input mdbInputDirective type="password" id="form31" [(ngModel)]="User.password" name="password" class="form-control">
-          <label for="form31">Your password</label>
-        </div>
+        <!--Body-->
+        <div class="modal-body">
+            <div class="md-form form-sm">
+                <i class="fa fa-envelope prefix"></i>
+                <input mdbInputDirective type="text" id="form30" [(ngModel)]="User.username" name="username" class="form-control">
+                <label for="form30">Your Name</label>
+            </div>
+              <br>
+            <div class="md-form form-sm">
+                <i class="fa fa-lock prefix"></i>
+                <input mdbInputDirective type="password" id="form31" [(ngModel)]="User.password" name="password" class="form-control">
+                <label for="form31">Your password</label>
+            </div>
 
-        <div class="text-center mt-2">
-          <button class="btn btn-info waves-light" type="submit" mdbWavesEffect [disabled]="!loginForm.form.valid">Log in <i class="fa fa-sign-in ml-1"></i></button>
-        </div>
+            <div class="text-center mt-2">
+                <button class="btn btn-info waves-light" type="submit" mdbWavesEffect [disabled]="!loginForm.form.valid">Log in <i class="fa fa-sign-in ml-1"></i></button>
+            </div>
 
-      </div>
-      <!--Footer-->
-      <div class="modal-footer">
-        <div class="options text-center text-md-right mt-1">
-          <p>Not a member? <a  (click)="goToSignup()"> create account </a></p>
         </div>
-        <button type="button" class="btn btn-outline-info ml-auto" data-dismiss="modal" (click)="onNoClick()" mdbWavesEffect>Close</button>
-      </div>
+        <!--Footer-->
+        <div class="modal-footer">
+            <div class="options text-center text-md-right mt-1">
+                <p>Not a member? <a  (click)="goToSignup()"> create account </a></p>
+            </div>
+            <button type="button" class="btn btn-outline-info ml-auto" data-dismiss="modal" (click)="onNoClick()" mdbWavesEffect>Close</button>
+        </div>
     </div>
     <!--/.Content-->
-  </div>
+</div>
 </form>
