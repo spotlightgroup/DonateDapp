@@ -16,11 +16,11 @@ export class ViewRequestsComponent implements OnInit {
 
 
 
-  ngOnInit() {
+async  ngOnInit() {
     this.userInfo = JSON.parse(localStorage.getItem('userInfo'));
     if (this.userInfo.type === "donor") {
       this.isDonor = true;
-      this.http.post("/api/getDonorRequests",{username:this.userInfo.username})
+      await this.http.post("/api/getDonorRequests",{username:this.userInfo.username})
       .subscribe((res)=>{
         this.requests = res;
         console.log('res',res)
@@ -34,7 +34,7 @@ export class ViewRequestsComponent implements OnInit {
 
 
     }else{
-      this.http.post("/api/getRequests",{username:this.userInfo.username})
+      await this.http.post("/api/getRequests",{username:this.userInfo.username})
       .subscribe(res=>{
         this.requests = res;
         console.log('res',res)
