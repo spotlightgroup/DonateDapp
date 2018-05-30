@@ -49,11 +49,12 @@ router.post('/profile', function(req, res) {
       user.overview=req.body.overview;
       user.publicKey=req.body.publicKey;
       // save the user
-      user.save(function(err) {
+      user.save(function(err, data) {
         if (err) {
           return res.json({success: false, msg: 'Username already exists.'});
         }
-        res.json({success: true, msg: 'Successful created new user.'});
+        
+        res.json({success: true, msg: data});
       });
     }
   })
@@ -123,6 +124,7 @@ router.post('/profileImage', (req, res) => {
     }
     else {
       console.log(data);
+      res.send(data)
     }
   })
 })
