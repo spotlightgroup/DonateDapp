@@ -13,9 +13,9 @@ import { RegisterComponent } from '../register/register.component';
 })
 export class LoginComponent implements OnInit {
 
-  User = {};
-  data :any;
-  message = "";
+  User = {}
+  data : any
+  message = ""
 
   constructor(
     private router: Router,
@@ -29,44 +29,35 @@ export class LoginComponent implements OnInit {
   ngOnInit() {
   }
 
-
-  // close the login dialog;
   onNoClick(): void {
-  this.dialogRef.close();
+    this.dialogRef.close();
+  }
+  goToSignup(): void {
+    this.dialogRef.close();
+    let dialogRef = this.dialog.open(RegisterComponent, {
+      panelClass: 'custom-dialog-container'
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+    });
+  };
+
+  login() {
+  this.http.post('/api/login',this.User).subscribe(res => {
+    this.data = res;
+    this.Data.getUserInfo()
+    //to store data in the browser's session
+    localStorage.setItem('jwtToken', this.data.token);
+    localStorage.setItem('isLogged', 'true');
+
+    this.dialogRef.close();
+    setTimeout(()=> {
+      window.location.reload();
+
+    },400)
+
+  }, err => {
+    this.message = err.error.msg;
+  });
 }
-
-//close the login dialog and open the sign up dialog;
-goToSignup(): void {
-this.dialogRef.close();
-let dialogRef = this.dialog.open(RegisterComponent, {
-  panelClass: 'custom-dialog-container'
-});
-dialogRef.afterClosed().subscribe(result => {
-  console.log('The dialog was closed');
-});
-};
-
-// send the http request to the server with the username and the password;
-login() {
-this.http.post('/api/login',this.User).subscribe(res => {
-  //save the result in a local variable;
-  this.data = res;
-  //get the current user info after the login;
-  this.Data.getUserInfo()
-  // store the login info in the browser localStorage;
-  localStorage.setItem('jwtToken', this.data.token);
-  // check the user as logged in;
-  localStorage.setItem('isLogged', 'true');
-  // close the login dialog
-  this.dialogRef.close();
-  //reload the page after the login is complete;
-  setTimeout(()=> {
-  window.location.reload()
-},1000)
-
-}, err => {
-  this.message = err.error.msg;
-});
-}
-
 }

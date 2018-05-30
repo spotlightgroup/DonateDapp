@@ -10,8 +10,6 @@ import swal from 'sweetalert2';
   templateUrl: './requests.component.html',
   styleUrls: ['./requests.component.css']
 })
-
-
 export class RequestsComponent implements OnInit {
   model:any={
     user:"",
@@ -27,11 +25,10 @@ export class RequestsComponent implements OnInit {
    }
 
   ngOnInit() {
-    //get the post id and the post balance form the DataService
     this.model.postId=this.data.post._id;
     this.model.balance=this.data.post.balance;
   }
-  //send the request model the server;
+
   sendRequest(){
     this.model.user = JSON.parse(localStorage.getItem('userInfo')).username;
     this.model.postId = JSON.parse(localStorage.getItem('post'))._id;

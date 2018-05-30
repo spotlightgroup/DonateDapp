@@ -5,30 +5,21 @@ import { Router } from '@angular/router';
 import { MatDialog , MatDialogRef , MAT_DIALOG_DATA } from '@angular/material';
 import { LoginComponent } from '../login/login.component';
 import * as $ from 'jquery';
-
-
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.css']
 })
-
-
-
 export class NavbarComponent implements OnInit {
-  fadeShow = true;
-  userInfo :any;
+  fadeShow=true;
+  //User = "";
+  userInfo:any;
   message = "";
   isLogged = false;
-constructor(private http:HttpClient,
-    private data: DataService,
-    private router: Router,
-    public dialog: MatDialog) { }
+  constructor(private http:HttpClient, private data: DataService, private router: Router, public dialog: MatDialog) { }
 
   ngOnInit() {
-    //get the user info from the browser localStorage;
     this.userInfo = JSON.parse(localStorage.getItem('userInfo'))
-    // check weather if the user is logged in or not every one second;
     setInterval(()=> {
       if(localStorage.getItem('isLogged') === "true") {
         this.isLogged = true;
@@ -37,10 +28,8 @@ constructor(private http:HttpClient,
         this.isLogged = false;
       }
     }, 1000)
-// hide the  logged in content;
-  $(".fadeIn").hide();
+    $(".fadeIn").hide();
   }
-
 
   loadRequests(){
     setTimeout(() => {
@@ -48,20 +37,17 @@ constructor(private http:HttpClient,
     }, 1500)
   }
 
-// handle the logout  event
   logout(){
     this.fadeClick()
-    //navigate to the home page and reload the page;
     setTimeout(() => {
       this.router.navigate(['home']);
       window.location.reload()
     },400)
-    // check the user as not logged in;
     localStorage.setItem('isLogged', 'false');
-    // remove the user credintial;
     this.http.post('/api/logout',{}).subscribe(res => {
-    localStorage.remove('jwtToken');
-    localStorage.remove('userInfo');
+      localStorage.remove('jwtToken');
+      localStorage.remove('userInfo');
+      localStorage.remove('isLogged');
     }, err => {
       this.message = err.error.msg;
     });

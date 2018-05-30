@@ -1,51 +1,83 @@
-<form (ngSubmit)="register()" #signupForm="ngForm">
-  <div class="modal-dialog cascading-modal" role="document">
-    <!--Content-->
-    <div class="modal-content">
-
-      <!--Header-->
-      <div class="modal-header light-blue darken-3 white-text">
-        <h4 class="title"><i class="fa fa-user-plus"></i> Register</h4>
-      </div>
-      <!--Body-->
-      <div class="modal-body">
-        <div class="md-form form-sm">
-          <i class="fa fa-envelope prefix"></i>
-          <input mdbInputDirective type="text" id="form32" class="form-control" [(ngModel)]="User.username" name="username" required>
-          <label for="form32">Your Name</label>
+<!-- <div class="container">
+  <h1>Register</h1>
+  <div class="row">
+    <div class="col-md-6">
+      <form (ngSubmit)="register()" #registerForm="ngForm">
+        <div class="form-group">
+          <label for="name">User Name:</label>
+          <input type="text" class="form-control" [(ngModel)]="User.username" name="username" required>
         </div>
-
-        <div class="md-form form-sm">
-          <i class="fa fa-lock prefix"></i>
-          <input mdbInputDirective type="email" id="form33" class="form-control" [(ngModel)]="User.email" name="email" required>
-          <label for="form33">Your Email</label>
+        <div class="form-group">
+          <label for="name">Email:</label>
+          <input type="email" class="form-control" [(ngModel)]="User.email" name="email" required>
         </div>
-
         <mat-form-field>
           <mat-select placeholder="Select an option" [(ngModel)]="User.type" name="type" required>
-            <mat-option value="donor">Donor</mat-option>
-            <mat-option value="project-maker">Project maker</mat-option>
+          <mat-option value="donor">Donor</mat-option>
+          <mat-option value="project-maker">Project maker</mat-option>
           </mat-select>
+
         </mat-form-field>
-
-        <div class="md-form form-sm">
-          <i class="fa fa-lock prefix"></i>
-          <input mdbInputDirective type="password" id="form34" class="form-control" [(ngModel)]="User.password" name="password" required>
-          <label for="form34">Your Password</label>
+        <div class="form-group">
+          <label for="name">Password:</label>
+          <input type="password" class="form-control" [(ngModel)]="User.password" name="password" required>
         </div>
-
-        <div class="text-center mt-2">
-          <button class="btn btn-info waves-light" type="submit" mdbWavesEffect [disabled]="!signupForm.form.valid">Sign up <i class="fa fa-sign-in ml-1"></i></button>
+        <div class="form-group">
+          <button type="submit" class="btn btn-success" [disabled]="!registerForm.form.valid">Sign up</button>
+          <a  [routerLink]="['/login']" class="nav-link" href="#">if you have already account login</a>
         </div>
-
-      </div>
-      <!--Footer-->
-      <div class="modal-footer">
-        <div class="options text-center text-md-right mt-1">
-          <p>Already have an account? <a (click)="goToLogin()">Log In</a></p>
-        </div>
-        <button type="button" class="btn btn-outline-info ml-auto" data-dismiss="modal" (click)="onNoClick()" mdbWavesEffect>Close</button>
-      </div>
+      </form>
     </div>
-    <!--/.Content-->
   </div>
+</div> -->
+<form (ngSubmit)="register()" #signupForm="ngForm">
+<div class="modal-dialog cascading-modal" role="document">
+        <!--Content-->
+        <div class="modal-content">
+
+            <!--Header-->
+            <div class="modal-header light-blue darken-3 white-text">
+                <h4 class="title"><i class="fa fa-user-plus"></i> Register</h4>
+            </div>
+            <!--Body-->
+            <div class="modal-body">
+                <div class="md-form form-sm">
+                    <i class="fa fa-envelope prefix"></i>
+                    <input mdbInputDirective type="text" id="form32" class="form-control" [(ngModel)]="User.username" name="username" required>
+                    <label for="form32">Your Name</label>
+                </div>
+
+                <div class="md-form form-sm">
+                    <i class="fa fa-lock prefix"></i>
+                    <input mdbInputDirective type="email" id="form33" class="form-control" [(ngModel)]="User.email" name="email" required>
+                    <label for="form33">Your Email</label>
+                </div>
+
+                <mat-form-field>
+                  <mat-select placeholder="Select an option" [(ngModel)]="User.type" name="type" required>
+                    <mat-option value="donor">Donor</mat-option>
+                    <mat-option value="project-maker">Project maker</mat-option>
+                  </mat-select>
+                </mat-form-field>
+
+                <div class="md-form form-sm">
+                    <i class="fa fa-lock prefix"></i>
+                    <input mdbInputDirective type="password" id="form34" class="form-control" [(ngModel)]="User.password" name="password" required>
+                    <label for="form34">Your Password</label>
+                </div>
+
+                <div class="text-center mt-2">
+                    <button class="btn btn-info waves-light" type="submit" mdbWavesEffect [disabled]="!signupForm.form.valid">Sign up <i class="fa fa-sign-in ml-1"></i></button>
+                </div>
+
+            </div>
+            <!--Footer-->
+            <div class="modal-footer">
+                <div class="options text-center text-md-right mt-1">
+                    <p>Already have an account? <a (click)="goToLogin()">Log In</a></p>
+                </div>
+                <button type="button" class="btn btn-outline-info ml-auto" data-dismiss="modal" (click)="onNoClick()" mdbWavesEffect>Close</button>
+            </div>
+        </div>
+        <!--/.Content-->
+    </div>

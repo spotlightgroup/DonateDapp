@@ -1,8 +1,19 @@
 <app-about *ngIf="!isLogged"></app-about>
 <div class="" *ngIf="isLogged">
 
-
-</div>
+<!-- <div class="inputPost container-fluid" *ngIf="!isDonor" >
+    <h3>What Is Your Project ?</h3>
+    <input type="text" class="form-control" [(ngModel)]="model.header" >
+    <h3>Descrip Your Project</h3>
+    <input type="text" class="form-control" [(ngModel)]="model.description" >
+    <h3>How Much Do You Need ?</h3>
+    <input type="number" class="form-control" [(ngModel)]="model.needed" min="0" >
+    <input type="button" name="send" value="send" (click)="sendPost()" class="btn btn-outline-success my-2 my-sm-0">
+    <div class="alert alert-warning alert-dismissible" role="alert" *ngIf="message !== ''">
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      {{message}}
+    </div>
+</div> -->
 
 <button type="button" class="btn btn-primary waves-light" (click)="form.show()" mdbWavesEffect *ngIf="!isDonor">Have an idea !</button>
 <!--Modal: Login with Avatar Form-->
@@ -82,36 +93,12 @@
             </table>
           </div>
         </div>
-        <div class="face2" *ngIf="flip[i]">
-          <div class="Row">
-            <h3>About my idea</h3>
-            <hr>
-            <p>{{post.description}}</p>
-          </div>
-          <div class="Row">
-            <h3>Amount</h3>
-            <hr>
-            <div class="amounTable">
-              <table>
-                <tr>
-                  <td>total needed</td>
-                  <td> &nbsp; </td>
-                  <td>gained balance</td>
-                </tr>
-                <tr>
-                  <td>{{post.needed}}</td>
-                  <td> / </td>
-                  <td>{{post.balance}}</td>
-                </tr>
-              </table>
-            </div>
-          </div>
-          <div class="Row">
-            <p>created at: {{post.time}}</p>
-            <button mat-button (click)="flipOf(i)"><i class="fa fa-repeat"></i>  Flip</button>
-          </div>
+        <div class="Row">
+          <p>created at: {{post.time}}</p>
+          <button mat-button (click)="flipOf(i)"><i class="fa fa-repeat"></i>  Flip</button>
         </div>
       </div>
     </mat-card>
   </div>
+</div>
 </div>
