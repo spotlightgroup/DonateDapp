@@ -1,9 +1,7 @@
 .body {
-  margin-left: 100px;
-  margin-right: 100px;
+  margin: 200px;
   padding: 100px;
   border-radius: 20px;
   border-width: 3px;
-  height: 100%;
   background-color: rgba(255, 255, 255, 0.7);
 }
