@@ -1,13 +1,33 @@
-<div class="">
+<div style="background-color:white">
   <br><br><br><br>
-<h3>Full Balance: <span>{{model.balance}}</span></h3>
-<br><br>
-<label for="description">description: </label> <input [(ngModel)]="model.description" type="text" name="" value="">
-<br><br>
-<label for="amount">amount</label> <input [(ngModel)]="model.amount" type="text" name="" value="">
-<br><br>
-<br><br>
-<label for="receiver">receiver</label><input [(ngModel)]="model.receiver" type="text" name="" value="">
-<br><br>
-<button [routerLink]="['/viewRequests']" (click)=sendRequest() type="button" name="button">send request</button>
-</div>
+
+<center><h3>Full Balance: <span>{{model.balance}}</span></h3></center>
+   <div class="sendPost"  style="color:black">
+     <div class="row" style="margin:0 8% 0 8%">
+       <div class="col-md-6">
+         <div class="md-form">
+           <input mdbInputDirective type="text"  class="form-control" [(ngModel)]="model.receiver" style="border-bottom-color: #4285f4;">
+           <label>receiver</label>
+         </div>
+       </div>
+       <div class="col-md-6">
+         <div class="md-form">
+           <input mdbInputDirective type="number"  class="form-control" [(ngModel)]="model.amount" style="border-bottom-color: #4285f4;" min="0">
+           <label> Amount </label>
+         </div>
+       </div>
+     </div>
+     <div class="row" style="margin:0 8% 0 8%">
+       <div class="col-md-10">
+         <div class="md-form">
+           <textarea mdbInputDirective type="text"  class="md-textarea form-control" rows="1" [(ngModel)]="model.description"  style="border-bottom-color: #4285f4;"></textarea>
+           <label>Describe Your Project</label>
+         </div>
+         <button class="btn btn-primary waves-light" type="button" [routerLink]="['/viewRequests']" (click)=sendRequest() mdbWavesEffect>send request</button>
+       </div>
+     </div>
+
+<br><br><br><br>
+   </div>
+
+  <!-- contact form -->
