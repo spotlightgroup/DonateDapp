@@ -1,5 +1,5 @@
 
-<nav class="navbar">
+<nav Class="navbar fixed-top scrolling-navbar" style="background-color:rgb(0,0,0,0.5);height:50px">
   <a class="nav-link" [routerLink]="['/home']" style="font-family: 'Courgette';font-size: 22px;">DonateDapp</a>
   <a *ngIf="!isLogged" style="color: white;position:absolute ; left:95%" (click)="openLogin()">Login</a>
   <div class="fadeIn">

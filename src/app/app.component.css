@@ -1,7 +1,6 @@
-.body{
-  background-image: url("https://i.imgur.com/8f6IDSr.jpg");
+
+body{
+  height: 100%;
   background-size: cover;
   background-repeat:no-repeat;
-  background-attachment: fixed;
-  height: 100%;
 }
