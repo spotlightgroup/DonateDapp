@@ -1,22 +1,44 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { DataService } from '../util/data.service'
+import { DataService } from '../util/data.service';
+import {Web3Service} from '../util/web3.service';
+import { MatSnackBar } from '@angular/material';
+declare let require: any;
+const metacoin_artifacts = require('../../../build/contracts/RbCoin.json');
+
 @Component({
   selector: 'app-view-requests',
   templateUrl: './view-requests.component.html',
   styleUrls: ['./view-requests.component.css']
 })
 export class ViewRequestsComponent implements OnInit {
+  model:any={
+  account:""
+}
+  accounts: string[];
+  RbCoin: any;
+  sent=false;
+
   requests:any;
   message = "";
+  status="";
   isDonor = false;
   donorsCount = 0;
   userInfo :any;
-  constructor(private http:HttpClient, private data: DataService) { }
+  constructor(private http:HttpClient,
+     private web3Service: Web3Service,
+     private matSnackBar: MatSnackBar,
+     private data: DataService,
+   ) { }
 
 
 
 async  ngOnInit() {
+  this.watchAccount();
+ this.web3Service.artifactsToContract(metacoin_artifacts)
+ .then((RbCoinAbstraction) => {
+   this.RbCoin = RbCoinAbstraction;
+ });
      this.userInfo = await JSON.parse(localStorage.getItem('userInfo'));
     if (this.userInfo.type === "donor") {
       this.isDonor = true;
@@ -50,8 +72,48 @@ async  ngOnInit() {
       this.message = "there is no requests yet !"
     }
   }
+  setStatus(status) {
+  this.matSnackBar.open(status, null, {duration: 3000});
+}
+watchAccount() {
+    this.web3Service.accountsObservable
+    .subscribe((accounts) => {
+      this.accounts = accounts;
+      this.model.account = accounts[0];
+      //this.data.publicKey = this.model.account;
+      this.refreshBalance();
+    });
+}
+async refreshBalance() {
+  console.log('Refreshing balance');
 
-  finalize(request){
+  try {
+    const deployedRbCoin = await this.RbCoin.deployed();
+    console.log(deployedRbCoin);
+    console.log('Account', this.model.account);
+    const RbCoinBalance = await deployedRbCoin.getBalance.call(this.model.account);
+    console.log('Found balance: ' + RbCoinBalance);
+    this.model.balance = RbCoinBalance;
+    //  window.location.reload()
+
+  } catch (e) {
+    console.log(e);
+    this.setStatus('Error getting balance; see log.');
+  }
+}
+  // finalize(request){
+  //   if(request.amount === 0){
+  //     this.message= "Enter real amount"
+  //     return;
+  //   }
+  //   if(request.approvals <= request.donors / 2){
+  //     this.message="you don't have the permession"
+  //     return;
+  //   }
+  //   this.message = "done"
+  //
+  // }
+  async  finalize(request){
     if(request.amount === 0){
       this.message= "Enter real amount"
       return;
@@ -60,7 +122,72 @@ async  ngOnInit() {
       this.message="you don't have the permession"
       return;
     }
-    this.message = "done"
+  //  this.message = "done"
+  let receiver;
+  let sender;
+  console.log("request.receiver in finlize",request.receiver);
+
+
+      await   this.http.post('/api/getReceiver',{username:request.receiver}).subscribe(async(res)=>{
+        receiver= res['publicKey'];
+        console.log('get receiver in finalize',res);
+      },(err)=>{
+        console.log(err);
+      });
+      console.log('usernamee',this.userInfo.username)
+      await   this.http.post('/api/getSender',{username:this.userInfo.username}).subscribe(async(res)=>{
+        sender= res['publicKey'];
+        console.log('get sender in finalize',res);
+      },(err)=>{
+        console.log(err);
+      });
+setTimeout(async()=> {
+    console.log("receiver in finlize",receiver);
+      const amount = request.amount;
+      //const id = JSON.parse(localStorage.getItem('post'))._id
+      //const post = JSON.parse(localStorage.getItem('post'))
+
+      if (!this.RbCoin) {
+        this.setStatus('RbCoin is not loaded, unable to send transaction');
+        return;
+      }
+
+      this.setStatus('Initiating transaction... (please wait)');
+
+      try {
+        console.log("receiver in finlize inside try",receiver);
+
+        //receiver="0x074F0E4182D3C133fEd5b7F9e1D7577407EB6E81";
+        const deployedRbCoin = await this.RbCoin.deployed();
+        const transaction = await deployedRbCoin.sendCoin.sendTransaction(receiver, amount, {from: sender});
+
+        if (!transaction) {
+          this.setStatus('Transaction failed!');
+        }
+        else {
+          this.setStatus('Transaction complete!');
+          this.sent = true;
+
+        }
+      }
+      catch (e) {
+        console.log(e);
+        this.setStatus('Error sending coin; see log.');
+        return;
+      }
+
+      // if (this.sent) {
+      //   this.http.post('/api/donate', {_id: id, amount: amount})
+      //   .subscribe(res => {
+      //     console.log(res);
+      //   }, err => {
+      //     console.log(err);
+      //   })
+      // }
+
+
+        window.location.reload()
+      },7000)
 
   }
 
