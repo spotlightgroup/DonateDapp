@@ -12,7 +12,7 @@ module.exports = function (config) {
       require('karma-coverage-istanbul-reporter'),
       require('@angular/cli/plugins/karma')
     ],
-    client:{
+    client: {
       clearContext: false // leave Jasmine Spec Runner output visible in browser
     },
     coverageIstanbulReporter: {
@@ -37,9 +37,9 @@ module.exports = function (config) {
           '--disable-gpu',
           '--no-sandbox',
           // Without a remote debugging port, Google Chrome exits immediately.
-          '--remote-debugging-port=9222',
-        ],
+          '--remote-debugging-port=9222'
+        ]
       }
     }
-  });
-};
+  })
+}

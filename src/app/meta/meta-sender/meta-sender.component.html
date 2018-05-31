@@ -1,9 +1,12 @@
-<br><br><br><br>
-<p>your balance is :</p><p>{{model.balance}}rbcoin</p>
-<div class="container">
-  <div>
-    <h1>Send RbCoin</h1>
-      <input type="text" matInput id="amount" placeholder="Amount" (change)="setAmount($event)">
-      <button mat-button id="send" (click)="sendCoin()">Send RBCOIN</button>
-  </div>
+
+
+
+<div class="example-container body">
+  <h2>Your Balance Is: </h2>
+  <h3>{{model.balance}} RbCoin</h3>
+  <mat-form-field>
+    <input matInput placeholder="Amount" type="number" class="example-right-align" (change)="setAmount($event)">
+    <span matPrefix>$&nbsp;</span>
+  </mat-form-field>
+  <button mat-button id="send" (click)="sendCoin()">Send RBCOIN</button>
 </div>

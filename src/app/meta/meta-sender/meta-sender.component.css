@@ -1,10 +1,46 @@
+.example-container {
+  display: flex;
+  flex-direction: column;
+}
 
-.address-field {
-  width: 400px;
+.example-container > * {
+  width: 100%;
+}
+
+.example-right-align {
+  text-align: right;
+}
+
+input.example-right-align::-webkit-outer-spin-button,
+input.example-right-align::-webkit-inner-spin-button {
+  display: none;
+}
+
+input.example-right-align {
+  -moz-appearance: textfield;
+}
+
+h2 {
+  color: #444;
+  text-align: center;
+  font-family: Arial;
+
 }
 
 
-li{
-  list-style: none;
+h3 {
+  font-family: Arial;
+  text-align: center;
+  color: #444;
+}
 
+
+.body {
+  margin-left: 100px;
+  margin-right: 100px;
+  padding: 100px;
+  border-radius: 20px;
+  border-color: cyan;
+  border-width: 3px;
+  background-color: rgba(255, 255, 255, 0.7);
 }
