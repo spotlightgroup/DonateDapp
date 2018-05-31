@@ -52,3 +52,15 @@ h3{
 .Row {
   height: 140px;
 }
+.sendPost{
+  background-color: #F4D2AE;
+}
+label{
+  color: black;
+  font-weight: bold;
+}
+.btn-outline-success {
+    border: 2px solid #4285f4 !important;
+    background-color: transparent !important;
+    color: #4285f4 !important;
+}
