@@ -14,6 +14,7 @@ const metacoin_artifacts = require('../../../../build/contracts/RbCoin.json');
   styleUrls: ['./meta-sender.component.css']
 })
 export class MetaSenderComponent implements OnInit {
+  hide = true;
   accounts: string[];
   RbCoin: any;
   sent = false;
@@ -68,7 +69,7 @@ export class MetaSenderComponent implements OnInit {
       this.setStatus('Metacoin is not loaded, unable to send transaction');
       return;
     }
- 
+
     this.setStatus('Initiating transaction... (please wait)');
 
     try {
