@@ -1,13 +1,73 @@
 <div class="">
   <br><br><br><br>
-<h3>Full Balance: <span>{{model.balance}}</span></h3>
-<br><br>
-<label for="description">description: </label> <input [(ngModel)]="model.description" type="text" name="" value="">
+<!-- 
+  <div class="sendPost">
+     <div class="row" >
+       <div class="col-md-6">
+         <div class="md-form">
+           <input mdbInputDirective type="text"  class="form-control" [(ngModel)]="model.header" >
+           <label>Name of your project</label>
+         </div>
+       </div>
+       <div class="col-md-6">
+         <div class="md-form">
+           <input mdbInputDirective type="number"  class="form-control" [(ngModel)]="model.needed">
+           <label>The Amount </label>
+         </div>
+       </div>
+     </div>
+     <div class="row">
+       <div class="col-md-10">
+         <div class="md-form">
+           <textarea mdbInputDirective type="text"  class="md-textarea form-control" rows="1" [(ngModel)]="model.description"  ></textarea>
+           <label>Description of your project</label>
+         </div>
+       </div>
+       <input type="button" name="send" value="send" (click)="sendPost()" class="btn btn-outline-success my-2 my-sm-5" >
+     </div>
+     <div class="alert alert-warning alert-dismissible" role="alert" *ngIf="message !== ''">
+       <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+       {{message}}
+     </div>
+   </div> -->
+
+  <!-- contact form -->
+  <form>
+    <p class="h5 text-center mb-4">Full Balance: <span>{{model.balance}}</span></p>
+
+    <div class="md-form">
+      <i class="fa fa-audio-description prefix grey-text"></i>
+      <input [(ngModel)]="model.description" type="text" class="form-control" placeholder="description:">
+    </div>
+
+    <div class="md-form">
+      <i class="fa fa-usd prefix grey-text"></i>
+      <input [(ngModel)]="model.amount" type="number" class="form-control" placeholder="amount:">
+    </div>
+
+    <div class="md-form">
+      <i class="fa fa-user-circle prefix grey-text"></i>
+      <input [(ngModel)]="model.receiver" type="text" class="form-control" placeholder="receiver:">
+    </div>
+
+    <div class="text-center">
+      <button [routerLink]="['/viewRequests']" (click)=sendRequest() class="btn btn-unique waves-light" mdbWavesEffect>Send request
+        <i class="fa fa-paper-plane-o ml-1"></i>
+      </button>
+    </div>
+  </form>
+  <!-- contact form -->
+
+
+
+<!-- <h3>Full Balance: <span>{{model.balance}}</span></h3>
+<br><br> -->
+<!-- <label for="description">description: </label> <input [(ngModel)]="model.description" type="text" name="" value="">
 <br><br>
 <label for="amount">amount</label> <input [(ngModel)]="model.amount" type="text" name="" value="">
 <br><br>
 <br><br>
 <label for="receiver">receiver</label><input [(ngModel)]="model.receiver" type="text" name="" value="">
 <br><br>
-<button [routerLink]="['/viewRequests']" (click)=sendRequest() type="button" name="button">send request</button>
+<button [routerLink]="['/viewRequests']" (click)=sendRequest() type="button" name="button">send request</button> -->
 </div>
