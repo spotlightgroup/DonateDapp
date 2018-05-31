@@ -80,7 +80,6 @@ watchAccount() {
     .subscribe((accounts) => {
       this.accounts = accounts;
       this.model.account = accounts[0];
-      //this.data.publicKey = this.model.account;
       this.refreshBalance();
     });
 }
@@ -101,18 +100,7 @@ async refreshBalance() {
     this.setStatus('Error getting balance; see log.');
   }
 }
-  // finalize(request){
-  //   if(request.amount === 0){
-  //     this.message= "Enter real amount"
-  //     return;
-  //   }
-  //   if(request.approvals <= request.donors / 2){
-  //     this.message="you don't have the permession"
-  //     return;
-  //   }
-  //   this.message = "done"
-  //
-  // }
+
   async  finalize(request){
     if(request.amount === 0){
       this.message= "Enter real amount"
@@ -135,59 +123,37 @@ async refreshBalance() {
         console.log(err);
       });
       console.log('usernamee',this.userInfo.username)
-      await   this.http.post('/api/getSender',{username:this.userInfo.username}).subscribe(async(res)=>{
-        sender= res['publicKey'];
-        console.log('get sender in finalize',res);
-      },(err)=>{
-        console.log(err);
-      });
 setTimeout(async()=> {
-    console.log("receiver in finlize",receiver);
-      const amount = request.amount;
-      //const id = JSON.parse(localStorage.getItem('post'))._id
-      //const post = JSON.parse(localStorage.getItem('post'))
-
-      if (!this.RbCoin) {
-        this.setStatus('RbCoin is not loaded, unable to send transaction');
-        return;
-      }
-
-      this.setStatus('Initiating transaction... (please wait)');
-
-      try {
-        console.log("receiver in finlize inside try",receiver);
-
-        //receiver="0x074F0E4182D3C133fEd5b7F9e1D7577407EB6E81";
-        const deployedRbCoin = await this.RbCoin.deployed();
-        const transaction = await deployedRbCoin.sendCoin.sendTransaction(receiver, amount, {from: sender});
-
-        if (!transaction) {
-          this.setStatus('Transaction failed!');
+      console.log("receiver in finlize",receiver);
+        const amount = request.amount;
+        if (!this.RbCoin) {
+          this.setStatus('RbCoin is not loaded, unable to send transaction');
+          return;
         }
-        else {
-          this.setStatus('Transaction complete!');
-          this.sent = true;
 
+        this.setStatus('Initiating transaction... (please wait)');
+
+        try {
+          console.log("receiver in finlize inside try",receiver);
+          const deployedRbCoin = await this.RbCoin.deployed();
+          const transaction = await deployedRbCoin.sendCoin.sendTransaction(receiver, amount, {from: this.userInfo.publicKey});
+
+          if (!transaction) {
+            this.setStatus('Transaction failed!');
+          }
+          else {
+            this.setStatus('Transaction complete!');
+            this.sent = true;
+
+          }
         }
-      }
-      catch (e) {
-        console.log(e);
-        this.setStatus('Error sending coin; see log.');
-        return;
-      }
-
-      // if (this.sent) {
-      //   this.http.post('/api/donate', {_id: id, amount: amount})
-      //   .subscribe(res => {
-      //     console.log(res);
-      //   }, err => {
-      //     console.log(err);
-      //   })
-      // }
-
-
+        catch (e) {
+          console.log(e);
+          this.setStatus('Error sending coin; see log.');
+          return;
+        }
         window.location.reload()
-      },7000)
+      },2000);
 
   }
 
