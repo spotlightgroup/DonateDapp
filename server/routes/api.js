@@ -279,5 +279,55 @@ router.post('/approve', (req, res) => {
       }
     }
   })
-})
+});
+router.post('/getReceiver',async (req,res)=>{
+  let receiver;
+await  (async()=>{
+    await User.findOne(req.body,(err,data)=>{
+    if(err){
+      console.log(err);
+      res.sendStatus(404);
+    }else{
+      receiver=data;
+      console.log("data from get receiver",data);
+      console.log('type of pkey',typeof data.publicKey);
+      //res.send();
+    }
+  });
+  })()
+
+  if(!res.headerSent){
+    //res.send(data)
+    console.log("receiver from get receiver",receiver);
+
+    res.send(receiver);
+
+  }
+
+});
+router.post('/getSender',async (req,res)=>{
+  let sender;
+await  (async()=>{
+    await User.findOne(req.body,(err,data)=>{
+    if(err){
+      console.log(err);
+      res.sendStatus(404);
+    }else{
+      sender=data;
+      console.log("data from get receiver",data);
+      console.log('type of pkey',typeof data.publicKey);
+      //res.send();
+    }
+  });
+  })()
+
+  if(!res.headerSent){
+    //res.send(data)
+    console.log("receiver from get receiver",sender);
+
+    res.send(sender);
+
+  }
+
+});
 module.exports = router;
