@@ -5,7 +5,7 @@
   "scripts": {
     "postinstall": "ng build --aot -prod ",
     "ng": "ng",
-    "start": "ng build && node ./server.js",
+    "start": "node ./server.js",
     "build": "ng build",
     "test": "mocha ./testing",
     "lint": "ng lint",
