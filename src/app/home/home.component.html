@@ -41,7 +41,7 @@
       <mat-card [ngClass]="'card'+i" *ngIf="post.user === model.user || isDonor">
         <div class="face1" *ngIf="!flip[i]">
           <div class="cardHead" [ngStyle]="{'background-image': 'url('+img+')'}"></div>
-          <!-- <img class="userImg" src={{post.userInfo[0].image}}  alt="Avatar" > -->
+          <img class="userImg" src={{post.userInfo[0].image}}  alt="Avatar" >
           <div class="cardButtom">
             <mat-card-title>{{post.user}}</mat-card-title>
             <mat-card-subtitle>{{post.header}}</mat-card-subtitle>
