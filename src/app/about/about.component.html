@@ -72,14 +72,35 @@
     </div>
 </div>
 
-<div class="view intro" style="background-image: url(https://mdbootstrap.com/img/Photos/Others/background.jpg); background-attachment: fixed; min-height: 700px">
+<div class="view intro" style="height:100%">
+
+<!--Carousel Wrapper-->
+<mdb-carousel [isControls]="true" [animation]="'slide'">
+    <!--First slide-->
+    <mdb-slide>
+        <img class="team-img d-block w-100" src="https://mdbootstrap.com/img/Photos/Slides/img%20(130).jpg" alt="First slide">
+    </mdb-slide>
+    <!--/First slide-->
+    <!--Second slide-->
+    <mdb-slide>
+        <img class="team-img d-block w-100" src="https://mdbootstrap.com/img/Photos/Slides/img%20(129).jpg" alt="Second slide">
+    </mdb-slide>
+    <!--/Second slide-->
+    <!--Third slide-->
+    <mdb-slide>
+        <img class="team-img d-block w-100" src="https://mdbootstrap.com/img/Photos/Slides/img%20(70).jpg" alt="Third slide">
+    </mdb-slide>
+    <!--/Third slide-->
+</mdb-carousel>
+<!--/.Carousel Wrapper-->
+
     <div class="full-bg-img mask rgba-purple-slight">
         <div class="container">
             <div class="d-flex align-items-center d-flex justify-content-center" style="height: 700px">
                 <div class="row mt-5">
                     <div class="col-md-12 wow fadeIn mb-3">
                         <div class="intro-info-content text-center">
-                            <h1 class="display-1 white-text mb-2 fadeInDown" >Our great team</h1>
+                            <h1 class="display-1 white-text mb-2 animated fadeInDown" >Our great team</h1>
                             <h4 class="mb-3 mt-1 white-text font-bold fadeIn" >We are not the only one but we are the best !</h4>
                             <a class="mb-3 mt-1 font-bold fadeIn waves-effect light-blue-text" style="font-size:20px" mdbWavesEffect >Read more</a>
                         </div>
@@ -93,7 +114,7 @@
     <!--Grid row-->
     <div _ngcontent-c3="" class="row aboutUs">
       <div _ngcontent-c3="" class="col-md-3 my-5">
-        <img src="https://i.imgur.com/6nmVLfa.jpg">
+        <img class = "member-info" src="https://i.imgur.com/6nmVLfa.jpg">
         <h5 class="font-weight-bold mt-4 mb-3">Ahmad Mostafa</h5>
         <p class="text-uppercase blue-text"><strong>blockchain developer</strong></p>
         <p class="white-text">Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci sed quia non numquam modi tempora eius.</p>
@@ -109,7 +130,7 @@
         </ul>
       </div>
       <div _ngcontent-c3="" class="col-md-3 my-5">
-        <img src="https://i.imgur.com/6hbAq2G.jpg">
+        <img class = "member-info" src="https://i.imgur.com/6hbAq2G.jpg">
         <h5 class="font-weight-bold mt-4 mb-3">Abdullatif</h5>
         <p class="text-uppercase blue-text"><strong>Full Stack Developer</strong></p>
         <p class="white-text">Sed ut perspiciatis unde omnis iste natus error sit voluptatem ipsa accusantium doloremque rem laudantium totam aperiam ipsa accusantium.</p>
@@ -125,7 +146,7 @@
         </ul>
       </div>
       <div _ngcontent-c3="" class="col-md-3 my-5">
-        <img src="https://i.imgur.com/VY0gTq2.jpg">
+        <img class = "member-info" src="https://i.imgur.com/VY0gTq2.jpg">
         <h5 class="font-weight-bold mt-4 mb-3">Samer Salmeh</h5>
         <p class="text-uppercase blue-text"><strong>Technical Support</strong></p>
         <p class="white-text">To be a good developer is not enough for me <br> I will not satisfy myself until I become better <br> than anyone in my field</p>
@@ -141,7 +162,7 @@
         </ul>
       </div>
       <div _ngcontent-c3="" class="col-md-3 my-5">
-        <img src="https://i.imgur.com/xhXRKLn.jpg">
+        <img class = "member-info" src="https://i.imgur.com/xhXRKLn.jpg">
         <h5 class="font-weight-bold mt-4 mb-3">Abdulhameed Abdullah</h5>
         <p class="text-uppercase blue-text"><strong>blockchain developer</strong></p>
         <p class="white-text">Perspiciatis repellendus ad odit consequuntur, eveniet earum nisi qui consectetur totam officia voluptates perferendis voluptatibus aut.</p>
