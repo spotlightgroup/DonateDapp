@@ -93,7 +93,8 @@ isLogged = false;
       balance: 0,
       donors: []
     };
-    this.getPosts()
+    this.getPosts();
+    window.location.reload();
   }
 
 
