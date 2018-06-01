@@ -285,4 +285,20 @@ router.post('/getSender', async (req, res) => {
     res.send(sender)
   }
 })
+
+
+router.post('/finalize', (req, res) => {
+  let body = req.body;
+  body.finalized = true;
+  console.log('body', body);
+  Request.findOneAndUpdate(req.body, body, (err, data) => {
+    if (err) {
+      console.log(err);
+    }
+    else {
+      console.log(data);
+      res.send(data)
+    }
+  })
+})
 module.exports = router

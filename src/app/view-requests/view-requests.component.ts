@@ -18,7 +18,7 @@ export class ViewRequestsComponent implements OnInit {
   accounts: string[];
   RbCoin: any;
   //sent=false;
-
+  color: 'green'
   requests:any;
   message = "";
   status="";
@@ -143,8 +143,12 @@ setTimeout(async()=> {
           }
           else {
             this.setStatus('Transaction complete!');
-            //this.sent = true;
-
+            this.http.post('/api/finalize', request)
+            .subscribe(res=> {
+              console.log('finalized',res)
+            }, err => {
+              console.log(err)
+            })
           }
         }
         catch (e) {
