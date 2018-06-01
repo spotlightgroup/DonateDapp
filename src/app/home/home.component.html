@@ -1,4 +1,6 @@
 <app-about *ngIf="!isLogged"></app-about>
+<div class="video-parallax"><video src="../../assets/blockchainVid" frameborder="0" autoplay="" loop=""></video>
+</div>
 <div class="body" *ngIf="isLogged">
 
   <button class="btn btn-primary waves-light" type="button" (click)="test.toggle()" mdbWavesEffect *ngIf="!isDonor"  style="width:100%;margin:5% 0% 0% 0%;text-transform:none">
