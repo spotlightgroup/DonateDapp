@@ -12,7 +12,7 @@
     <p>approvals: {{request.approvals.length}}/ Total Donors: {{request.donorsCount}}</p>
   </mat-card-content>
   <mat-card-actions>
-    <button mat-button *ngIf="!isDonor" type="button" name="button" (click)="finalize(request)" class="btn btn-primary">Finalize</button>
+    <button mat-button *ngIf="!isDonor && request.approvals.length >= request.donorsCount/2" type="button" name="button" (click)="finalize(request)" class="btn btn-primary">Finalize</button>
     <button mat-button *ngIf="isDonor" type="button" name="button" (click)="approve(request)" class="btn btn-primary">Approve</button>
   </mat-card-actions>
 </mat-card>

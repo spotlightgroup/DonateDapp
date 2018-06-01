@@ -250,9 +250,7 @@ router.post('/getReceiver', async (req, res) => {
         res.sendStatus(404)
       } else {
         receiver = data
-        console.log('data from get receiver', data)
-        console.log('type of pkey', typeof data.publicKey)
-      // res.send();
+        console.log('data from get receiver', data);
       }
     })
   })()

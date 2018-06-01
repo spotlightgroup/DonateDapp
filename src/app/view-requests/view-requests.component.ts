@@ -17,7 +17,7 @@ export class ViewRequestsComponent implements OnInit {
 }
   accounts: string[];
   RbCoin: any;
-  sent=false;
+  //sent=false;
 
   requests:any;
   message = "";
@@ -143,7 +143,7 @@ setTimeout(async()=> {
           }
           else {
             this.setStatus('Transaction complete!');
-            this.sent = true;
+            //this.sent = true;
 
           }
         }
