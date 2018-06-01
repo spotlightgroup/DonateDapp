@@ -4,6 +4,10 @@
   width: 100%;
 }
 
+.video-parallax {
+  position: fixed;
+}
+
 .postImage{
   width: 80px;
 }
@@ -59,7 +63,8 @@ h3{
   height: 140px;
 }
 .sendPost{
-  background-color: rgba(255, 255, 255, 0.7);
+  background: linear-gradient(45deg, rgba(245, 250, 255, 0.9), rgba(245, 240, 250, 100%) 100%);
+
 }
 label{
   color: black;
