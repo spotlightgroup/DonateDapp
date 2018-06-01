@@ -39,6 +39,7 @@ isLogged = false;
     if (localStorage.getItem('isLogged') === "true") {
       this.isLogged = true;
       this.userInfo = JSON.parse(localStorage.getItem('userInfo'))
+      console.log(this.userInfo)
       if(this.userInfo.type === "donor") {
         this.isDonor = true;
       }
