@@ -143,8 +143,12 @@ setTimeout(async()=> {
           }
           else {
             this.setStatus('Transaction complete!');
-            //this.sent = true;
-
+            this.http.post('/api/finalize', request)
+            .subscribe(res=> {
+              console.log('finalized',res)
+            }, err => {
+              console.log(err)
+            })
           }
         }
         catch (e) {
