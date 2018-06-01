@@ -8,7 +8,8 @@ const RequestSchema = new Schema({
   amount: Number,
   receiver: String,
   approvals: [String],
-  donorsCount: Number
+  donorsCount: Number,
+  finalized: Boolean
 })
 
 module.exports = mongoose.model('Request', RequestSchema)

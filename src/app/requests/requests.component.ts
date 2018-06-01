@@ -18,7 +18,8 @@ export class RequestsComponent implements OnInit {
     amount:0,
     receiver:"",
     balance:0,
-    donorsCount:0
+    donorsCount:0,
+    finalized: false
   }
   constructor(private data:DataService,private http:HttpClient) {
 

@@ -18,7 +18,7 @@ export class ViewRequestsComponent implements OnInit {
   accounts: string[];
   RbCoin: any;
   //sent=false;
-
+  color: 'green'
   requests:any;
   message = "";
   status="";
