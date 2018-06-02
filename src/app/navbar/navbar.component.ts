@@ -11,6 +11,7 @@ import * as $ from 'jquery';
   styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent implements OnInit {
+  originImg="https://oncomunicacionvisual.com/wp-content/uploads/2017/11/abstract-user-flat-3.png"
   fadeShow=true;
   //User = "";
   userInfo:any;
