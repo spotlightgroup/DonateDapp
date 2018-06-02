@@ -23,7 +23,7 @@ app.use(passport.initialize())
 /// ///////////////
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({extended: false}))
-app.use(express.static(path.join(__dirname, 'dist/DonateDapp')))
+app.use(express.static(path.join(__dirname, '/dist')))
 app.use('/api', api)
 
 app.post('/addPost', (req, res) => {
