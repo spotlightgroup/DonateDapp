@@ -29,3 +29,9 @@ p {
   color: white;
   width: 100%;
 }
+h2{
+  -webkit-text-stroke: 1px black;
+}
+h4{
+  -webkit-text-stroke: 1px black;
+}

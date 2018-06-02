@@ -15,7 +15,7 @@
       </li>
     </ul>
   </div>
-  <div class="circle" (click)="fadeClick()" *ngIf="isLogged" [style.backgroundImage]=" 'url('+ userInfo.image +')' "></div>
+  <div class="circle" (click)="fadeClick()" *ngIf="isLogged" [style.backgroundImage]=" userInfo.image ? 'url('+ userInfo.image +')' : 'url('+ originImg +')' "></div>
 </nav>
 <div class="alert alert-warning alert-dismissible" role="alert" *ngIf="message !== ''">
     <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
